@@ -1,0 +1,18 @@
+/* This removes padding from the inner .ant-card-body */
+.custom-card .ant-card-body {
+  padding: 0 !important;
+  overflow: hidden !important;
+}
+body{
+  font-family: poppins, sans-serif;
+}
+.ant-slider-handle{
+  height: 50px !important;
+  width: 50px !important;
+  margin-top: -20px;
+}
+
+.ant-slider-handle::after{
+  height: 50px !important;
+  width: 50px !important;
+}
