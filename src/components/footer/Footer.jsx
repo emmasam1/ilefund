@@ -6,8 +6,8 @@ import dot from '../../assets/dot.png'
 
 const Footer = () => {
   return (
-    <div className="py-35">
-      <div className="m-auto w-11/12 grid gap-2 mt-20 pb-5
+    <div className="py-35 bg-[#333333]">
+      {/* <div className="m-auto w-11/12 grid gap-2 mt-20 pb-5
         grid-cols-1 sm:grid-cols-2 md:grid-cols-3 
         lg:grid-cols-[1.3fr_1fr_1fr_1fr_1fr]">
         
@@ -59,7 +59,8 @@ const Footer = () => {
             <img src={dot} alt="" className="h-3 w-3 -ml-2 z-1"/>
           </div>
         </div>
-      </div>
+      </div> */}
+      
     </div>
   );
 };

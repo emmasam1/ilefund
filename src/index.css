@@ -1,1 +1,4 @@
 @import "tailwindcss";
+.ant-card .ant-card-body{
+    padding: 5px;
+}

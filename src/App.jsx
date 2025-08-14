@@ -7,6 +7,7 @@ import Footer from "./components/footer/Footer";
 import Faq from "./pages/faq/Faq";
 import About from "./pages/about/About";
 import Properties from "./pages/properties/Properties";
+import Land from "./pages/land/Land";
 
 
 function App() {
@@ -20,6 +21,7 @@ function App() {
           <Route path="/faqs" element={<Faq />} />
           <Route path="/about-us" element={<About />} />
           <Route path="/properties" element={<Properties />} />
+          <Route path="/lands" element={<Land />} />
           {/* {/* <Route path="/about" element={<AboutPage />} /> */}
           {/* Add more routes here */}
         </Routes>
