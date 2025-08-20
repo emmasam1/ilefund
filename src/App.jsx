@@ -8,6 +8,7 @@ import Faq from "./pages/faq/Faq";
 import About from "./pages/about/About";
 import Properties from "./pages/properties/Properties";
 import Land from "./pages/land/Land";
+import PropertyDetails from "./pages/details/PropertyDetails";
 
 
 function App() {
@@ -21,6 +22,7 @@ function App() {
           <Route path="/faqs" element={<Faq />} />
           <Route path="/about-us" element={<About />} />
           <Route path="/properties" element={<Properties />} />
+          <Route path="/property/:id" element={<PropertyDetails />} />
           <Route path="/lands" element={<Land />} />
           {/* {/* <Route path="/about" element={<AboutPage />} /> */}
           {/* Add more routes here */}

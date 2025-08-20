@@ -1,201 +1,117 @@
-import { Card, Button, Divider } from "antd";
-import { useNavigate } from "react-router"
+import { useState } from "react";
+import propertyImg1 from "../../assets/property_img_1.png";
+import propertyImg3 from "../../assets/property_img_3.png";
+import SliderComponent from "../../components/slider/SliderComponent";
+import "./dotStyle.css";
+import { motion, AnimatePresence } from "framer-motion"; // ✅ import AnimatePresence
+import { Button, Divider } from "antd";
+import About from "../../components/About";
+import Details from "../../components/Details";
+
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-
-import house from "../../assets/house.jpg";
-import pin from "../../assets/pin.png";
-import btn from "../../assets/btn.png";
-import propertyImg1 from "../../assets/property_img_1.png";
-import propertyImg2 from "../../assets/property_img_2.png";
 import { LiaLongArrowAltRightSolid } from "react-icons/lia";
-import Calculator from "../../components/calculator/Calculator";
 
-var settings = {
-  dots: true,
-  infinite: true,
-  speed: 500,
-  slidesToShow: 1,
-  slidesToScroll: 1,
-  arrows: false,
-};
+const PropertyDetails = () => {
+  const images = [propertyImg1, propertyImg3];
+  const [activeTab, setActiveTab] = useState(1);
 
-const properties = [
-  {
-    id: 1,
-    title: "4 Semi detached-duplex with 2 room BQ",
-    location: "Big land city Apo hilltop",
-    price: "₦13,000,000",
-    size: "500 SQM",
-    deposit: "₦1,500,000",
-    duration: "6 Months",
-    image: propertyImg2,
-  },
-  {
-    id: 2,
-    title: "Luxury 3 Bedroom Flat",
-    location: "Maitama District, Abuja",
-    price: "₦25,000,000",
-    size: "750 SQM",
-    deposit: "₦2,000,000",
-    duration: "12 Months",
-    image: propertyImg2,
-  },
-  {
-    id: 3,
-    title: "Modern Bungalow with Garden",
-    location: "Gwarinpa, Abuja",
-    price: "₦8,500,000",
-    size: "400 SQM",
-    deposit: "₦800,000",
-    duration: "8 Months",
-    image: propertyImg2,
-  },
-  {
-    id: 4,
-    title: "Luxury Villa with Pool",
-    location: "Asokoro, Abuja",
-    price: "₦45,000,000",
-    size: "1000 SQM",
-    deposit: "₦3,500,000",
-    duration: "18 Months",
-    image: propertyImg2,
-  },
-  {
-    id: 5,
-    title: "2 Bedroom Mini Flat",
-    location: "Lugbe, Abuja",
-    price: "₦5,500,000",
-    size: "300 SQM",
-    deposit: "₦600,000",
-    duration: "10 Months",
-    image: propertyImg2,
-  },
-  {
-    id: 6,
-    title: "5 Bedroom Fully Detached Duplex",
-    location: "Jabi, Abuja",
-    price: "₦60,000,000",
-    size: "1200 SQM",
-    deposit: "₦5,000,000",
-    duration: "24 Months",
-    image: propertyImg2,
-  },
-  {
-    id: 7,
-    title: "Penthouse Apartment",
-    location: "Wuse II, Abuja",
-    price: "₦35,000,000",
-    size: "850 SQM",
-    deposit: "₦2,800,000",
-    duration: "15 Months",
-    image: propertyImg2,
-  },
-  {
-    id: 8,
-    title: "Townhouse with Rooftop Terrace",
-    location: "Katampe Extension, Abuja",
-    price: "₦20,000,000",
-    size: "600 SQM",
-    deposit: "₦1,800,000",
-    duration: "9 Months",
-    image: propertyImg2,
-  },
-];
+  const tabs = [
+    { key: 1, label: "About", content: <About /> },
+    { key: 2, label: "Details", content: <Details /> },
+    { key: 3, label: "Documents", content: "Attached documents go here." },
+    { key: 4, label: "Location", content: "Map and location details here." },
+  ];
 
-const Properties = () => {
-
-  const navigate = useNavigate();
-
-  const handleClick = (id) => {
-    navigate(`/property/${id}`);
+  var setting = {
+    dots: true,
+    infinite: true,
+    speed: 500,
+    slidesToShow: 1,
+    slidesToScroll: 1,
+    arrows: false,
   };
 
+  const settings = {
+    appendDots: (dots) => (
+      <div className="property-slider">
+        <ul className="flex justify-center gap-2">{dots}</ul>
+      </div>
+    ),
+    customPaging: () => (
+      <div className="w-3 h-3 bg-white/60 rounded-full hover:bg-blue-500 transition"></div>
+    ),
+  };
+
+  // ✅ Find active tab content
+  const activeContent = tabs.find((tab) => tab.key === activeTab)?.content;
+
   return (
-    <>
-      <div
-        className="relative min-h-[500px] bg-cover bg-center bg-no-repeat"
-        style={{ backgroundImage: `url(${propertyImg1})` }}
-      >
-        <div className="overlay h-full w-full absolute bg-[#00000063] flex items-center">
-          <div className="pl-10">
-            <h1 className="text-white font-extrabold text-5xl">
-              Start With A <br /> Plan, Save & Own.
-            </h1>
-            <p className="text-white mt-4">From Savings to Home Ownership.</p>
-            <Button
-              type="primary"
-              size="mideum"
-              className="!rounded-full !px-6 flex items-center gap-2 w-fit mt-4"
+    <div className="relative ">
+      {/* Slider */}
+      <SliderComponent images={images} height="h-[500px]" settings={settings} />
+
+      <div className="max-w-6xl mx-auto p-5">
+        <h1 className="font-extrabold text-3xl mb-4">
+          4 Semi detached-duplex with 2 room BQ
+        </h1>
+
+        {/* Tabs */}
+        <div className="flex space-x-10 rounded-full w-fit mt-4">
+          {tabs.map((tab) => {
+            const isActive = activeTab === tab.key;
+            return (
+              <motion.div
+                key={tab.key}
+                whileTap={{ scale: 0.95 }}
+                className="relative"
+              >
+                <Button
+                  onClick={() => setActiveTab(tab.key)}
+                  type="text"
+                  className={`px-6 py-2 !rounded-full font-medium transition-colors duration-300
+                    ${isActive ? "!text-white" : "text-white/60"}`}
+                  style={{
+                    backgroundColor: isActive ? "#14003C" : "transparent",
+                  }}
+                >
+                  {tab.label}
+                </Button>
+
+                {isActive && (
+                  <motion.div
+                    layoutId="activeTab"
+                    className="absolute inset-0 rounded-full"
+                    style={{ backgroundColor: "#14003C", zIndex: -1 }}
+                    transition={{
+                      type: "spring",
+                      stiffness: 400,
+                      damping: 35,
+                      mass: 1.2,
+                    }}
+                  />
+                )}
+              </motion.div>
+            );
+          })}
+        </div>
+
+        {/* ✅ Animated Tab Content */}
+        <div className="mt-6 min-h-[120px]">
+          <AnimatePresence mode="wait">
+            <motion.div
+              key={activeTab}
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -10 }}
+              transition={{ duration: 0.3 }}
             >
-              Let’s start <LiaLongArrowAltRightSolid size={20} />
-            </Button>
-          </div>
+              {activeContent}
+            </motion.div>
+          </AnimatePresence>
         </div>
       </div>
-
-      <section>
-        <div className="max-w-6xl mx-auto py-15">
-          <h1 className="text-center font-extrabold">
-            Stay the course, reap the rewards
-          </h1>
-          <p className="!text-center text-bold mt-7 text-gray-300">
-            If you Invested
-          </p>
-        </div>
-
-        <Calculator />
-      </section>
-
-      <section className="px-5 mt-9">
-        <h1 className="font-extrabold text-2xl mb-4">Vetted Properties</h1>
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-          {properties.map((property) => (
-            <div key={property.id} onClick={() => handleClick(property.id)}>
-              <Card
-              hoverable
-                className="w-full overflow-hidden !p-2"
-                cover={
-                  <div className="relative">
-                    <img
-                      alt="property"
-                      src={property.image}
-                      className="h-40 w-full object-cover"
-                    />
-                  </div>
-                }
-              >
-                <span className="font-bold text-lg">{property.title}</span>
-
-                <div className="flex items-center mt-3 gap-2">
-                  <img src={pin} alt="pin" />
-                  <p className="text-gray-400 text-lg">{property.location}</p>
-                </div>
-
-                <div className="flex gap-4 mt-3 items-center">
-                  <h1 className="font-bold text-2xl">{property.price}</h1>
-                  <h1 className="font-bold text-sm mt-2">{property.size}</h1>
-                </div>
-
-                <div className="flex justify-between mt-5">
-                  <div>
-                    <h1 className="font-bold text-1xl">{property.deposit}</h1>
-                    <p className="text-gray-400 text-sm">Weekly deposit</p>
-                  </div>
-                  <div>
-                    <h1 className="font-bold text-1xl">{property.duration}</h1>
-                    <p className="text-gray-400 text-sm">Duration</p>
-                  </div>
-                  <div>
-                    <img src={btn} alt="button" className="w-22" />
-                  </div>
-                </div>
-              </Card>
-            </div>
-          ))}
-        </div>
-      </section>
 
       <section className="bg-[#12033a] py-10 mt-10">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 px-10">
@@ -222,7 +138,7 @@ const Properties = () => {
           </div>
 
           <div className="bg-[#2A1C4E] p-6 rounded-lg">
-            <Slider {...settings}>
+            <Slider {...setting}>
               <div>
                 <h2 className="text-2xl font-bold text-white">Logoipsum</h2>
                 <p className="mt-2 text-sm text-white">
@@ -338,8 +254,8 @@ const Properties = () => {
           </div>
         </div>
       </section>
-    </>
+    </div>
   );
 };
 
-export default Properties;
+export default PropertyDetails;
