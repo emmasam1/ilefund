@@ -193,7 +193,7 @@ const HomePage = () => {
               </Avatar.Group>
             </div>
 
-            <div className="flex gap-2 my-4">
+            <div className="flex gap-2 my-4 max-w-[529px]">
               <Input
                 placeholder="Start Your Email address ....."
                 className="!bg-[#f2f3fa] !border-none placeholder:!text-black"
