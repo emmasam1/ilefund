@@ -2,3 +2,19 @@
 .ant-card .ant-card-body{
     padding: 5px;
 }
+
+/* ✅ Square corners */
+.custom-select .ant-select-selector {
+  border-radius: 0 !important;
+  display: flex !important;
+  align-items: left !important; /* keep text aligned */
+  padding: 0 11px !important; /* same as Input padding */
+}
+
+/* ✅ Text alignment fix */
+.custom-select .ant-select-selection-item,
+.custom-select .ant-select-selection-placeholder {
+  line-height: 38px !important; /* slightly less than height */
+}
+
+

@@ -1,0 +1,8 @@
+/* CustomSlider.module.css */
+.slider :global(.ant-slider .ant-slider-handle::after) {
+  width: 20px !important;
+  height: 20px !important;
+  margin-top: 14px !important;  /* half of the height */
+  margin-left: 15px !important; /* half of the width */
+  /* box-shadow: none !important; */ /* optional */
+}

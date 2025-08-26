@@ -5,7 +5,7 @@ import Logo from "../../assets/Logo.png";
 import right_arrow from "../../assets/arrow-long-right.png";
 import angle_down from "../../assets/angle-down-small.png";
 import { Sling as Hamburger } from "hamburger-react";
-import { BulbOutlined, EyeOutlined } from "@ant-design/icons";
+import { BulbOutlined, EyeOutlined, ContactsOutlined  } from "@ant-design/icons";
 import { motion, AnimatePresence } from "framer-motion";
 
 const goalsMenu = (
@@ -42,6 +42,9 @@ const resourcesMenu = (
       </Menu.Item>
       <Menu.Item key="7" icon={<EyeOutlined />} className="!bg-white">
         <Link to="/team">Team</Link>
+      </Menu.Item>
+      <Menu.Item key="7" icon={<ContactsOutlined  />} className="!bg-white">
+        <Link to="/contact">Contact</Link>
       </Menu.Item>
     </div>
   </Menu>

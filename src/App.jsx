@@ -9,6 +9,8 @@ import About from "./pages/about/About";
 import Properties from "./pages/properties/Properties";
 import Land from "./pages/land/Land";
 import PropertyDetails from "./pages/details/PropertyDetails";
+import HowToSave from "./pages/how to save/HowToSave";
+import Contact from "./pages/contact/Contact";
 
 
 function App() {
@@ -24,7 +26,8 @@ function App() {
           <Route path="/properties" element={<Properties />} />
           <Route path="/property/:id" element={<PropertyDetails />} />
           <Route path="/lands" element={<Land />} />
-          {/* {/* <Route path="/about" element={<AboutPage />} /> */}
+          <Route path="/how-to-save" element={<HowToSave />} />
+           <Route path="/contact" element={<Contact />} />
           {/* Add more routes here */}
         </Routes>
         <Footer />
