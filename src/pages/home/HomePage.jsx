@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Button, Card, Avatar, Tooltip, Divider } from "antd";
+import { Button, Card, Avatar, Tooltip, Divider, Input } from "antd";
 
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
@@ -7,7 +7,9 @@ import "slick-carousel/slick/slick-theme.css";
 
 import home_progress from "../../assets/home_progress.png";
 import home_img from "../../assets/home_img.png";
+import Rectangle43 from "../../assets/Rectangle43.png";
 import propertyImg2 from "../../assets/property_img_2.png";
+import home_img_1 from "../../assets/home_img_1.svg";
 import { MdOutlineArrowRightAlt } from "react-icons/md";
 import pin from "../../assets/pin.png";
 import btn from "../../assets/btn.png";
@@ -154,6 +156,61 @@ const HomePage = () => {
 
   return (
     <>
+      <section className="w-11/12 mx-auto mt-10">
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-10">
+          <div className="flex flex-col gap-6">
+            <h1 className="font-extrabold text-5xl/19">
+              Start With A <br />
+              Plan, Save & Own.
+            </h1>
+            <div className="flex gap-3 items-center">
+              <img src={Rectangle43} alt="" className="" />
+              <p className=" text-2xl font-semibold">
+                From Savings to Home Ownership.
+              </p>
+            </div>
+
+            <div className="flex gap-3 items-center mt-4">
+              <p className="text-lg">
+                Building a Dream, One{" "}
+                <span className="!font-bold">Home Owner</span> at a Time.
+              </p>
+              <Avatar.Group>
+                <Avatar src="https://api.dicebear.com/7.x/miniavs/svg?seed=1" />
+                <a href="https://ant.design">
+                  <Avatar style={{ backgroundColor: "#f56a00" }}>K</Avatar>
+                </a>
+                <Tooltip title="Ant User" placement="top">
+                  <Avatar
+                    style={{ backgroundColor: "#87d068" }}
+                    icon={<UserOutlined />}
+                  />
+                </Tooltip>
+                <Avatar
+                  style={{ backgroundColor: "#1677ff" }}
+                  icon={<AntDesignOutlined />}
+                />
+              </Avatar.Group>
+            </div>
+
+            <div className="flex gap-2 my-4">
+              <Input
+                placeholder="Start Your Email address ....."
+                className="!bg-[#f2f3fa] !border-none placeholder:!text-black"
+              />
+              <Button
+                className="!bg-blue-600 !text-white py-3 !rounded-full w-60 hover:bg-blue-700 transition !border-0"
+                htmlType="submit"
+              >
+                Let’s start <MdOutlineArrowRightAlt />
+              </Button>
+            </div>
+          </div>
+          <div>
+            <img src={home_img_1} alt="" />
+          </div>
+        </div>
+      </section>
       {/* ✅ Hero Section with fixed ratio + consistent padding */}
       <section className="w-11/12 mx-auto py-16">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 h-full">
