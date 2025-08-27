@@ -5,6 +5,7 @@ import { AiOutlinePlus } from "react-icons/ai";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
+import { MdOutlineArrowRightAlt } from "react-icons/md";
 
 import landImg1 from "../../assets/land_img_1.png";
 import landImg2 from "../../assets/land_img_2.png";
@@ -16,6 +17,11 @@ import icon2 from "../../assets/icon2.png";
 import icon3 from "../../assets/icon3.png";
 import dollar_round from "../../assets/dollar_round.png";
 import google from "../../assets/google.png";
+
+import home_progress from "../../assets/home_progress.png";
+import home_img_2 from "../../assets/twemoji_house-with-garden.svg";
+import home_img_3 from "../../assets/game-icons_tower-bridge.svg";
+import home_img_4 from "../../assets/Group.svg";
 
 const { Panel } = Collapse;
 
@@ -175,31 +181,43 @@ const Land = () => {
       </section>
 
       {/* Image Grid Section */}
-      <section className="py-16 max-w-6xl mx-auto px-4">
-        <h1 className="font-bold text-2xl sm:text-3xl mb-6 text-center md:text-right">
-          Three Steps to Home Ownership
-        </h1>
-
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          <div>
-            <img
-              src={landImg2}
-              alt="Land development"
-              className="w-full h-auto object-cover"
-            />
+      <section className="w-11/12 mx-auto">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <div className="md:col-span-1 flex flex-col justify-center">
+            <h1 className="font-extrabold text-4xl">
+              Three Steps to Home Ownership
+            </h1>
+            <p className="mt-5 font-semibold">
+              Find out how you can own a Home and be a Landlord in just few days
+            </p>
+            <Button
+              className="!bg-blue-600 !h-10 !text-white py-3 !rounded-full w-60 hover:bg-blue-700 transition !border-0 mt-5"
+              htmlType="submit"
+            >
+              Get Started <MdOutlineArrowRightAlt />
+            </Button>
           </div>
-
-          <div>
-            <img
-              src={landImg3}
-              alt="Home ownership"
-              className="w-full h-auto object-cover"
-            />
+          <div className="h-[600px] md:col-span-2 bg-[url('/src/assets/house_bg.png')] bg-contain bg-no-repeat bg-center flex flex-col justify-end">
+            {/* ✅ Green bar always stays at the bottom */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6  w-full p-4">
+              <div className="h-35 w-30">
+                <img src={home_img_4} alt="" className="w-full h-full " />
+                <p className="text-center font-bold">Register</p>
+              </div>
+              <div className="h-35 w-30 justify-self-center">
+                <img src={home_img_3} alt="" className="w-full h-full " />
+                <p className="text-center font-bold">Save</p>
+              </div>
+              <div className="h-35 w-30 justify-self-end">
+                <img src={home_img_2} alt="" className="w-full h-full " />
+                <p className="text-center font-bold">Get Home</p>
+              </div>
+            </div>
           </div>
         </div>
       </section>
 
-      <section className="bg-[#D9D9D9] py-12">
+      <section className="bg-[#D9D9D9] py-12 mt-10">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center max-w-6xl mx-auto px-4">
           {/* Text Section */}
           <div className="space-y-4 text-center md:text-left">
@@ -507,7 +525,9 @@ const Land = () => {
                 <Divider />
                 <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mb-2">
                   <div class="border border-[#dddddd] rounded-lg flex justify-center flex-col items-center">
-                    <span className="text-xs mt-1 text-white">Goggle Rating</span>
+                    <span className="text-xs mt-1 text-white">
+                      Goggle Rating
+                    </span>
                     <h1 className="font-bold text-white">5.0</h1>
                   </div>
                   <div class="border border-[#dddddd] rounded-lg flex justify-center flex-col items-center">
@@ -542,7 +562,9 @@ const Land = () => {
                 <Divider />
                 <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mb-2">
                   <div class="border border-[#dddddd] rounded-lg flex justify-center flex-col items-center">
-                    <span className="text-xs mt-1 text-white">Goggle Rating</span>
+                    <span className="text-xs mt-1 text-white">
+                      Goggle Rating
+                    </span>
                     <h1 className="font-bold text-white">5.0</h1>
                   </div>
                   <div class="border border-[#dddddd] rounded-lg flex justify-center flex-col items-center">
@@ -577,7 +599,9 @@ const Land = () => {
                 <Divider />
                 <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mb-2">
                   <div class="border border-[#dddddd] rounded-lg flex justify-center flex-col items-center">
-                    <span className="text-xs mt-1 text-white">Goggle Rating</span>
+                    <span className="text-xs mt-1 text-white">
+                      Goggle Rating
+                    </span>
                     <h1 className="font-bold text-white">5.0</h1>
                   </div>
                   <div class="border border-[#dddddd] rounded-lg flex justify-center flex-col items-center">
@@ -594,7 +618,6 @@ const Land = () => {
                   </div>
                 </div>
               </div>
-             
             </Slider>
           </div>
         </div>

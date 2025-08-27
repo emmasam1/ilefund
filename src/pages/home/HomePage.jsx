@@ -6,7 +6,11 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 
 import home_progress from "../../assets/home_progress.png";
-import home_img from "../../assets/home_img.png";
+import home_img_2 from "../../assets/twemoji_house-with-garden.svg";
+import home_img_3 from "../../assets/game-icons_tower-bridge.svg";
+import home_img_4 from "../../assets/Group.svg";
+import iphone from "../../assets/iphone.png";
+import google from "../../assets/google.svg";
 import Rectangle43 from "../../assets/Rectangle43.png";
 import propertyImg2 from "../../assets/property_img_2.png";
 import home_img_1 from "../../assets/home_img_1.svg";
@@ -199,7 +203,7 @@ const HomePage = () => {
                 className="!bg-[#f2f3fa] !border-none placeholder:!text-black"
               />
               <Button
-                className="!bg-blue-600 !text-white py-3 !rounded-full w-60 hover:bg-blue-700 transition !border-0"
+                className="!bg-blue-600 !text-white !py-4 !rounded-full w-60 !h-10 hover:bg-blue-700 transition !border-0"
                 htmlType="submit"
               >
                 Let’s start <MdOutlineArrowRightAlt />
@@ -223,7 +227,7 @@ const HomePage = () => {
               One small step today, a giant leap for tomorrow.
             </p>
             <Button
-              className="!bg-blue-600 !text-white py-3 !rounded-full w-60 hover:bg-blue-700 transition !border-0 mt-5"
+              className="!bg-blue-600 !h-10 !text-white py-3 !rounded-full w-60 hover:bg-blue-700 transition !border-0 mt-5"
               htmlType="submit"
             >
               Start Building Wealth <MdOutlineArrowRightAlt />
@@ -246,14 +250,28 @@ const HomePage = () => {
               Find out how you can own a Home and be a Landlord in just few days
             </p>
             <Button
-              className="!bg-blue-600 !text-white py-3 !rounded-full w-60 hover:bg-blue-700 transition !border-0 mt-5"
+              className="!bg-blue-600 !h-10 !text-white py-3 !rounded-full w-60 hover:bg-blue-700 transition !border-0 mt-5"
               htmlType="submit"
             >
               Get Started <MdOutlineArrowRightAlt />
             </Button>
           </div>
-          <div className="md:col-span-2 flex flex-col justify-center">
-            <img src={home_img} alt="" className="h-full object-contain" />
+          <div className="h-[400px] md:col-span-2 bg-[url('/src/assets/house_bg.png')] bg-contain bg-no-repeat bg-center flex flex-col justify-end">
+            {/* ✅ Green bar always stays at the bottom */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6  w-full p-4">
+              <div className="h-35 w-30">
+                <img src={home_img_4} alt=""  className="w-full h-full "/>
+                <p className="text-center font-bold">Register</p>
+              </div>
+              <div className="h-35 w-30 justify-self-center">
+                 <img src={home_img_3} alt="" className="w-full h-full " />
+                 <p className="text-center font-bold">Save</p>
+              </div>
+              <div className="h-35 w-30 justify-self-end">
+                <img src={home_img_2} alt=""  className="w-full h-full "/>
+                <p className="text-center font-bold">Get Home</p>
+              </div>
+            </div>
           </div>
         </div>
       </section>
@@ -286,7 +304,7 @@ const HomePage = () => {
                     }
                   >
                     <span className="font-bold">
-                      {property.title?.slice(0, 25)}...
+                      {property.title?.slice(0, 13)}...
                     </span>
 
                     <div className="flex items-center mt-3 gap-2">
@@ -353,9 +371,29 @@ const HomePage = () => {
         </div>
       </section>
 
-      <section className="bg-[url('/src/assets/blue_bg.png')] bg-no-repeat bg-contain h-[500px] my-20"></section>
+      <section className="bg-[url('/src/assets/blue_bg.png')] bg-no-repeat bg-contain h-[500px] my-40">
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+        <div className="relative">
+          <img src={iphone} alt="" className="object-center w-90 absolute -top-20 left-30" />
+        </div>
+        <div className="flex flex-col justify-center h-[500px]">
+          <h1 className="text-white text-4xl/13 font-extrabold">Already a Potential <br/> Stake Holder</h1>
+          <p className="text-white my-4">Download ILE FUND  for free get all the latest updates find <br/>your home and contact support</p>
+          <img src={google} alt="" className="w-40 cursor-pointer"/>
+        </div>
+      </div>
+      </section>
 
-      <section className="w-11/12 mx-auto">
+      <section className="w-11/12 mx-auto mt-5">
+      <div className="flex justify-between mb-10">
+        <h1 className="font-bold text-4xl/13">Your most frequently asked <br/> question answered</h1>
+        <Button
+              className="!bg-blue-600 !h-10 !text-white py-3 !rounded-full w-60 hover:bg-blue-700 transition !border-0 mt-5"
+              htmlType="submit"
+            >
+              View All FAQS <MdOutlineArrowRightAlt />
+            </Button>
+      </div>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
           <div className="h-[500px] rounded-md bg-[url('/src/assets/land_img_5.png')] bg-no-repeat bg-cover bg-top relative">
             <div className="rounded-md bg-[#12033a] flex justify-center items-center flex-col p-10 w-60 absolute top-75 -right-2.5">
@@ -465,7 +503,7 @@ const HomePage = () => {
             <Button
               type="primary"
               size="medium"
-              className="!rounded-full !px-6 flex items-center gap-2 w-fit mt-2"
+              className="!rounded-full !px-6 flex items-center gap-2 w-fit mt-2 !py-4 !h-10"
             >
               Contact Now <LiaLongArrowAltRightSolid size={20} />
             </Button>
