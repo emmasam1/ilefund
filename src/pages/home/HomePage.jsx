@@ -9,7 +9,7 @@ import home_progress from "../../assets/home_progress.png";
 import home_img_2 from "../../assets/twemoji_house-with-garden.svg";
 import home_img_3 from "../../assets/game-icons_tower-bridge.svg";
 import home_img_4 from "../../assets/Group.svg";
-import iphone from "../../assets/iPhone.png";
+import iphone from "../../assets/iPhone-ilefund.png";
 import google from "../../assets/google.svg";
 import Rectangle43 from "../../assets/Rectangle43.png";
 import propertyImg2 from "../../assets/property_img_2.png";
