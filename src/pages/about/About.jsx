@@ -1,9 +1,42 @@
-import React from "react";
+import React, { useState } from "react";
 import about_img_1 from "../../assets/about_img_1.png";
+import { Segmented, Tabs } from "antd";
+
+const onChange = (key) => {
+  console.log(key);
+};
+
+const items = [
+  { key: "1", label: "Tab 1", children: "Content of Tab Pane 1" },
+  { key: "2", label: "Tab 2", children: "Content of Tab Pane 2" },
+  { key: "3", label: "Tab 3", children: "Content of Tab Pane 3" },
+];
 
 const About = () => {
+  const [value, setValue] = useState('Map');
+
   return (
     <div>
+      {/* Header */}
+      <div className="bg-[url(src/assets/ilefund-land-nigeria-bg-2.png)] h-96 flex flex-col justify-center items-center gap-3">
+        <h1 className="text-[#0047FF] font-bold text-3xl">About the Company</h1>
+        <p className="text-center">
+          At Ilefund, we are dedicated to creating innovative real estate
+          investment solutions
+          <br /> that empower individuals and businesses to own, grow, and
+          manage property with
+          <br /> confidence.
+        </p>
+      </div>
+
+      {/* FIXED TABS */}
+      <div className="my-10 flex flex-col items-center">
+       <Segmented options={['Map', 'Transit', 'Satellite']} value={value} onChange={setValue} />;
+
+      </div>
+
+      {/* Rest of your sections unchanged */}
+
       {/* ✅ Section 1: Mission & Vision */}
       <section className="max-w-6xl mx-auto py-16 px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">

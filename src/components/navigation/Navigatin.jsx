@@ -63,7 +63,7 @@ const Navigation = () => {
   };
 
   return (
-    <nav className="w-full border-b border-b-gray-200 py-4 bg-white relative">
+    <nav className="w-full border-b border-b-gray-200 py-4 bg-white relative bg-[url(src/assets/ilefund-land-nigeria-bg-2.png)] ">
       <div className="flex justify-between items-center m-auto w-11/12">
         <Link to="/">
           <img src={Logo} alt="logo" className="w-40" />
@@ -74,24 +74,28 @@ const Navigation = () => {
           <Link to="/about-us" className="cursor-pointer">
             About
           </Link>
-
+          <Link to="/about-us" className="cursor-pointer">
+            Real Estate
+          </Link>
+          <Link to="/faqs" className="cursor-pointer">
+            FAQs
+          </Link>
+{/* 
           <Dropdown
             overlay={goalsMenu}
             trigger={["click"]}
             placement="bottomLeft"
           >
             <span className="cursor-pointer inline-flex items-center">
-              Goals{" "}
+              Real Estate{" "}
               <img src={angle_down} alt="down" className="h-4 ml-1 mt-1" />
             </span>
           </Dropdown>
 
           <Link to="/properties" className="cursor-pointer">
             Properties
-          </Link>
-          <Link to="/faqs" className="cursor-pointer">
-            FAQs
-          </Link>
+          </Link> */}
+          
 
           <Dropdown
             overlay={resourcesMenu}
