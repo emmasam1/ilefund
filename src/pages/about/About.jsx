@@ -1,19 +1,18 @@
 import React, { useState } from "react";
 import about_img_1 from "../../assets/about_img_1.png";
-import { Segmented, Tabs } from "antd";
-
-const onChange = (key) => {
-  console.log(key);
-};
-
-const items = [
-  { key: "1", label: "Tab 1", children: "Content of Tab Pane 1" },
-  { key: "2", label: "Tab 2", children: "Content of Tab Pane 2" },
-  { key: "3", label: "Tab 3", children: "Content of Tab Pane 3" },
-];
+import { Segmented } from "antd";
 
 const About = () => {
-  const [value, setValue] = useState('Map');
+  const [value, setValue] = useState("Mision");
+
+  const content = {
+    Mision:
+      "We aim to simplify the complexities of real estate investment, enhance accessibility, and drive sustainable growth through our innovative property solutions. By providing trusted and transparent services, we empower our clients to confidently navigate the ever-changing world of land and estate investment.",
+    Vision:
+      "We aim to simplify the complexities of real estate investment, enhance accessibility, and drive sustainable growth through our innovative property solutions. By providing trusted and transparent services, we empower our clients to confidently navigate the ever-changing world of land and estate investment.",
+    Value:
+      "This is the value content...",
+  };
 
   return (
     <div>
@@ -29,18 +28,58 @@ const About = () => {
         </p>
       </div>
 
-      {/* FIXED TABS */}
-      <div className="my-10 flex flex-col items-center">
-       <Segmented options={['Map', 'Transit', 'Satellite']} value={value} onChange={setValue} />;
+      {/* FIXED GRID SECTION */}
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-20 px-20">
+
+        {/* LEFT SIDE */}
+        <div>
+          <div className="bg-[#DFE8FF] px-2 rounded-lg py-1 text-[#0047FF] w-30">
+            What we do
+          </div>
+          <p className="font-bold text-2xl">
+            We help people grow wealth
+            <br /> through smart property
+            <br /> investments.
+          </p>
+        </div>
+
+        {/* RIGHT SIDE - Segmented + Content */}
+        <div>
+          <Segmented
+            options={["Mision", "Vision", "Value"]}
+            value={value}
+            onChange={setValue}
+            className="custom-segment"
+          />
+
+          {/* Content Renders Under the Selected Tab */}
+          <div className="mt-4 p-4 ">
+            {content[value]}
+          </div>
+        </div>
 
       </div>
 
-      {/* Rest of your sections unchanged */}
+      {/* Segmented styles */}
+      <style>
+        {`
+          .custom-segment .ant-segmented-item-selected {
+            background-color: #2563eb !important;
+            color: white !important;
+            font-weight: 600;
+          }
 
-      {/* ✅ Section 1: Mission & Vision */}
-      <section className="max-w-6xl mx-auto py-16 px-4 sm:px-6 lg:px-8">
+          .custom-segment .ant-segmented-item:hover {
+            color: #2563eb !important;
+          }
+        `}
+      </style>
+
+      {/* Rest of your code unchanged */}
+
+      {/* Section 1: Mission & Vision */}
+      {/* <section className="max-w-6xl mx-auto py-16 px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          {/* Left Side (bigger, takes 2/3 width) */}
           <div className="md:col-span-2 flex flex-col justify-center">
             <h2 className="font-bold mb-6 text-[#0047FF] text-4xl sm:text-5xl">
               Our Mission and Vision
@@ -66,7 +105,6 @@ const About = () => {
             </p>
           </div>
 
-          {/* Right Side (smaller, takes 1/3 width) */}
           <div>
             <img
               src={about_img_1}
@@ -75,11 +113,10 @@ const About = () => {
             />
           </div>
         </div>
-      </section>
+      </section> */}
 
-      {/* ✅ Section 2: Overlay with Background */}
+      {/* Section 2: Overlay with Background */}
       <section className="relative bg-[url('/src/assets/house.jpg')] bg-no-repeat bg-cover bg-center mt-10 h-[500px] sm:h-[600px]">
-        {/* Overlay */}
         <div className="absolute inset-0 bg-black/50 flex flex-col justify-center items-center px-4 text-center">
           <h1 className="text-white font-extrabold text-2xl sm:text-4xl lg:text-6xl leading-tight max-w-4xl">
             ILEFUND And Its Purposes
@@ -100,17 +137,15 @@ const About = () => {
 
       <section className="max-w-6xl mx-auto py-16 px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-3 items-center">
-          {/* Left (smaller, 1/3 width on desktop) */}
-          <div className="">
+          <div>
             <h2 className="font-bold mb-6 text-[#0047FF] text-4xl sm:text-5xl text-right">
               Why Now ?
             </h2>
           </div>
 
-          {/* Right (bigger, 2/3 width on desktop) */}
-          <div className="md:col-span-2 bg-[url('/src/assets/bg-plane.png')] bg-no-repeat bg-contain sm:bg-cover lg:bg-contain h-[400px] sm:h-[700px] md:h-[700px]  flex items-center">
+          <div className="md:col-span-2 bg-[url('/src/assets/bg-plane.png')] bg-no-repeat bg-contain sm:bg-cover lg:bg-contain h-[400px] sm:h-[700px] md:h-[700px] flex items-center">
             <div className="max-w-130 ml-4 mx-auto">
-              <p className="">
+              <p>
                 For decades, owning a home in Nigeria has been a frustrating
                 journey filled with:
               </p>
@@ -129,8 +164,8 @@ const About = () => {
                 housing gap continues to widen. We’re introducing structure,
                 transparency, and accessibility to the real estate space by
                 letting users save with purpose, see what their money is working
-                toward, and deal directly with verified developers—no middlemen,
-                no guesswork.
+                toward, and deal directly with verified developers—no
+                middlemen, no guesswork.
               </p>
             </div>
           </div>

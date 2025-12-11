@@ -5,7 +5,7 @@ import Logo from "../../assets/Logo.png";
 import right_arrow from "../../assets/arrow-long-right.png";
 import angle_down from "../../assets/angle-down-small.png";
 import { Sling as Hamburger } from "hamburger-react";
-import { BulbOutlined, EyeOutlined, ContactsOutlined  } from "@ant-design/icons";
+import { BulbOutlined, EyeOutlined, ContactsOutlined } from "@ant-design/icons";
 import { motion, AnimatePresence } from "framer-motion";
 
 const goalsMenu = (
@@ -43,7 +43,7 @@ const resourcesMenu = (
       <Menu.Item key="7" icon={<EyeOutlined />} className="!bg-white">
         <Link to="/team">Team</Link>
       </Menu.Item>
-      <Menu.Item key="7" icon={<ContactsOutlined  />} className="!bg-white">
+      <Menu.Item key="7" icon={<ContactsOutlined />} className="!bg-white">
         <Link to="/contact">Contact</Link>
       </Menu.Item>
     </div>
@@ -74,13 +74,13 @@ const Navigation = () => {
           <Link to="/about-us" className="cursor-pointer">
             About
           </Link>
-          <Link to="/about-us" className="cursor-pointer">
+          <Link to="/real-estate" className="cursor-pointer">
             Real Estate
           </Link>
           <Link to="/faqs" className="cursor-pointer">
             FAQs
           </Link>
-{/* 
+          {/* 
           <Dropdown
             overlay={goalsMenu}
             trigger={["click"]}
@@ -95,7 +95,6 @@ const Navigation = () => {
           <Link to="/properties" className="cursor-pointer">
             Properties
           </Link> */}
-          
 
           <Dropdown
             overlay={resourcesMenu}
@@ -140,7 +139,7 @@ const Navigation = () => {
 
             <div className="space-y-6 text-black font-medium">
               <Link
-                to="/about"
+                to="/about-us"
                 onClick={handleMobileNavClick}
                 className="block"
               >
