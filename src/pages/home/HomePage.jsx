@@ -6,14 +6,14 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 
 import home_progress from "../../assets/home_progress.png";
-import home_img_2 from "../../assets/twemoji_house-with-garden.svg";
-import home_img_3 from "../../assets/game-icons_tower-bridge.svg";
-import home_img_4 from "../../assets/Group.svg";
+import home_img_2 from "../../assets/ilefund-register.svg";
+import home_img_3 from "../../assets/ilefund-save.svg";
+import home_img_4 from "../../assets/ilefund-homes.svg";
 import iphone from "../../assets/iPhone-ilefund.png";
 import google from "../../assets/google.svg";
 import Rectangle43 from "../../assets/Rectangle43.png";
 import propertyImg2 from "../../assets/property_img_2.png";
-import home_img_1 from "../../assets/home_img_1.png";
+import home_img_1 from "../../assets/ilefund-home_img_1.png";
 import { MdOutlineArrowRightAlt } from "react-icons/md";
 import pin from "../../assets/pin.png";
 import btn from "../../assets/btn.png";
@@ -202,30 +202,30 @@ const HomePage = () => {
                 </p>
                 <div className="flex -space-x-2 overflow-hidden">
                   <img
-                    src="https://images.unsplash.com/photo-1491528323818-fdd1faba62cc?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
-                    alt=""
-                    className="inline-block w-8 h-8 rounded-full"
+                    src="https://images.unsplash.com/photo-1594564190328-0bed16a89837?w=900&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8bmlnZXJpYW58ZW58MHx8MHx8fDI%3D"
+                    alt="ilefund-user-1"
+                    className="inline-block w-10 h-10 rounded-full object-cover"
                   />
                   <img
-                    src="https://images.unsplash.com/photo-1550525811-e5869dd03032?ixlib=rb-1.2.1&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
-                    alt=""
-                    className="inline-block w-8 h-8 rounded-full"
+                    src="https://images.unsplash.com/photo-1643008504049-1f4957523024?w=900&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NTh8fG5pZ2VyaWFufGVufDB8fDB8fHwy"
+                    alt="ilefund-user-2"
+                    className="inline-block w-10 h-10 rounded-full object-cover"
                   />
                   <img
-                    src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2.25&w=256&h=256&q=80"
-                    alt=""
-                    className="inline-block w-8 h-8 rounded-full"
+                    src="https://images.unsplash.com/photo-1533108344127-a586d2b02479?w=900&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8bmlnZXJpYW58ZW58MHx8MHx8fDI%3D"
+                    alt="ilefund-user-3"
+                    className="inline-block w-10 h-10 rounded-full object-cover"
                   />
                   <img
-                    src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
-                    alt=""
-                    className="inline-block w-8 h-8 rounded-full"
+                    src="https://images.unsplash.com/photo-1602342323893-b11f757957c9?w=900&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8bmlnZXJpYW58ZW58MHx8MHx8fDI%3D"
+                    alt="ilefund-user-4"
+                    className="inline-block w-10 h-10 rounded-full object-cover"
                   />
                 </div>
               </div>
             </div>
             <div>
-              <img src={home_img_1} alt="" className="w-full h-auto" />
+              <img src={home_img_1} alt="ilefund-home-bg" className="w-full h-auto" />
             </div>
           </div>
         </section>
@@ -237,52 +237,39 @@ const HomePage = () => {
         </div>
 
         <h1 className="font-bold text-3xl text-center">
-          Three Steps to Home Ownership
+         Three Steps to Own Your First Property
         </h1>
 
         <p className="text-center">
-          Find out how you can own a Home and be <br /> a Landlord in just few
-          days
+          Find out how you can become a property owner <br /> in just few days.
         </p>
 
         {/* ✅ FULLY RESPONSIVE GRID */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10 mt-10 w-full">
           {/* Item 1 */}
           <div className="p-6 flex flex-col items-center text-center">
-            <img src={home_img_2} alt="Register" className="w-24 h-24 mb-4" />
-            <h3 className="text-xl font-semibold mb-2">Register</h3>
-            <p className="text-gray-600 leading-6">
-              Protect your wealth by managing
-              <br />
-              risk, seeking advice and making
-              <br />
-              smart financial decisions.
+            <img src={home_img_2} alt="ilefund-Register" className="w-34 h-34 mb-4" />
+            <h3 className="text-xl font-semibold mb-2">Sign Up and Verify Your Account</h3>
+            <p className="text-gray-600 text-sm leading-6 text-justify">
+              Create a secure account and complete your KYC (NIN, BVN, Address) to access all features. The more verified you are, the more benefits you unlock.
             </p>
           </div>
 
           {/* Item 2 */}
           <div className="p-6 flex flex-col items-center text-center">
-            <img src={home_img_3} alt="Save" className="w-24 h-24 mb-4" />
-            <h3 className="text-xl font-semibold mb-2">Save</h3>
-            <p className="text-gray-600 leading-6">
-              Protect your wealth by managing
-              <br />
-              risk, seeking advice and making
-              <br />
-              smart financial decisions.
+            <img src={home_img_3} alt="ilefund-Save" className="w-34 h-34 mb-4" />
+            <h3 className="text-xl font-semibold mb-2">Start Saving with a Plan</h3>
+            <p className="text-gray-600 text-sm leading-6 text-justify">
+              Set your saving frequency (daily, weekly, monthly), and we’ll guide you with reminders and progress tracking. You can save manually or automate with card/bank.
             </p>
           </div>
 
           {/* Item 3 */}
           <div className="p-6 flex flex-col items-center text-center">
-            <img src={home_img_4} alt="Get Home" className="w-24 h-24 mb-4" />
-            <h3 className="text-xl font-semibold mb-2">Get Home</h3>
-            <p className="text-gray-600 leading-6">
-              Protect your wealth by managing
-              <br />
-              risk, seeking advice and making
-              <br />
-              smart financial decisions.
+            <img src={home_img_4} alt="ilefund-Get-Home" className="w-34 h-34 mb-4" />
+            <h3 className="text-xl font-semibold mb-2">Own Your Property</h3>
+            <p className="text-gray-600 text-sm leading-6 text-justify">
+              Choose to pay outright or continue your payment plan over a pre-defined period. We’ll keep track of everything with the savings tracker, and the developer shares documentation with you wherever you are when you are done.
             </p>
           </div>
         </div>

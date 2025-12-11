@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Link } from "react-router";
 import { Dropdown, Menu } from "antd";
-import Logo from "../../assets/Logo.png";
+import Logo from "../../assets/ilefund-Logo-long.png";
 import right_arrow from "../../assets/arrow-long-right.png";
 import angle_down from "../../assets/angle-down-small.png";
 import { Sling as Hamburger } from "hamburger-react";
@@ -66,7 +66,7 @@ const Navigation = () => {
     <nav className="w-full border-b border-b-gray-200 py-4 bg-white relative bg-[url(src/assets/ilefund-land-nigeria-bg-2.png)] ">
       <div className="flex justify-between items-center m-auto w-11/12">
         <Link to="/">
-          <img src={Logo} alt="logo" className="w-40" />
+          <img src={Logo} alt="ilefund-logo" className="w-40" />
         </Link>
 
         {/* Desktop Nav */}
