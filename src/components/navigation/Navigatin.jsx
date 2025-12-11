@@ -5,7 +5,7 @@ import Logo from "../../assets/Logo.png";
 import right_arrow from "../../assets/arrow-long-right.png";
 import angle_down from "../../assets/angle-down-small.png";
 import { Sling as Hamburger } from "hamburger-react";
-import { BulbOutlined, EyeOutlined, ContactsOutlined  } from "@ant-design/icons";
+import { BulbOutlined, EyeOutlined, ContactsOutlined } from "@ant-design/icons";
 import { motion, AnimatePresence } from "framer-motion";
 
 const goalsMenu = (
@@ -43,7 +43,7 @@ const resourcesMenu = (
       <Menu.Item key="7" icon={<EyeOutlined />} className="!bg-white">
         <Link to="/team">Team</Link>
       </Menu.Item>
-      <Menu.Item key="7" icon={<ContactsOutlined  />} className="!bg-white">
+      <Menu.Item key="7" icon={<ContactsOutlined />} className="!bg-white">
         <Link to="/contact">Contact</Link>
       </Menu.Item>
     </div>
@@ -63,7 +63,7 @@ const Navigation = () => {
   };
 
   return (
-    <nav className="w-full border-b border-b-gray-200 py-4 bg-white relative">
+    <nav className="w-full border-b border-b-gray-200 py-4 bg-white relative bg-[url(src/assets/ilefund-land-nigeria-bg-2.png)] ">
       <div className="flex justify-between items-center m-auto w-11/12">
         <Link to="/">
           <img src={Logo} alt="logo" className="w-40" />
@@ -74,24 +74,27 @@ const Navigation = () => {
           <Link to="/about-us" className="cursor-pointer">
             About
           </Link>
-
+          <Link to="/real-estate" className="cursor-pointer">
+            Real Estate
+          </Link>
+          <Link to="/faqs" className="cursor-pointer">
+            FAQs
+          </Link>
+          {/* 
           <Dropdown
             overlay={goalsMenu}
             trigger={["click"]}
             placement="bottomLeft"
           >
             <span className="cursor-pointer inline-flex items-center">
-              Goals{" "}
+              Real Estate{" "}
               <img src={angle_down} alt="down" className="h-4 ml-1 mt-1" />
             </span>
           </Dropdown>
 
           <Link to="/properties" className="cursor-pointer">
             Properties
-          </Link>
-          <Link to="/faqs" className="cursor-pointer">
-            FAQs
-          </Link>
+          </Link> */}
 
           <Dropdown
             overlay={resourcesMenu}
@@ -136,7 +139,7 @@ const Navigation = () => {
 
             <div className="space-y-6 text-black font-medium">
               <Link
-                to="/about"
+                to="/about-us"
                 onClick={handleMobileNavClick}
                 className="block"
               >

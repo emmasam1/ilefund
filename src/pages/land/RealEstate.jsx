@@ -103,24 +103,39 @@ const RealEstate = () => {
     },
   ];
 
+  const content = [
+    
+  ]
+
   return (
     <div className="bg-white">
       {/* Hero Section */}
-      <section className="grid grid-cols-1 sm:grid-cols-2 gap-8 items-center max-w-7xl mx-auto px-6 py-16">
+      <section className="grid grid-cols-1 sm:grid-cols-2 gap-8 items-center px-15 py-16 bg-cover bg-center bg-[url(src/assets/ilefund-land-nigeria-bg-2.png)]">
         <div className="space-y-6">
-          <h1 className="font-extrabold text-4xl sm:text-5xl lg:text-5xl leading-tight">
-            Start With A <br /> Plan, Save & Own.
+          <p className="">REAL ESTATE</p>
+          <h1 className="font-extrabold text-4xl sm:text-4xl lg:text-4xl leading-tight">
+            An expansive portfolio,
+            <br />
+            calibrated for consistent
+            <br />
+            growth
           </h1>
-          <p className="text-lg text-gray-600 max-w-md">
-            From savings to home ownership.
+          <p className="text-gray-600 max-w-md">
+            Explore ilefund’s real estate strategies designed to harness
+            long-term macroeconomic drivers such as Sunbelt housing and
+            e-commerce logistics.
           </p>
-          <Button
-            type="primary"
-            size="large"
-            className="!rounded-full !px-6 flex items-center gap-2 w-fit"
-          >
-            Let’s start <LiaLongArrowAltRightSolid size={20} />
-          </Button>
+
+          <div className="flex gap-5">
+            <Input placeholder="Start with your Email address ....." />
+            <Button
+              type="primary"
+              size="large"
+              className="!rounded-full !px-6 flex items-center gap-2 w-fit"
+            >
+              Let’s start <LiaLongArrowAltRightSolid size={20} />
+            </Button>
+          </div>
         </div>
 
         <div className="flex justify-center">
@@ -131,6 +146,40 @@ const RealEstate = () => {
           />
         </div>
       </section>
+
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-6 px-10 mt-10">
+        {/* LEFT — FIXED */}
+        <div className="md:sticky md:top-10 h-max">
+          <div className="p-4 bg-gray-100 rounded-lg shadow">
+            <h2 className="text-xl font-bold">Left Side (Fixed)</h2>
+            <p>
+              This section stays fixed as long as you scroll the right side.
+            </p>
+          </div>
+        </div>
+
+        {/* RIGHT — SCROLLABLE */}
+        <div className="h-[500px] overflow-y-scroll scrollbar-hide pr-4">
+          {/* Long Content Here */}
+          <div className="space-y-4">
+            <p>
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed ut...
+            </p>
+            <p>(Repeat your long content here)</p>
+            <p>More long content...</p>
+            <p>More long content...</p>
+            <p>More long content...</p>
+          </div>
+        </div>
+      </div>
+
+      {/* Normal content continues */}
+      <div className="p-10">
+        <h1 className="text-2xl font-bold">Page continues normally below…</h1>
+        <p className="mt-4">
+          This part shows after the right content finishes scrolling.
+        </p>
+      </div>
 
       {/* Feature Cards Section */}
       <section className="bg-[#D9D9D9] py-16">
