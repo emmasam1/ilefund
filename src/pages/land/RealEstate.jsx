@@ -22,6 +22,10 @@ import home_progress from "../../assets/home_progress.png";
 import home_img_2 from "../../assets/twemoji_house-with-garden.svg";
 import home_img_3 from "../../assets/game-icons_tower-bridge.svg";
 import home_img_4 from "../../assets/Group.svg";
+import img1 from "../../assets/ilefund-land-nigeria-wealth.png";
+import img2 from "../../assets/ilefund-land-nigeria-income.png";
+import img3 from "../../assets/ilefund-land-nigeria-future.png";
+import img4 from "../../assets/ilefund-land-nigeria-diversification.png";
 
 const { Panel } = Collapse;
 
@@ -104,8 +108,35 @@ const RealEstate = () => {
   ];
 
   const content = [
-    
-  ]
+    {
+      id: 1,
+      title: "Wealth preservationand growth",
+      content:
+        "Alternative assets like private real estate have historically offered a unique combination of lower volatility than stocks and higher potential returns than bonds. This mixture can anchor your portfolio, smoothing out the wild ups and downs of the public markets.",
+      icon: img1,
+    },
+    {
+      id: 2,
+      title: "Income generation",
+      content:
+        "For many investors, the ability to create consistent income—via equity ownership in apartment buildings or single-family rentals that earn income through rental payments, for instance—is one of the most attractive aspects of real estate investing.",
+      icon: img2,
+    },
+    {
+      id: 3,
+      title: "Superior diversification",
+      content:
+        "Private market assets are less likely to be affected by market fluctuations, helping reduce risk and improving your long-term financial stability—even during sustained periods of economic uncertainty.",
+      icon: img4,
+    },
+    {
+      id: 4,
+      title: "Built for the future",
+      content:
+        "Our portfolio aims to harness the most powerful long-term macroeconomic drivers of the U.S. economy. Trends like increased demand for well-located residential assets across the sunbelt to the explosion of eCommerce-driven industrial spaces.",
+      icon: img3,
+    },
+  ];
 
   return (
     <div className="bg-white">
@@ -147,28 +178,36 @@ const RealEstate = () => {
         </div>
       </section>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6 px-10 mt-10">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-6 px-10 mt-10 bg-[#F2F3FA] py-20">
         {/* LEFT — FIXED */}
         <div className="md:sticky md:top-10 h-max">
-          <div className="p-4 bg-gray-100 rounded-lg shadow">
-            <h2 className="text-xl font-bold">Left Side (Fixed)</h2>
-            <p>
-              This section stays fixed as long as you scroll the right side.
+          <div className="">
+            <h2 className="text-3xl font-bold">Why private real estate</h2>
+            <p className="mt-3 text-sm">
+              Historically, private market real estate has featured a
+              combination of traits not found in other asset classes: long-term
+              earning potential and effective diversification beyond the stock
+              market.
             </p>
           </div>
         </div>
 
         {/* RIGHT — SCROLLABLE */}
-        <div className="h-[500px] overflow-y-scroll scrollbar-hide pr-4">
+        <div className="overflow-y-scroll scrollbar-hide pr-4">
           {/* Long Content Here */}
           <div className="space-y-4">
-            <p>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed ut...
-            </p>
-            <p>(Repeat your long content here)</p>
-            <p>More long content...</p>
-            <p>More long content...</p>
-            <p>More long content...</p>
+            {content.map((e) => {
+              return (
+                <Card className="!bg-white [&_.ant-card-body]:!bg-white rounded-md !p-5 !mb-5">
+                  <div className="flex justify-between items-center">
+                    <h1 className="font-bold text-2xl">{e.title}</h1>
+                    <img src={e.icon} alt="" className="w-25" />
+                  </div>
+
+                  <p className="text-sm">{e.content}</p>
+                </Card>
+              );
+            })}
           </div>
         </div>
       </div>
