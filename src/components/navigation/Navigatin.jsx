@@ -8,6 +8,7 @@ import { Sling as Hamburger } from "hamburger-react";
 import { BulbOutlined, EyeOutlined, ContactsOutlined } from "@ant-design/icons";
 import { motion, AnimatePresence } from "framer-motion";
 
+
 const goalsMenu = (
   <Menu className="w-48 p-2 !py-5">
     <Menu.Item key="1" icon={<BulbOutlined />}>
@@ -19,6 +20,9 @@ const goalsMenu = (
   </Menu>
 );
 
+const moveToPage=()=>{
+  window.location.href = "https://app.ilefund.com";
+}
 const resourcesMenu = (
   <Menu className="w-74 p-2 !py-5">
     <div className="grid grid-cols-2 gap-2">
@@ -109,12 +113,12 @@ const Navigation = () => {
         </div>
 
         {/* CTA */}
-        <Link to="/get-started">
-          <button className="hidden md:flex items-center space-x-2 bg-blue-600 text-white font-semibold px-5 py-2 rounded-full hover:bg-blue-700 transition cursor-pointer">
+        
+          <button onClick={moveToPage} className="hidden md:flex items-center space-x-2 bg-blue-600 text-white font-semibold px-5 py-2 rounded-full hover:bg-blue-700 transition cursor-pointer">
             <span>Get Started</span>
             <img src={right_arrow} alt="arrow" />
           </button>
-        </Link>
+       
 
         {/* Hamburger */}
         <div className="md:hidden z-30">

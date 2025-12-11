@@ -1,5 +1,15 @@
-import { useState } from "react";
-import { Button, Card, Avatar, Tooltip, Divider, Input } from "antd";
+import { useEffect, useState } from "react";
+import {
+  Button,
+  Card,
+  Avatar,
+  Tooltip,
+  Divider,
+  Input,
+  Skeleton,
+  Form,
+  message,
+} from "antd";
 
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
@@ -26,6 +36,9 @@ import blueline from "../../assets/blueline.png";
 import phone1 from "../../assets/ilefund-land-nigeria-iphone-1.png";
 import phone2 from "../../assets/ilefund-land-nigeria-iphone-2.png";
 import bg from "../../assets/ilefund-land-nigeria-bg-1.png";
+import axios from "axios";
+
+import { useNavigate } from "react-router";
 
 var settings = {
   dots: true,
@@ -37,7 +50,118 @@ var settings = {
 };
 
 const HomePage = () => {
+  const navigate = useNavigate();
   const [activeKey, setActiveKey] = useState(null);
+  const [listing, setListing] = useState([]);
+  const [loading, setLoading] = useState(false);
+
+  const [messageApi, contextHolder] = message.useMessage();
+
+  const getListing = async () => {
+    try {
+      setLoading(true);
+      const res = await axios.get(
+        `https://wallet-v2-aeqw.onrender.com/api/estate/prototypes`
+      );
+      console.log(res);
+      const cleanedData = (res.data.data || []).map((item) => ({
+        banner: item.banner?.url,
+        estate: item.estate?.name,
+        price: item.price,
+        sizeValue: item.sizeValue,
+        title: item.title,
+      }));
+
+      setListing(cleanedData);
+
+      // console.log("........", cleanedData)
+    } catch (error) {
+      console.log(error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+ const onFinish = async (values) => {
+  setLoading(true);
+  try {
+    // Optional delay for smoother UX
+    await new Promise((resolve) => setTimeout(resolve, 1500));
+
+    // Send registration request
+    const response = await axios.post(
+      "https://wallet-v2-aeqw.onrender.com/api/v1/register",
+      { email: values.email }
+    );
+
+    if (!response.data) throw new Error("No response data from server");
+
+    const { token, message, otpVerified, isPassword } = response.data;
+    console.log("🔹 Server Response:", response.data);
+
+    // Normalize booleans
+    const otpVerifiedBool =
+      otpVerified === true || otpVerified === "true" || otpVerified === 1;
+    const isPasswordBool =
+      isPassword === true || isPassword === "true" || isPassword === 1;
+
+    // Save token securely
+    if (token) {
+      sessionStorage.setItem("token", token);
+      console.log("✅ Token saved to sessionStorage");
+    }
+
+    // Save email always
+    localStorage.setItem("email", values.email);
+    console.log("📩 Email saved to localStorage:", values.email);
+
+    // Close any AntD modals
+    if (window.Modal) window.Modal.destroyAll?.();
+
+    // External redirect logic
+    if (otpVerifiedBool && !isPasswordBool) {
+      // Email verified but password not set
+      messageApi.info("Email verified. Continue your registration.");
+      console.log("➡️ Redirecting to personal-information");
+      window.location.href = "https://app.ilefund.com/personal-information";
+    } else if (!otpVerifiedBool && !isPasswordBool) {
+      // Email exists but not verified
+      messageApi.success(message || "Verification email sent. Check your inbox.");
+      console.log("➡️ Redirecting to enter-confirmation-pin");
+      window.location.href = "https://app.ilefund.com/enter-confirmation-pin";
+    } else if (!otpVerifiedBool && isPasswordBool) {
+      // User already registered but OTP pending
+      messageApi.warning("Please verify your email before continuing.");
+      console.log("➡️ Redirecting to enter-confirmation-pin");
+      window.location.href = "https://app.ilefund.com/enter-confirmation-pin";
+    } else {
+      // Registration complete
+      messageApi.success(message || "Registration complete!");
+      console.log("➡️ Redirecting to personal-information");
+      window.location.href = "https://app.ilefund.com/personal-information";
+    }
+  } catch (error) {
+    console.error(
+      "❌ Registration error:",
+      error.response?.data || error.message
+    );
+    const errorMsg =
+      error.response?.data?.message ||
+      "Registration failed. Please try again.";
+    messageApi.error(errorMsg);
+  } finally {
+    setLoading(false);
+  }
+};
+
+const moveToPage=()=>{
+  window.location.href = "https://app.ilefund.com";
+}
+
+
+  useEffect(() => {
+    getListing();
+  }, []);
 
   const properties = [
     {
@@ -166,6 +290,7 @@ const HomePage = () => {
 
   return (
     <>
+      {contextHolder}
       {/* ✅ Hero Section */}
       <div className="bg-[url(src/assets/ilefund-land-nigeria-bg-2.png)] w-full h-[700px] bg-cover bg-center relative">
         <section className="w-11/12 mx-auto h-full flex items-center">
@@ -182,18 +307,31 @@ const HomePage = () => {
                 </p>
               </div>
 
-              <div className="flex gap-2 my-4 max-w-[529px]">
-                <Input
-                  placeholder="Start Your Email address ....."
-                  className="!bg-[#f2f3fa] !border-none placeholder:!text-black"
-                />
-                <Button
-                  className="!bg-blue-600 !text-white !py-4 !rounded-full w-60 !h-10 hover:bg-blue-700 transition !border-0"
-                  htmlType="submit"
-                >
-                  Let’s start <MdOutlineArrowRightAlt />
-                </Button>
-              </div>
+              <Form onFinish={onFinish}>
+                <div className="flex gap-2 my-4 max-w-[529px]">
+                  <Form.Item
+                    name="email"
+                    rules={[
+                      { required: true, message: "Email is required" },
+                      { type: "email", message: "Enter a valid email" },
+                    ]}
+                    className="flex-1"
+                  >
+                    <Input
+                      placeholder="Start Your Email address ....."
+                      className="!bg-[#f2f3fa] !border-none placeholder:!text-black p-2"
+                    />
+                  </Form.Item>
+
+                  <Button
+                    className="!bg-blue-600 !text-white !py-4 !rounded-full w-60 !h-10"
+                    htmlType="submit"
+                    loading={loading}
+                  >
+                    Let’s start <MdOutlineArrowRightAlt />
+                  </Button>
+                </div>
+              </Form>
 
               <div className="flex gap-16 items-center -mt-6">
                 <p className="text-sm">
@@ -225,7 +363,11 @@ const HomePage = () => {
               </div>
             </div>
             <div>
-              <img src={home_img_1} alt="ilefund-home-bg" className="w-full h-auto" />
+              <img
+                src={home_img_1}
+                alt="ilefund-home-bg"
+                className="w-full h-auto"
+              />
             </div>
           </div>
         </section>
@@ -237,7 +379,7 @@ const HomePage = () => {
         </div>
 
         <h1 className="font-bold text-3xl text-center">
-         Three Steps to Own Your First Property
+          Three Steps to Own Your First Property
         </h1>
 
         <p className="text-center">
@@ -248,28 +390,51 @@ const HomePage = () => {
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10 mt-10 w-full">
           {/* Item 1 */}
           <div className="p-6 flex flex-col items-center text-center">
-            <img src={home_img_2} alt="ilefund-Register" className="w-34 h-34 mb-4" />
-            <h3 className="text-xl font-semibold mb-2">Sign Up and Verify Your Account</h3>
+            <img
+              src={home_img_2}
+              alt="ilefund-Register"
+              className="w-34 h-34 mb-4"
+            />
+            <h3 className="text-xl font-semibold mb-2">
+              Sign Up and Verify Your Account
+            </h3>
             <p className="text-gray-600 text-sm leading-6 text-justify">
-              Create a secure account and complete your KYC (NIN, BVN, Address) to access all features. The more verified you are, the more benefits you unlock.
+              Create a secure account and complete your KYC (NIN, BVN, Address)
+              to access all features. The more verified you are, the more
+              benefits you unlock.
             </p>
           </div>
 
           {/* Item 2 */}
           <div className="p-6 flex flex-col items-center text-center">
-            <img src={home_img_3} alt="ilefund-Save" className="w-34 h-34 mb-4" />
-            <h3 className="text-xl font-semibold mb-2">Start Saving with a Plan</h3>
+            <img
+              src={home_img_3}
+              alt="ilefund-Save"
+              className="w-34 h-34 mb-4"
+            />
+            <h3 className="text-xl font-semibold mb-2">
+              Start Saving with a Plan
+            </h3>
             <p className="text-gray-600 text-sm leading-6 text-justify">
-              Set your saving frequency (daily, weekly, monthly), and we’ll guide you with reminders and progress tracking. You can save manually or automate with card/bank.
+              Set your saving frequency (daily, weekly, monthly), and we’ll
+              guide you with reminders and progress tracking. You can save
+              manually or automate with card/bank.
             </p>
           </div>
 
           {/* Item 3 */}
           <div className="p-6 flex flex-col items-center text-center">
-            <img src={home_img_4} alt="ilefund-Get-Home" className="w-34 h-34 mb-4" />
+            <img
+              src={home_img_4}
+              alt="ilefund-Get-Home"
+              className="w-34 h-34 mb-4"
+            />
             <h3 className="text-xl font-semibold mb-2">Own Your Property</h3>
             <p className="text-gray-600 text-sm leading-6 text-justify">
-              Choose to pay outright or continue your payment plan over a pre-defined period. We’ll keep track of everything with the savings tracker, and the developer shares documentation with you wherever you are when you are done.
+              Choose to pay outright or continue your payment plan over a
+              pre-defined period. We’ll keep track of everything with the
+              savings tracker, and the developer shares documentation with you
+              wherever you are when you are done.
             </p>
           </div>
         </div>
@@ -312,18 +477,39 @@ const HomePage = () => {
             <h1 className="text-center font-bold mb-5 text-lg">
               Vetted Properties
             </h1>
+
+            {/* GRID WRAPPER */}
             <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3">
-              {properties.map((property) => (
-                <div key={property.id}>
+              {/* ⭐ SKELETON LOADER */}
+              {loading &&
+                Array.from({ length: 8 }).map((_, i) => (
+                  <Card key={i} className="!p-2 w-full">
+                    <Skeleton.Image
+                      style={{
+                        width: "100%",
+                        height: "5rem",
+                        borderRadius: "6px",
+                      }}
+                      active
+                    />
+                    <Skeleton active title={false} paragraph={{ rows: 3 }} />
+                  </Card>
+                ))}
+
+              {/* ⭐ REAL LISTING */}
+              {!loading &&
+                listing.map((property, index) => (
                   <Card
+                    key={index}
+                    onClick={moveToPage}
                     hoverable
                     className="w-full overflow-hidden !p-2"
                     cover={
                       <div className="relative">
                         <img
                           alt="property"
-                          src={property.image}
-                          className="h-20 w-full object-contain"
+                          src={property.banner}
+                          className="h-20 w-full object-cover"
                         />
                       </div>
                     }
@@ -335,40 +521,20 @@ const HomePage = () => {
                     <div className="flex items-center mt-3 gap-2">
                       <img src={pin} alt="pin" className="w-3" />
                       <p className="text-gray-400">
-                        {property.location?.slice(0, 12)}...
+                        {property.estate?.slice(0, 12)}...
                       </p>
                     </div>
 
                     <div className="flex gap-4 mt-1 items-center">
-                      <h1 className="font-bold">{property.price}</h1>
-                      <h1 className="font-bold text-[.5rem]">
-                        {property.size}
+                      <h1 className="font-bold">
+                        ₦{Number(property.price).toLocaleString("en-NG")}
+                      </h1>
+                      <h1 className="font-bold text-[.6rem]">
+                        {property.sizeValue} sqm
                       </h1>
                     </div>
-
-                    <div className="flex justify-between mt-2">
-                      <div>
-                        <h1 className="font-bold text-[.6rem]">
-                          {property.deposit}
-                        </h1>
-                        <p className="text-gray-400 text-[.6rem]">
-                          Weekly deposit
-                        </p>
-                      </div>
-                      <div>
-                        <h1 className="font-bold text-[.6rem]">
-                          {property.duration}
-                        </h1>
-                        <p className="text-gray-400 text-[.5rem]">Duration</p>
-                      </div>
-                    </div>
-
-                    <div className="flex justify-center mt-3">
-                      <img src={btn} alt="button" className="w-22" />
-                    </div>
                   </Card>
-                </div>
-              ))}
+                ))}
             </div>
           </div>
         </div>
@@ -495,59 +661,66 @@ const HomePage = () => {
       </section>
       {/* // bg-[url('/src/assets/ilefund-land-nigeria-bg-1.png')]  */}
       <div className="w-full py-16 flex justify-center mt-28 ">
-  <div
-    className="
+        <div
+          className="
       bg-[url('/src/assets/ilefund-land-nigeria-bg-1.png')]
       bg-no-repeat bg-center 
       bg-[length:100%_100%]
       h-[420px] w-full pl-10
     "
-  >
-    <div className="w-full max-w-7xl grid md:grid-cols-2 gap-10 items-center">
-      
-      {/* LEFT: PHONE MOCKUPS */}
-      <div className="relative flex justify-center md:justify-start">
-        <img
-          src={phone1}
-          alt="mockup-1"
-          className="w-52 md:w-72 drop-shadow-2xl rotate-[-5deg] z-20 -mt-15"
-        />
+        >
+          <div className="w-full max-w-7xl grid md:grid-cols-2 gap-10 items-center">
+            {/* LEFT: PHONE MOCKUPS */}
+            <div className="relative flex justify-center md:justify-start">
+              <img
+                src={phone1}
+                alt="mockup-1"
+                className="w-52 md:w-72 drop-shadow-2xl rotate-[-5deg] z-20 -mt-15"
+              />
 
-        <img
-          src={phone2}
-          alt="mockup-2"
-          className="w-52 md:w-72 drop-shadow-xl rotate-[5deg] 
+              <img
+                src={phone2}
+                alt="mockup-2"
+                className="w-52 md:w-72 drop-shadow-xl rotate-[5deg] 
           absolute left-28 -top-20 md:left-48 z-10"
-        />
-      </div>
+              />
+            </div>
 
-      {/* RIGHT: TEXT + FORM */}
-      <div className="text-white p-10 md:p-16 -mt-20">
-        <h1 className="text-3xl md:text-5xl font-extrabold leading-tight">
-          Already a Potential <br /> Stake Holder
-        </h1>
+            {/* RIGHT: TEXT + FORM */}
+            <div className="text-white p-10 md:p-16 -mt-20">
+              <h1 className="text-3xl md:text-5xl font-extrabold leading-tight">
+                Already a Potential <br /> Stake Holder
+              </h1>
 
-        <p className="text-sm md:text-base mt-4 opacity-90">
-          Download ILE FUND for free and get all the latest updates, 
-          find your home, and contact support.
-        </p>
+              <p className="text-sm md:text-base mt-4 opacity-90">
+                Download ILE FUND for free and get all the latest updates, find
+                your home, and contact support.
+              </p>
 
-        <div className="mt-6">
-          <Input placeholder="Email" size="large" className="rounded-xl" />
+              <Form>
+                <div className="mt-6">
+                  <Input
+                    placeholder="Email"
+                    name="email"
+                    size="large"
+                    className="rounded-xl"
+                  />
 
-          <Button
-            type="primary"
-            size="large"
-            className="mt-4 bg-white text-[#005DFF] font-semibold rounded-xl px-8"
-          >
-            Get Started
-          </Button>
+                  <Button
+                    type="primary"
+                    htmlType="submit"
+                    loading={loading}
+                    size="large"
+                    className="mt-4 bg-white text-[#005DFF] font-semibold rounded-xl px-8"
+                  >
+                    Get Started
+                  </Button>
+                </div>
+              </Form>
+            </div>
+          </div>
         </div>
       </div>
-
-    </div>
-  </div>
-</div>
 
       <section className="bg-[#F2F3FA] py-10 mt-10">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 px-10">
