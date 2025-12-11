@@ -82,77 +82,101 @@ const HomePage = () => {
     }
   };
 
- const onFinish = async (values) => {
+//  const onFinish = async (values) => {
+//   setLoading(true);
+//   try {
+//     // Optional delay for smoother UX
+//     await new Promise((resolve) => setTimeout(resolve, 1500));
+
+//     // Send registration request
+//     const response = await axios.post(
+//       "https://wallet-v2-aeqw.onrender.com/api/v1/register",
+//       { email: values.email }
+//     );
+
+//     if (!response.data) throw new Error("No response data from server");
+
+//     const { token, message, otpVerified, isPassword } = response.data;
+//     console.log("🔹 Server Response:", response.data);
+
+//     // Normalize booleans
+//     const otpVerifiedBool =
+//       otpVerified === true || otpVerified === "true" || otpVerified === 1;
+//     const isPasswordBool =
+//       isPassword === true || isPassword === "true" || isPassword === 1;
+
+//     // Save token securely
+//     if (token) {
+//       sessionStorage.setItem("token", token);
+//       console.log("✅ Token saved to sessionStorage");
+//     }
+
+//     // Save email always
+//     localStorage.setItem("email", values.email);
+//     console.log("📩 Email saved to localStorage:", values.email);
+
+//     // Close any AntD modals
+//     if (window.Modal) window.Modal.destroyAll?.();
+
+//     // External redirect logic
+//     if (otpVerifiedBool && !isPasswordBool) {
+//       // Email verified but password not set
+//       messageApi.info("Email verified. Continue your registration.");
+//       console.log("➡️ Redirecting to personal-information");
+//       window.location.href = "https://app.ilefund.com/personal-information";
+//     } else if (!otpVerifiedBool && !isPasswordBool) {
+//       // Email exists but not verified
+//       messageApi.success(message || "Verification email sent. Check your inbox.");
+//       console.log("➡️ Redirecting to enter-confirmation-pin");
+//       window.location.href = "https://app.ilefund.com/enter-confirmation-pin";
+//     } else if (!otpVerifiedBool && isPasswordBool) {
+//       // User already registered but OTP pending
+//       messageApi.warning("Please verify your email before continuing.");
+//       console.log("➡️ Redirecting to enter-confirmation-pin");
+//       window.location.href = "https://app.ilefund.com/enter-confirmation-pin";
+//     } else {
+//       // Registration complete
+//       messageApi.success(message || "Registration complete!");
+//       console.log("➡️ Redirecting to personal-information");
+//       window.location.href = "https://app.ilefund.com/personal-information";
+//     }
+//   } catch (error) {
+//     console.error(
+//       "❌ Registration error:",
+//       error.response?.data || error.message
+//     );
+//     const errorMsg =
+//       error.response?.data?.message ||
+//       "Registration failed. Please try again.";
+//     messageApi.error(errorMsg);
+//   } finally {
+//     setLoading(false);
+//   }
+// };
+
+
+
+const onFinish = async (values) => {
+
+  const userEmail = values.email;
+
+
+  console.log("User Email:", userEmail);
+
+  // ✅ Start loading
   setLoading(true);
-  try {
-    // Optional delay for smoother UX
-    await new Promise((resolve) => setTimeout(resolve, 1500));
 
-    // Send registration request
-    const response = await axios.post(
-      "https://wallet-v2-aeqw.onrender.com/api/v1/register",
-      { email: values.email }
-    );
+  // ⏳ Optional delay (3 seconds)
+  await new Promise((resolve) => setTimeout(resolve, 3000));
 
-    if (!response.data) throw new Error("No response data from server");
+  // ✅ Redirect to the external website
+  window.location.href = `https://app.ilefund.com/register?email=${userEmail}`;
+  // window.location.href = `http://localhost:5174/register?email=${userEmail}`;
 
-    const { token, message, otpVerified, isPassword } = response.data;
-    console.log("🔹 Server Response:", response.data);
-
-    // Normalize booleans
-    const otpVerifiedBool =
-      otpVerified === true || otpVerified === "true" || otpVerified === 1;
-    const isPasswordBool =
-      isPassword === true || isPassword === "true" || isPassword === 1;
-
-    // Save token securely
-    if (token) {
-      sessionStorage.setItem("token", token);
-      console.log("✅ Token saved to sessionStorage");
-    }
-
-    // Save email always
-    localStorage.setItem("email", values.email);
-    console.log("📩 Email saved to localStorage:", values.email);
-
-    // Close any AntD modals
-    if (window.Modal) window.Modal.destroyAll?.();
-
-    // External redirect logic
-    if (otpVerifiedBool && !isPasswordBool) {
-      // Email verified but password not set
-      messageApi.info("Email verified. Continue your registration.");
-      console.log("➡️ Redirecting to personal-information");
-      window.location.href = "https://app.ilefund.com/personal-information";
-    } else if (!otpVerifiedBool && !isPasswordBool) {
-      // Email exists but not verified
-      messageApi.success(message || "Verification email sent. Check your inbox.");
-      console.log("➡️ Redirecting to enter-confirmation-pin");
-      window.location.href = "https://app.ilefund.com/enter-confirmation-pin";
-    } else if (!otpVerifiedBool && isPasswordBool) {
-      // User already registered but OTP pending
-      messageApi.warning("Please verify your email before continuing.");
-      console.log("➡️ Redirecting to enter-confirmation-pin");
-      window.location.href = "https://app.ilefund.com/enter-confirmation-pin";
-    } else {
-      // Registration complete
-      messageApi.success(message || "Registration complete!");
-      console.log("➡️ Redirecting to personal-information");
-      window.location.href = "https://app.ilefund.com/personal-information";
-    }
-  } catch (error) {
-    console.error(
-      "❌ Registration error:",
-      error.response?.data || error.message
-    );
-    const errorMsg =
-      error.response?.data?.message ||
-      "Registration failed. Please try again.";
-    messageApi.error(errorMsg);
-  } finally {
-    setLoading(false);
-  }
+  // (No need to stop loading because page will change)
 };
+
+
 
 const moveToPage=()=>{
   window.location.href = "https://app.ilefund.com";
@@ -163,88 +187,88 @@ const moveToPage=()=>{
     getListing();
   }, []);
 
-  const properties = [
-    {
-      id: 1,
-      title: "4 Semi detached-duplex with 2 room BQ",
-      location: "Big land city Apo hilltop",
-      price: "₦13,000,000",
-      size: "500 SQM",
-      deposit: "₦1,500,000",
-      duration: "6 Months",
-      image: propertyImg2,
-    },
-    {
-      id: 2,
-      title: "Luxury 3 Bedroom Flat",
-      location: "Maitama District, Abuja",
-      price: "₦25,000,000",
-      size: "750 SQM",
-      deposit: "₦2,000,000",
-      duration: "12 Months",
-      image: propertyImg2,
-    },
-    {
-      id: 3,
-      title: "Modern Bungalow with Garden",
-      location: "Gwarinpa, Abuja",
-      price: "₦8,500,000",
-      size: "400 SQM",
-      deposit: "₦800,000",
-      duration: "8 Months",
-      image: propertyImg2,
-    },
-    {
-      id: 4,
-      title: "Luxury Villa with Pool",
-      location: "Asokoro, Abuja",
-      price: "₦45,000,000",
-      size: "1000 SQM",
-      deposit: "₦3,500,000",
-      duration: "18 Months",
-      image: propertyImg2,
-    },
-    {
-      id: 5,
-      title: "2 Bedroom Mini Flat",
-      location: "Lugbe, Abuja",
-      price: "₦5,500,000",
-      size: "300 SQM",
-      deposit: "₦600,000",
-      duration: "10 Months",
-      image: propertyImg2,
-    },
-    {
-      id: 6,
-      title: "5 Bedroom Fully Detached Duplex",
-      location: "Jabi, Abuja",
-      price: "₦60,000,000",
-      size: "1200 SQM",
-      deposit: "₦5,000,000",
-      duration: "24 Months",
-      image: propertyImg2,
-    },
-    {
-      id: 7,
-      title: "Penthouse Apartment",
-      location: "Wuse II, Abuja",
-      price: "₦35,000,000",
-      size: "850 SQM",
-      deposit: "₦2,800,000",
-      duration: "15 Months",
-      image: propertyImg2,
-    },
-    {
-      id: 8,
-      title: "Townhouse with Rooftop Terrace",
-      location: "Katampe Extension, Abuja",
-      price: "₦20,000,000",
-      size: "600 SQM",
-      deposit: "₦1,800,000",
-      duration: "9 Months",
-      image: propertyImg2,
-    },
-  ];
+  // const properties = [
+  //   {
+  //     id: 1,
+  //     title: "4 Semi detached-duplex with 2 room BQ",
+  //     location: "Big land city Apo hilltop",
+  //     price: "₦13,000,000",
+  //     size: "500 SQM",
+  //     deposit: "₦1,500,000",
+  //     duration: "6 Months",
+  //     image: propertyImg2,
+  //   },
+  //   {
+  //     id: 2,
+  //     title: "Luxury 3 Bedroom Flat",
+  //     location: "Maitama District, Abuja",
+  //     price: "₦25,000,000",
+  //     size: "750 SQM",
+  //     deposit: "₦2,000,000",
+  //     duration: "12 Months",
+  //     image: propertyImg2,
+  //   },
+  //   {
+  //     id: 3,
+  //     title: "Modern Bungalow with Garden",
+  //     location: "Gwarinpa, Abuja",
+  //     price: "₦8,500,000",
+  //     size: "400 SQM",
+  //     deposit: "₦800,000",
+  //     duration: "8 Months",
+  //     image: propertyImg2,
+  //   },
+  //   {
+  //     id: 4,
+  //     title: "Luxury Villa with Pool",
+  //     location: "Asokoro, Abuja",
+  //     price: "₦45,000,000",
+  //     size: "1000 SQM",
+  //     deposit: "₦3,500,000",
+  //     duration: "18 Months",
+  //     image: propertyImg2,
+  //   },
+  //   {
+  //     id: 5,
+  //     title: "2 Bedroom Mini Flat",
+  //     location: "Lugbe, Abuja",
+  //     price: "₦5,500,000",
+  //     size: "300 SQM",
+  //     deposit: "₦600,000",
+  //     duration: "10 Months",
+  //     image: propertyImg2,
+  //   },
+  //   {
+  //     id: 6,
+  //     title: "5 Bedroom Fully Detached Duplex",
+  //     location: "Jabi, Abuja",
+  //     price: "₦60,000,000",
+  //     size: "1200 SQM",
+  //     deposit: "₦5,000,000",
+  //     duration: "24 Months",
+  //     image: propertyImg2,
+  //   },
+  //   {
+  //     id: 7,
+  //     title: "Penthouse Apartment",
+  //     location: "Wuse II, Abuja",
+  //     price: "₦35,000,000",
+  //     size: "850 SQM",
+  //     deposit: "₦2,800,000",
+  //     duration: "15 Months",
+  //     image: propertyImg2,
+  //   },
+  //   {
+  //     id: 8,
+  //     title: "Townhouse with Rooftop Terrace",
+  //     location: "Katampe Extension, Abuja",
+  //     price: "₦20,000,000",
+  //     size: "600 SQM",
+  //     deposit: "₦1,800,000",
+  //     duration: "9 Months",
+  //     image: propertyImg2,
+  //   },
+  // ];
 
   const stats = [
     { value: "98", label: "Projects" },
