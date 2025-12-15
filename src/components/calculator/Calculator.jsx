@@ -26,7 +26,7 @@ const Calculator = ({
 
   return (
     <div>
-      <div className="px-4 text-center max-w-5xl mx-auto">
+      <div className="px-4 text-center w-52 mx-auto">
         {/* Amount input */}
         <div className="flex justify-center items-center mb-4 max-w-full overflow-x-auto">
           <span className="text-4xl">{currency}</span>
@@ -43,8 +43,10 @@ const Calculator = ({
           />
         </div>
 
+
+
         {/* Controls */}
-        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-center mb-6">
+        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-center mb-6 w-50">
           <Select
             value={currency}
             onChange={setCurrency}
@@ -92,7 +94,7 @@ const Calculator = ({
 
         {/* Result */}
         <div className="mt-10">
-          <p className="text-gray-500 text-xl sm:text-2xl font-semibold my-4">
+          <p className="text-gray-500 font-semibold my-4">
             Today, you'd have
           </p>
           <div className="flex justify-center items-center gap-2">

@@ -82,106 +82,99 @@ const HomePage = () => {
     }
   };
 
-//  const onFinish = async (values) => {
-//   setLoading(true);
-//   try {
-//     // Optional delay for smoother UX
-//     await new Promise((resolve) => setTimeout(resolve, 1500));
+  //  const onFinish = async (values) => {
+  //   setLoading(true);
+  //   try {
+  //     // Optional delay for smoother UX
+  //     await new Promise((resolve) => setTimeout(resolve, 1500));
 
-//     // Send registration request
-//     const response = await axios.post(
-//       "https://wallet-v2-aeqw.onrender.com/api/v1/register",
-//       { email: values.email }
-//     );
+  //     // Send registration request
+  //     const response = await axios.post(
+  //       "https://wallet-v2-aeqw.onrender.com/api/v1/register",
+  //       { email: values.email }
+  //     );
 
-//     if (!response.data) throw new Error("No response data from server");
+  //     if (!response.data) throw new Error("No response data from server");
 
-//     const { token, message, otpVerified, isPassword } = response.data;
-//     console.log("🔹 Server Response:", response.data);
+  //     const { token, message, otpVerified, isPassword } = response.data;
+  //     console.log("🔹 Server Response:", response.data);
 
-//     // Normalize booleans
-//     const otpVerifiedBool =
-//       otpVerified === true || otpVerified === "true" || otpVerified === 1;
-//     const isPasswordBool =
-//       isPassword === true || isPassword === "true" || isPassword === 1;
+  //     // Normalize booleans
+  //     const otpVerifiedBool =
+  //       otpVerified === true || otpVerified === "true" || otpVerified === 1;
+  //     const isPasswordBool =
+  //       isPassword === true || isPassword === "true" || isPassword === 1;
 
-//     // Save token securely
-//     if (token) {
-//       sessionStorage.setItem("token", token);
-//       console.log("✅ Token saved to sessionStorage");
-//     }
+  //     // Save token securely
+  //     if (token) {
+  //       sessionStorage.setItem("token", token);
+  //       console.log("✅ Token saved to sessionStorage");
+  //     }
 
-//     // Save email always
-//     localStorage.setItem("email", values.email);
-//     console.log("📩 Email saved to localStorage:", values.email);
+  //     // Save email always
+  //     localStorage.setItem("email", values.email);
+  //     console.log("📩 Email saved to localStorage:", values.email);
 
-//     // Close any AntD modals
-//     if (window.Modal) window.Modal.destroyAll?.();
+  //     // Close any AntD modals
+  //     if (window.Modal) window.Modal.destroyAll?.();
 
-//     // External redirect logic
-//     if (otpVerifiedBool && !isPasswordBool) {
-//       // Email verified but password not set
-//       messageApi.info("Email verified. Continue your registration.");
-//       console.log("➡️ Redirecting to personal-information");
-//       window.location.href = "https://app.ilefund.com/personal-information";
-//     } else if (!otpVerifiedBool && !isPasswordBool) {
-//       // Email exists but not verified
-//       messageApi.success(message || "Verification email sent. Check your inbox.");
-//       console.log("➡️ Redirecting to enter-confirmation-pin");
-//       window.location.href = "https://app.ilefund.com/enter-confirmation-pin";
-//     } else if (!otpVerifiedBool && isPasswordBool) {
-//       // User already registered but OTP pending
-//       messageApi.warning("Please verify your email before continuing.");
-//       console.log("➡️ Redirecting to enter-confirmation-pin");
-//       window.location.href = "https://app.ilefund.com/enter-confirmation-pin";
-//     } else {
-//       // Registration complete
-//       messageApi.success(message || "Registration complete!");
-//       console.log("➡️ Redirecting to personal-information");
-//       window.location.href = "https://app.ilefund.com/personal-information";
-//     }
-//   } catch (error) {
-//     console.error(
-//       "❌ Registration error:",
-//       error.response?.data || error.message
-//     );
-//     const errorMsg =
-//       error.response?.data?.message ||
-//       "Registration failed. Please try again.";
-//     messageApi.error(errorMsg);
-//   } finally {
-//     setLoading(false);
-//   }
-// };
+  //     // External redirect logic
+  //     if (otpVerifiedBool && !isPasswordBool) {
+  //       // Email verified but password not set
+  //       messageApi.info("Email verified. Continue your registration.");
+  //       console.log("➡️ Redirecting to personal-information");
+  //       window.location.href = "https://app.ilefund.com/personal-information";
+  //     } else if (!otpVerifiedBool && !isPasswordBool) {
+  //       // Email exists but not verified
+  //       messageApi.success(message || "Verification email sent. Check your inbox.");
+  //       console.log("➡️ Redirecting to enter-confirmation-pin");
+  //       window.location.href = "https://app.ilefund.com/enter-confirmation-pin";
+  //     } else if (!otpVerifiedBool && isPasswordBool) {
+  //       // User already registered but OTP pending
+  //       messageApi.warning("Please verify your email before continuing.");
+  //       console.log("➡️ Redirecting to enter-confirmation-pin");
+  //       window.location.href = "https://app.ilefund.com/enter-confirmation-pin";
+  //     } else {
+  //       // Registration complete
+  //       messageApi.success(message || "Registration complete!");
+  //       console.log("➡️ Redirecting to personal-information");
+  //       window.location.href = "https://app.ilefund.com/personal-information";
+  //     }
+  //   } catch (error) {
+  //     console.error(
+  //       "❌ Registration error:",
+  //       error.response?.data || error.message
+  //     );
+  //     const errorMsg =
+  //       error.response?.data?.message ||
+  //       "Registration failed. Please try again.";
+  //     messageApi.error(errorMsg);
+  //   } finally {
+  //     setLoading(false);
+  //   }
+  // };
 
+  const onFinish = async (values) => {
+    const userEmail = values.email;
 
+    console.log("User Email:", userEmail);
 
-const onFinish = async (values) => {
+    // ✅ Start loading
+    setLoading(true);
 
-  const userEmail = values.email;
+    // ⏳ Optional delay (3 seconds)
+    await new Promise((resolve) => setTimeout(resolve, 3000));
 
+    // ✅ Redirect to the external website
+    window.location.href = `https://app.ilefund.com/register?email=${userEmail}`;
+    // window.location.href = `http://localhost:5174/register?email=${userEmail}`;
 
-  console.log("User Email:", userEmail);
+    // (No need to stop loading because page will change)
+  };
 
-  // ✅ Start loading
-  setLoading(true);
-
-  // ⏳ Optional delay (3 seconds)
-  await new Promise((resolve) => setTimeout(resolve, 3000));
-
-  // ✅ Redirect to the external website
-  window.location.href = `https://app.ilefund.com/register?email=${userEmail}`;
-  // window.location.href = `http://localhost:5174/register?email=${userEmail}`;
-
-  // (No need to stop loading because page will change)
-};
-
-
-
-const moveToPage=()=>{
-  window.location.href = "https://app.ilefund.com";
-}
-
+  const moveToPage = () => {
+    window.location.href = "https://app.ilefund.com";
+  };
 
   useEffect(() => {
     getListing();
@@ -316,86 +309,168 @@ const moveToPage=()=>{
     <>
       {contextHolder}
       {/* ✅ Hero Section */}
-      <div className="bg-[url(src/assets/ilefund-land-nigeria-bg-2.png)] w-full h-[700px] bg-cover bg-center relative">
-        <section className="w-11/12 mx-auto h-full flex items-center">
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-10 w-full">
-            <div className="flex flex-col gap-6">
-              <h1 className="font-extrabold text-5xl/19">
-                Start With A <br />
-                Plan, Save & Own.
+      <div
+        className="
+    bg-[url(src/assets/ilefund-land-nigeria-bg-2.png)]
+    bg-cover bg-center
+    min-h-[480px]
+    sm:min-h-[600px]
+    md:min-h-[680px]
+    lg:min-h-[750px]
+    xl:min-h-[820px]
+    overflow-hidden
+  "
+      >
+        <section className="w-11/12 max-w-7xl mx-auto flex items-center py-8 sm:py-14 lg:py-20">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-10 lg:gap-16 items-center w-full">
+            {/* LEFT CONTENT */}
+            <div className="flex flex-col gap-4 sm:gap-6">
+              <h1
+                className="
+            font-extrabold
+            text-2xl
+            sm:text-4xl
+            md:text-[2.8rem]
+            lg:text-5xl
+            leading-tight
+          "
+              >
+                Start With A <br /> Plan, Save & Own.
               </h1>
-              <div className="flex gap-3 items-center">
-                <img src={Rectangle43} alt="" />
-                <p className="text-2xl font-semibold">
+
+              <div className="flex items-center gap-3 flex-wrap">
+                <img
+                  src={Rectangle43}
+                  alt=""
+                  className="w-7 sm:w-8 md:w-auto"
+                />
+                <p className="text-sm sm:text-lg md:text-xl lg:text-2xl font-semibold">
                   From Savings to Home Ownership.
                 </p>
               </div>
 
+              {/* FORM */}
               <Form onFinish={onFinish}>
-                <div className="flex gap-2 my-4 max-w-[529px]">
+                <div className="flex flex-col sm:flex-row gap-3 max-w-[540px] w-full">
                   <Form.Item
                     name="email"
                     rules={[
                       { required: true, message: "Email is required" },
                       { type: "email", message: "Enter a valid email" },
                     ]}
-                    className="flex-1"
+                    className="flex-1 mb-0"
                   >
                     <Input
                       placeholder="Start Your Email address ....."
-                      className="!bg-[#f2f3fa] !border-none placeholder:!text-black p-2"
+                      className="
+                  !bg-[#f2f3fa]
+                  !border-none
+                  !h-11 sm:!h-12
+                  text-sm sm:text-base
+                "
                     />
                   </Form.Item>
 
                   <Button
-                    className="!bg-blue-600 !text-white !py-4 !rounded-full w-60 !h-10"
                     htmlType="submit"
                     loading={loading}
+                    className="
+                !bg-blue-600 !text-white
+                !rounded-full
+                w-full sm:w-56
+                !h-11 sm:!h-12
+                flex items-center justify-center gap-2
+                text-sm sm:text-base
+              "
                   >
-                    Let’s start <MdOutlineArrowRightAlt />
+                    Let’s start <MdOutlineArrowRightAlt size={20} />
                   </Button>
                 </div>
               </Form>
 
-              <div className="flex gap-16 items-center -mt-6">
-                <p className="text-sm">
+              {/* AVATARS + TEXT */}
+              <div className="flex items-center sm:flex-row gap-4 sm:gap-1 sm:items-center">
+                <p className="text-xs sm:text-sm md:text-base leading-snug">
                   Building a Dream, One{" "}
-                  <span className="!font-bold">Home Owner</span> at a Time.
+                  <span className="font-bold">Home Owner</span> at a Time.
                 </p>
-                <div className="flex -space-x-2 overflow-hidden">
+
+                <div className="flex -space-x-2">
                   <img
-                    src="https://images.unsplash.com/photo-1594564190328-0bed16a89837?w=900&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8bmlnZXJpYW58ZW58MHx8MHx8fDI%3D"
+                    src="https://images.unsplash.com/photo-1594564190328-0bed16a89837?w=200&auto=format&fit=crop&q=60"
                     alt="ilefund-user-1"
-                    className="inline-block w-10 h-10 rounded-full object-cover"
+                    className="
+      w-8 h-8
+      sm:w-9 sm:h-9
+      md:w-10 md:h-10
+      rounded-full
+      object-cover
+      border-2 border-white
+    "
                   />
+
                   <img
-                    src="https://images.unsplash.com/photo-1643008504049-1f4957523024?w=900&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NTh8fG5pZ2VyaWFufGVufDB8fDB8fHwy"
+                    src="https://images.unsplash.com/photo-1643008504049-1f4957523024?w=200&auto=format&fit=crop&q=60"
                     alt="ilefund-user-2"
-                    className="inline-block w-10 h-10 rounded-full object-cover"
+                    className="
+      w-8 h-8
+      sm:w-9 sm:h-9
+      md:w-10 md:h-10
+      rounded-full
+      object-cover
+      border-2 border-white
+    "
                   />
+
                   <img
-                    src="https://images.unsplash.com/photo-1533108344127-a586d2b02479?w=900&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8bmlnZXJpYW58ZW58MHx8MHx8fDI%3D"
+                    src="https://images.unsplash.com/photo-1533108344127-a586d2b02479?w=200&auto=format&fit=crop&q=60"
                     alt="ilefund-user-3"
-                    className="inline-block w-10 h-10 rounded-full object-cover"
+                    className="
+      w-8 h-8
+      sm:w-9 sm:h-9
+      md:w-10 md:h-10
+      rounded-full
+      object-cover
+      border-2 border-white
+    "
                   />
+
                   <img
-                    src="https://images.unsplash.com/photo-1602342323893-b11f757957c9?w=900&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8bmlnZXJpYW58ZW58MHx8MHx8fDI%3D"
+                    src="https://images.unsplash.com/photo-1602342323893-b11f757957c9?w=200&auto=format&fit=crop&q=60"
                     alt="ilefund-user-4"
-                    className="inline-block w-10 h-10 rounded-full object-cover"
+                    className="
+      w-8 h-8
+      sm:w-9 sm:h-9
+      md:w-10 md:h-10
+      rounded-full
+      object-cover
+      border-2 border-white
+    "
                   />
                 </div>
               </div>
             </div>
-            <div>
+
+            {/* RIGHT IMAGE */}
+            <div className="flex justify-center md:justify-end">
               <img
                 src={home_img_1}
-                alt="ilefund-home-bg"
-                className="w-full h-auto"
+                alt="Hero"
+                className="
+            w-full
+            max-w-[320px]
+            sm:max-w-[420px]
+            md:max-w-[500px]
+            lg:max-w-[560px]
+            xl:max-w-[620px]
+            h-auto
+          "
               />
             </div>
           </div>
         </section>
       </div>
+
 
       <div className="flex justify-center flex-col items-center pt-10 gap-4 w-11/12 mx-auto">
         <div className="bg-[#DFE8FF] px-2 rounded-lg py-1 text-[#0047FF]">
@@ -465,104 +540,94 @@ const moveToPage=()=>{
       </div>
 
       {/* ✅ Calculator + Properties Section */}
-      <section className="w-11/12 mx-auto py-16">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          {/* LEFT: Calculator */}
-          <div
-            className="
-        lg:h-full 
-        !h-[650px] 
+     <section className="w-11/12 max-w-7xl mx-auto py-16">
+  <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+    {/* LEFT: Calculator */}
+    <div
+      className="
         md:col-span-1 
-        flex 
-        flex-col 
-        justify-center 
+        flex flex-col justify-center 
         bg-[url('/src/assets/phone.png')] 
-        bg-no-repeat 
-        bg-cover 
-        bg-center 
-        p-6 
-        sm:p-10
-
-        /* ⭐ Make calculator smaller on mobile */
-        scale-[0.85] 
-        sm:scale-95 
-        md:scale-100 
-        origin-top
+        bg-no-repeat bg-contain bg-center 
+        p-4 sm:p-6 md:p-10
+        h-[500px] sm:h-[600px] md:h-[650px] lg:h-full
+        transform scale-[0.8] sm:scale-90 md:scale-100 origin-top
       "
-          >
-            <Calculator
-              amountFontSize="text-lg sm:text-xl md:text-2xl"
-              resultFontSize="!text-lg sm:!text-xl md:!text-2xl"
-            />
-          </div>
+    >
+      <Calculator
+        amountFontSize="text-base sm:text-lg md:text-xl"
+        resultFontSize="!text-base sm:!text-lg md:!text-xl"
+      />
+    </div>
 
-          {/* RIGHT: Properties */}
-          <div className="md:col-span-2 flex flex-col justify-center">
-            <h1 className="text-center font-bold mb-5 text-lg">
-              Vetted Properties
-            </h1>
+    {/* RIGHT: Properties */}
+    <div className="md:col-span-2 flex flex-col justify-center">
+      <h1 className="text-center font-bold mb-5 text-lg sm:text-xl">
+        Vetted Properties
+      </h1>
 
-            {/* GRID WRAPPER */}
-            <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3">
-              {/* ⭐ SKELETON LOADER */}
-              {loading &&
-                Array.from({ length: 8 }).map((_, i) => (
-                  <Card key={i} className="!p-2 w-full">
-                    <Skeleton.Image
-                      style={{
-                        width: "100%",
-                        height: "5rem",
-                        borderRadius: "6px",
-                      }}
-                      active
-                    />
-                    <Skeleton active title={false} paragraph={{ rows: 3 }} />
-                  </Card>
-                ))}
+      {/* GRID WRAPPER */}
+      <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3">
+        {/* ⭐ SKELETON LOADER */}
+        {loading &&
+          Array.from({ length: 8 }).map((_, i) => (
+            <Card key={i} className="!p-2 w-full">
+              <Skeleton.Image
+                style={{
+                  width: "100%",
+                  height: "5rem",
+                  borderRadius: "6px",
+                }}
+                active
+              />
+              <Skeleton active title={false} paragraph={{ rows: 3 }} />
+            </Card>
+          ))}
 
-              {/* ⭐ REAL LISTING */}
-              {!loading &&
-                listing.map((property, index) => (
-                  <Card
-                    key={index}
-                    onClick={moveToPage}
-                    hoverable
-                    className="w-full overflow-hidden !p-2"
-                    cover={
-                      <div className="relative">
-                        <img
-                          alt="property"
-                          src={property.banner}
-                          className="h-20 w-full object-cover"
-                        />
-                      </div>
-                    }
-                  >
-                    <span className="font-bold">
-                      {property.title?.slice(0, 13)}...
-                    </span>
+        {/* ⭐ REAL LISTING */}
+        {!loading &&
+          listing.map((property, index) => (
+            <Card
+              key={index}
+              onClick={moveToPage}
+              hoverable
+              className="w-full overflow-hidden !p-2"
+              cover={
+                <div className="relative">
+                  <img
+                    alt="property"
+                    src={property.banner}
+                    className="h-24 sm:h-28 md:h-32 w-full object-cover"
+                  />
+                </div>
+              }
+            >
+              <span className="font-bold text-sm sm:text-base">
+                {property.title?.slice(0, 13)}...
+              </span>
 
-                    <div className="flex items-center mt-3 gap-2">
-                      <img src={pin} alt="pin" className="w-3" />
-                      <p className="text-gray-400">
-                        {property.estate?.slice(0, 12)}...
-                      </p>
-                    </div>
+              <div className="flex items-center mt-2 gap-2">
+                <img src={pin} alt="pin" className="w-3 sm:w-4" />
+                <p className="text-gray-400 text-xs sm:text-sm">
+                  {property.estate?.slice(0, 12)}...
+                </p>
+              </div>
 
-                    <div className="flex gap-4 mt-1 items-center">
-                      <h1 className="font-bold">
-                        ₦{Number(property.price).toLocaleString("en-NG")}
-                      </h1>
-                      <h1 className="font-bold text-[.6rem]">
-                        {property.sizeValue} sqm
-                      </h1>
-                    </div>
-                  </Card>
-                ))}
-            </div>
-          </div>
-        </div>
-      </section>
+              <div className="flex gap-4 mt-1 items-center">
+                <h1 className="font-bold text-sm sm:text-base">
+                  ₦{Number(property.price).toLocaleString("en-NG")}
+                </h1>
+                <h1 className="font-bold text-[0.5rem] sm:text-[0.6rem]">
+                  {property.sizeValue} sqm
+                </h1>
+              </div>
+            </Card>
+          ))}
+      </div>
+    </div>
+  </div>
+</section>
+
 
       <section>
         <div className="h-[750px] bg-[url('/src/assets/home_img_2.png')] bg-no-repeat bg-cover bg-center"></div>
