@@ -471,7 +471,6 @@ const HomePage = () => {
         </section>
       </div>
 
-
       <div className="flex justify-center flex-col items-center pt-10 gap-4 w-11/12 mx-auto">
         <div className="bg-[#DFE8FF] px-2 rounded-lg py-1 text-[#0047FF]">
           How it Works
@@ -540,11 +539,11 @@ const HomePage = () => {
       </div>
 
       {/* ✅ Calculator + Properties Section */}
-     <section className="w-11/12 max-w-7xl mx-auto py-16">
-  <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-    {/* LEFT: Calculator */}
-    <div
-      className="
+      <section className="w-11/12 max-w-7xl mx-auto py-16">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          {/* LEFT: Calculator */}
+          <div
+            className="
         md:col-span-1 
         flex flex-col justify-center 
         bg-[url('/src/assets/phone.png')] 
@@ -553,121 +552,150 @@ const HomePage = () => {
         h-[500px] sm:h-[600px] md:h-[650px] lg:h-full
         transform scale-[0.8] sm:scale-90 md:scale-100 origin-top
       "
-    >
-      <Calculator
-        amountFontSize="text-base sm:text-lg md:text-xl"
-        resultFontSize="!text-base sm:!text-lg md:!text-xl"
-      />
-    </div>
+          >
+            <Calculator
+              amountFontSize="text-base sm:text-lg md:text-xl"
+              resultFontSize="!text-base sm:!text-lg md:!text-xl"
+            />
+          </div>
 
-    {/* RIGHT: Properties */}
-    <div className="md:col-span-2 flex flex-col justify-center">
-      <h1 className="text-center font-bold mb-5 text-lg sm:text-xl">
-        Vetted Properties
-      </h1>
+          {/* RIGHT: Properties */}
+          <div className="md:col-span-2 flex flex-col justify-center">
+            <h1 className="text-center font-bold mb-5 text-lg sm:text-xl">
+              Vetted Properties
+            </h1>
 
-      {/* GRID WRAPPER */}
-      <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3">
-        {/* ⭐ SKELETON LOADER */}
-        {loading &&
-          Array.from({ length: 8 }).map((_, i) => (
-            <Card key={i} className="!p-2 w-full">
-              <Skeleton.Image
-                style={{
-                  width: "100%",
-                  height: "5rem",
-                  borderRadius: "6px",
-                }}
-                active
-              />
-              <Skeleton active title={false} paragraph={{ rows: 3 }} />
-            </Card>
-          ))}
+            {/* GRID WRAPPER */}
+            <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3">
+              {/* ⭐ SKELETON LOADER */}
+              {loading &&
+                Array.from({ length: 8 }).map((_, i) => (
+                  <Card key={i} className="!p-2 w-full">
+                    <Skeleton.Image
+                      style={{
+                        width: "100%",
+                        height: "5rem",
+                        borderRadius: "6px",
+                      }}
+                      active
+                    />
+                    <Skeleton active title={false} paragraph={{ rows: 3 }} />
+                  </Card>
+                ))}
 
-        {/* ⭐ REAL LISTING */}
-        {!loading &&
-          listing.map((property, index) => (
-            <Card
-              key={index}
-              onClick={moveToPage}
-              hoverable
-              className="w-full overflow-hidden !p-2"
-              cover={
-                <div className="relative">
-                  <img
-                    alt="property"
-                    src={property.banner}
-                    className="h-24 sm:h-28 md:h-32 w-full object-cover"
-                  />
-                </div>
-              }
+              {/* ⭐ REAL LISTING */}
+              {!loading &&
+                listing.map((property, index) => (
+                  <Card
+                    key={index}
+                    onClick={moveToPage}
+                    hoverable
+                    className="w-full overflow-hidden !p-2"
+                    cover={
+                      <div className="relative">
+                        <img
+                          alt="property"
+                          src={property.banner}
+                          className="h-24 sm:h-28 md:h-32 w-full object-cover"
+                        />
+                      </div>
+                    }
+                  >
+                    <span className="font-bold text-sm sm:text-base">
+                      {property.title?.slice(0, 13)}...
+                    </span>
+
+                    <div className="flex items-center mt-2 gap-2">
+                      <img src={pin} alt="pin" className="w-3 sm:w-4" />
+                      <p className="text-gray-400 text-xs sm:text-sm">
+                        {property.estate?.slice(0, 12)}...
+                      </p>
+                    </div>
+
+                    <div className="flex gap-4 mt-1 items-center">
+                      <h1 className="font-bold text-sm sm:text-base">
+                        ₦{Number(property.price).toLocaleString("en-NG")}
+                      </h1>
+                      <h1 className="font-bold text-[0.5rem] sm:text-[0.6rem]">
+                        {property.sizeValue} sqm
+                      </h1>
+                    </div>
+                  </Card>
+                ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section className="relative">
+        {/* HERO IMAGE */}
+        <div className="relative h-[400px] sm:h-[500px] md:h-[650px] lg:h-[750px] w-full bg-[url('/src/assets/home_img_2.png')] bg-cover bg-center bg-no-repeat">
+          {/* DARK OVERLAY */}
+          <div className="absolute inset-0 bg-[#00000085]"></div>
+
+          {/* YouTube Play Overlay */}
+          <div className="absolute inset-0 flex items-center justify-center">
+            <a
+              href="https://www.youtube.com/watch?v=YOUR_VIDEO_ID"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center justify-center w-20 h-20 sm:w-24 sm:h-24 lg:w-32 lg:h-32 bg-red-600 rounded-full hover:scale-110 transition-transform duration-300 shadow-lg z-10"
             >
-              <span className="font-bold text-sm sm:text-base">
-                {property.title?.slice(0, 13)}...
-              </span>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                className="w-10 h-10 sm:w-12 sm:h-12 text-white ml-1"
+                fill="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path d="M4 2.5a2.5 2.5 0 0 0-2.5 2.5v14a2.5 2.5 0 0 0 2.5 2.5h16a2.5 2.5 0 0 0 2.5-2.5v-14a2.5 2.5 0 0 0-2.5-2.5H4zm6.5 12.5v-7l6 3.5-6 3.5z" />
+              </svg>
+            </a>
+          </div>
+        </div>
 
-              <div className="flex items-center mt-2 gap-2">
-                <img src={pin} alt="pin" className="w-3 sm:w-4" />
-                <p className="text-gray-400 text-xs sm:text-sm">
-                  {property.estate?.slice(0, 12)}...
-                </p>
-              </div>
-
-              <div className="flex gap-4 mt-1 items-center">
-                <h1 className="font-bold text-sm sm:text-base">
-                  ₦{Number(property.price).toLocaleString("en-NG")}
-                </h1>
-                <h1 className="font-bold text-[0.5rem] sm:text-[0.6rem]">
-                  {property.sizeValue} sqm
-                </h1>
-              </div>
-            </Card>
-          ))}
-      </div>
-    </div>
-  </div>
-</section>
-
-
-      <section>
-        <div className="h-[750px] bg-[url('/src/assets/home_img_2.png')] bg-no-repeat bg-cover bg-center"></div>
-        <div className="bg-[#EAEAEA]">
-          {/* <div className="h-64 grid grid-cols-2 md:grid-cols-4 divide-x divide-gray-300 text-center">
-            {stats.map((stat, index) => (
+        {/* BOTTOM SECTION */}
+        {/* <div className="bg-[#EAEAEA] py-10">
+         
+          <div className="max-w-7xl mx-auto grid grid-cols-2 sm:grid-cols-4 gap-6 text-center">
+            {stats?.map((stat, index) => (
               <div
                 key={index}
-                className="flex flex-col items-center justify-center px-6"
+                className="flex flex-col items-center justify-center px-4"
               >
-                <div className="text-[100px] font-bold text-gray-300 leading-none relative">
+                <div className="text-4xl sm:text-5xl font-bold text-gray-700">
                   {stat.value}
                 </div>
-                <div className="text-lg font-semibold text-[#1E1245] absolute">
+                <div className="text-sm sm:text-lg font-semibold text-[#1E1245]">
                   {stat.label}
                 </div>
               </div>
             ))}
-          </div> */}
-        </div>
+          </div>
+        </div> */}
       </section>
 
       <section className="w-11/12 mx-auto mt-20">
-        <div className="flex justify-between mb-10">
-          <h1 className="font-bold text-4xl/13">
+        <div className="flex flex-col md:flex-row justify-between mb-10 gap-5 md:gap-0">
+          <h1 className="font-bold text-3xl sm:text-4xl md:text-4xl lg:text-5xl leading-tight">
             Your most frequently asked <br /> question answered
           </h1>
           <Button
-            className="!bg-blue-600 !h-10 !text-white py-3 !rounded-full w-60 hover:bg-blue-700 transition !border-0 mt-5"
+            className="!bg-blue-600 !h-10 !text-white py-3 !rounded-full w-full sm:w-60 hover:bg-blue-700 transition !border-0 mt-3 md:mt-0 flex items-center justify-center gap-2"
             htmlType="submit"
           >
             View All FAQS <MdOutlineArrowRightAlt />
           </Button>
         </div>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
-          <div className="h-[500px] rounded-md bg-[url('/src/assets/land_img_5.png')] bg-no-repeat bg-cover bg-top relative">
-            <div className="rounded-md bg-[#F2F3FA] flex justify-center items-center flex-col p-10 w-60 absolute top-75 -right-2.5">
-              <h1 className="font-bold">100+ Client</h1>
-              <h1 className="font-bold">5.0 (250 Reviews)</h1>
-              <Avatar.Group>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-10">
+          {/* LEFT: Image with Stats */}
+          <div className="relative h-[400px] sm:h-[450px] md:h-[500px] lg:h-[550px] rounded-md bg-[url('/src/assets/land_img_5.png')] bg-no-repeat bg-cover bg-top">
+            <div className="rounded-md bg-[#F2F3FA] flex flex-col justify-center items-center p-6 sm:p-10 w-56 sm:w-60 absolute top-3/4 md:top-3/4 right-2 sm:right-5 lg:right-10 transform -translate-y-1/2">
+              <h1 className="font-bold text-center sm:text-lg">100+ Client</h1>
+              <h1 className="font-bold text-center sm:text-lg">
+                5.0 (250 Reviews)
+              </h1>
+              <Avatar.Group className="mt-2 sm:mt-4">
                 <Avatar src="https://api.dicebear.com/7.x/miniavs/svg?seed=1" />
                 <a href="https://ant.design">
                   <Avatar style={{ backgroundColor: "#f56a00" }}>K</Avatar>
@@ -686,8 +714,8 @@ const HomePage = () => {
             </div>
           </div>
 
+          {/* RIGHT: Accordion */}
           <div className="w-full">
-            {/* Accordion */}
             <div className="space-y-4">
               {items.map((item) => {
                 const isActive = activeKey === item.key;
@@ -703,11 +731,11 @@ const HomePage = () => {
                       onClick={() => setActiveKey(isActive ? null : item.key)}
                       aria-expanded={isActive}
                       aria-controls={`panel-${item.key}`}
-                      className={`w-full flex items-center justify-between px-6 py-5 focus:outline-none transition-colors duration-300 ${
+                      className={`w-full flex items-center justify-between px-4 sm:px-6 py-4 sm:py-5 focus:outline-none transition-colors duration-300 ${
                         isActive ? "bg-[#F2F3FA]" : "bg-white text-gray-900"
                       }`}
                     >
-                      <span className="text-lg font-semibold">
+                      <span className="text-base sm:text-lg font-semibold">
                         {item.label}
                       </span>
 
@@ -734,7 +762,7 @@ const HomePage = () => {
                       }`}
                     >
                       <div
-                        className={`p-6 border-t border-gray-200 ${
+                        className={`p-4 sm:p-6 border-t border-gray-200 ${
                           isActive ? "bg-[#F2F3FA]" : "bg-white text-gray-700"
                         }`}
                       >
@@ -748,14 +776,15 @@ const HomePage = () => {
           </div>
         </div>
       </section>
+
       {/* // bg-[url('/src/assets/ilefund-land-nigeria-bg-1.png')]  */}
-      <div className="w-full py-16 flex justify-center mt-28 ">
+      <div className="w-full py-16 flex justify-center mt-28">
         <div
           className="
       bg-[url('/src/assets/ilefund-land-nigeria-bg-1.png')]
       bg-no-repeat bg-center 
       bg-[length:100%_100%]
-      h-[420px] w-full pl-10
+      h-[500px] sm:h-[550px] md:h-[420px] w-full px-4 sm:pl-10
     "
         >
           <div className="w-full max-w-7xl grid md:grid-cols-2 gap-10 items-center">
@@ -764,35 +793,38 @@ const HomePage = () => {
               <img
                 src={phone1}
                 alt="mockup-1"
-                className="w-52 md:w-72 drop-shadow-2xl rotate-[-5deg] z-20 -mt-15"
+                className="w-40 sm:w-52 md:w-72 drop-shadow-2xl rotate-[-5deg] z-20 -mt-10 sm:-mt-15"
               />
 
               <img
                 src={phone2}
                 alt="mockup-2"
-                className="w-52 md:w-72 drop-shadow-xl rotate-[5deg] 
-          absolute left-28 -top-20 md:left-48 z-10"
+                className="
+            w-40 sm:w-52 md:w-72 drop-shadow-xl rotate-[5deg]
+            absolute left-16 sm:left-28 md:left-48 -top-16 sm:-top-20
+            z-10
+          "
               />
             </div>
 
             {/* RIGHT: TEXT + FORM */}
-            <div className="text-white p-10 md:p-16 -mt-20">
-              <h1 className="text-3xl md:text-5xl font-extrabold leading-tight">
+            <div className="text-white p-6 sm:p-10 md:p-16 mt-6 md:mt-0">
+              <h1 className="text-2xl sm:text-3xl md:text-5xl font-extrabold leading-snug md:leading-tight">
                 Already a Potential <br /> Stake Holder
               </h1>
 
-              <p className="text-sm md:text-base mt-4 opacity-90">
+              <p className="text-xs sm:text-sm md:text-base mt-4 opacity-90">
                 Download ILE FUND for free and get all the latest updates, find
                 your home, and contact support.
               </p>
 
               <Form>
-                <div className="mt-6">
+                <div className="mt-6 flex flex-col sm:flex-row gap-3 sm:gap-4">
                   <Input
                     placeholder="Email"
                     name="email"
                     size="large"
-                    className="rounded-xl"
+                    className="rounded-xl flex-1"
                   />
 
                   <Button
@@ -800,7 +832,7 @@ const HomePage = () => {
                     htmlType="submit"
                     loading={loading}
                     size="large"
-                    className="mt-4 bg-white text-[#005DFF] font-semibold rounded-xl px-8"
+                    className="bg-white text-[#005DFF] font-semibold rounded-xl px-8 flex-shrink-0"
                   >
                     Get Started
                   </Button>
