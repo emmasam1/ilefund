@@ -8,7 +8,6 @@ import { Sling as Hamburger } from "hamburger-react";
 import { BulbOutlined, EyeOutlined, ContactsOutlined } from "@ant-design/icons";
 import { motion, AnimatePresence } from "framer-motion";
 
-
 const goalsMenu = (
   <Menu className="w-48 p-2 !py-5">
     <Menu.Item key="1" icon={<BulbOutlined />}>
@@ -20,9 +19,9 @@ const goalsMenu = (
   </Menu>
 );
 
-const moveToPage=()=>{
+const moveToPage = () => {
   window.location.href = "https://app.ilefund.com";
-}
+};
 const resourcesMenu = (
   <Menu className="w-74 p-2 !py-5">
     <div className="grid grid-cols-2 gap-2">
@@ -113,12 +112,14 @@ const Navigation = () => {
         </div>
 
         {/* CTA */}
-        
-          <button onClick={moveToPage} className="hidden md:flex items-center space-x-2 bg-blue-600 text-white font-semibold px-5 py-2 rounded-full hover:bg-blue-700 transition cursor-pointer">
-            <span>Get Started</span>
-            <img src={right_arrow} alt="arrow" />
-          </button>
-       
+
+        <button
+          onClick={moveToPage}
+          className="hidden md:flex items-center space-x-2 bg-blue-600 text-white font-semibold px-5 py-2 rounded-full hover:bg-blue-700 transition cursor-pointer"
+        >
+          <span>Get Started</span>
+          <img src={right_arrow} alt="arrow" />
+        </button>
 
         {/* Hamburger */}
         <div className="md:hidden z-30">
@@ -137,9 +138,11 @@ const Navigation = () => {
             transition={{ duration: 0.4 }}
             className="fixed top-0 left-0 h-full w-3/4 bg-white z-50 p-6"
           >
+           <Link to='/' onClick={handleMobileNavClick}>
             <div className="flex justify-between items-center mb-8">
               <img src={Logo} alt="logo" className="w-32" />
             </div>
+           </Link>
 
             <div className="space-y-6 text-black font-medium">
               <Link
@@ -151,7 +154,7 @@ const Navigation = () => {
               </Link>
 
               {/* Mobile Dropdown for Goals */}
-              <div>
+              {/* <div>
                 <span
                   className="cursor-pointer flex items-center"
                   onClick={() =>
@@ -188,7 +191,25 @@ const Navigation = () => {
                     </motion.div>
                   )}
                 </AnimatePresence>
-              </div>
+              </div> */}
+
+              <Link
+                to="/properties"
+                onClick={handleMobileNavClick}
+                className="block"
+              >
+                Real Estate
+              </Link>
+              {/* <Link
+                to="/properties"
+                onClick={handleMobileNavClick}
+                className="block"
+              >
+                Properties
+              </Link> */}
+              <Link to="/faqs" onClick={handleMobileNavClick} className="block">
+                FAQs
+              </Link>
 
               {/* Mobile Dropdown for Resources */}
               <div>
@@ -252,17 +273,6 @@ const Navigation = () => {
                   )}
                 </AnimatePresence>
               </div>
-
-              <Link
-                to="/properties"
-                onClick={handleMobileNavClick}
-                className="block"
-              >
-                Properties
-              </Link>
-              <Link to="/faqs" onClick={handleMobileNavClick} className="block">
-                FAQs
-              </Link>
 
               <Link to="/get-started" onClick={handleMobileNavClick}>
                 <button className="flex items-center space-x-2 bg-blue-600 text-white font-semibold px-4 py-2 rounded-full hover:bg-blue-700 transition">

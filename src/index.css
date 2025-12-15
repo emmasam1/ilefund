@@ -27,4 +27,23 @@
   scrollbar-width: none;
 }
 
+.ant-segmented .ant-segmented-item-label{
+  padding: 10px;
+  width: 90px;
+}
+
+.ant-segmented-item-selected {
+    background-color: #2563eb !important; /* Blue */
+    color: white !important;
+    font-weight: 600;
+  }
+
+.ant-segmented-item {
+    color: #2563eb; /* default text color */
+  }
+
+ .ant-segmented-item:hover {
+    color: #2563eb !important;
+  }
+
 

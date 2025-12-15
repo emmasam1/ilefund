@@ -15,6 +15,8 @@ import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 
+import  { Link } from 'react-router';
+
 import home_progress from "../../assets/home_progress.png";
 import home_img_2 from "../../assets/ilefund-register.svg";
 import home_img_3 from "../../assets/ilefund-save.svg";
@@ -586,9 +588,11 @@ const HomePage = () => {
               {/* ⭐ REAL LISTING */}
               {!loading &&
                 listing.map((property, index) => (
+                  <Link key={index} to={`/property/${property._id}`}>
+                  
                   <Card
-                    key={index}
-                    onClick={moveToPage}
+                    
+                    // onClick={moveToPage}
                     hoverable
                     className="w-full overflow-hidden !p-2"
                     cover={
@@ -621,6 +625,7 @@ const HomePage = () => {
                       </h1>
                     </div>
                   </Card>
+                  </Link>
                 ))}
             </div>
           </div>
