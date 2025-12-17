@@ -53,18 +53,22 @@ const HomePage = () => {
   const navigate = useNavigate();
   const [activeKey, setActiveKey] = useState(null);
   const [property, setProperty] = useState([]);
-  const [loading, setLoading] = useState(false);
-   const [playVideo, setPlayVideo] = useState(false);
+  const [listingLoading, setListingLoading] = useState(false);
+  const [emailSubmitLoading, setEmailSubmitLoading] = useState(false);
+  const [downloadSubmitLoading, setDownloadSubmitLoading] = useState(false);
+
+  const [playVideo, setPlayVideo] = useState(false);
 
   const [messageApi, contextHolder] = message.useMessage();
 
   const getListing = async () => {
     try {
-      setLoading(true);
+      setListingLoading(true);
+
       const res = await axios.get(
         `https://wallet-v2-aeqw.onrender.com/api/estate/prototypes?limit=8`
       );
-      // console.log(res);
+
       const cleanedData = (res.data.data || []).map((item) => ({
         id: item._id,
         banner: item.banner?.url,
@@ -75,103 +79,21 @@ const HomePage = () => {
       }));
 
       setProperty(cleanedData);
-
-      // console.log("........", cleanedData)
     } catch (error) {
       console.log(error);
     } finally {
-      setLoading(false);
+      setListingLoading(false);
     }
   };
-
-  //  const onFinish = async (values) => {
-  //   setLoading(true);
-  //   try {
-  //     // Optional delay for smoother UX
-  //     await new Promise((resolve) => setTimeout(resolve, 1500));
-
-  //     // Send registration request
-  //     const response = await axios.post(
-  //       "https://wallet-v2-aeqw.onrender.com/api/v1/register",
-  //       { email: values.email }
-  //     );
-
-  //     if (!response.data) throw new Error("No response data from server");
-
-  //     const { token, message, otpVerified, isPassword } = response.data;
-  //     console.log("🔹 Server Response:", response.data);
-
-  //     // Normalize booleans
-  //     const otpVerifiedBool =
-  //       otpVerified === true || otpVerified === "true" || otpVerified === 1;
-  //     const isPasswordBool =
-  //       isPassword === true || isPassword === "true" || isPassword === 1;
-
-  //     // Save token securely
-  //     if (token) {
-  //       sessionStorage.setItem("token", token);
-  //       console.log("✅ Token saved to sessionStorage");
-  //     }
-
-  //     // Save email always
-  //     localStorage.setItem("email", values.email);
-  //     console.log("📩 Email saved to localStorage:", values.email);
-
-  //     // Close any AntD modals
-  //     if (window.Modal) window.Modal.destroyAll?.();
-
-  //     // External redirect logic
-  //     if (otpVerifiedBool && !isPasswordBool) {
-  //       // Email verified but password not set
-  //       messageApi.info("Email verified. Continue your registration.");
-  //       console.log("➡️ Redirecting to personal-information");
-  //       window.location.href = "https://app.ilefund.com/personal-information";
-  //     } else if (!otpVerifiedBool && !isPasswordBool) {
-  //       // Email exists but not verified
-  //       messageApi.success(message || "Verification email sent. Check your inbox.");
-  //       console.log("➡️ Redirecting to enter-confirmation-pin");
-  //       window.location.href = "https://app.ilefund.com/enter-confirmation-pin";
-  //     } else if (!otpVerifiedBool && isPasswordBool) {
-  //       // User already registered but OTP pending
-  //       messageApi.warning("Please verify your email before continuing.");
-  //       console.log("➡️ Redirecting to enter-confirmation-pin");
-  //       window.location.href = "https://app.ilefund.com/enter-confirmation-pin";
-  //     } else {
-  //       // Registration complete
-  //       messageApi.success(message || "Registration complete!");
-  //       console.log("➡️ Redirecting to personal-information");
-  //       window.location.href = "https://app.ilefund.com/personal-information";
-  //     }
-  //   } catch (error) {
-  //     console.error(
-  //       "❌ Registration error:",
-  //       error.response?.data || error.message
-  //     );
-  //     const errorMsg =
-  //       error.response?.data?.message ||
-  //       "Registration failed. Please try again.";
-  //     messageApi.error(errorMsg);
-  //   } finally {
-  //     setLoading(false);
-  //   }
-  // };
 
   const onFinish = async (values) => {
     const userEmail = values.email;
 
-    console.log("User Email:", userEmail);
+    setEmailSubmitLoading(true);
 
-    // ✅ Start loading
-    setLoading(true);
-
-    // ⏳ Optional delay (3 seconds)
     await new Promise((resolve) => setTimeout(resolve, 3000));
 
-    // ✅ Redirect to the external website
     window.location.href = `https://app.ilefund.com/register?email=${userEmail}`;
-    // window.location.href = `http://localhost:5174/register?email=${userEmail}`;
-
-    // (No need to stop loading because page will change)
   };
 
   const moveToPage = () => {
@@ -181,89 +103,6 @@ const HomePage = () => {
   useEffect(() => {
     getListing();
   }, []);
-
-  // const properties = [
-  //   {
-  //     id: 1,
-  //     title: "4 Semi detached-duplex with 2 room BQ",
-  //     location: "Big land city Apo hilltop",
-  //     price: "₦13,000,000",
-  //     size: "500 SQM",
-  //     deposit: "₦1,500,000",
-  //     duration: "6 Months",
-  //     image: propertyImg2,
-  //   },
-  //   {
-  //     id: 2,
-  //     title: "Luxury 3 Bedroom Flat",
-  //     location: "Maitama District, Abuja",
-  //     price: "₦25,000,000",
-  //     size: "750 SQM",
-  //     deposit: "₦2,000,000",
-  //     duration: "12 Months",
-  //     image: propertyImg2,
-  //   },
-  //   {
-  //     id: 3,
-  //     title: "Modern Bungalow with Garden",
-  //     location: "Gwarinpa, Abuja",
-  //     price: "₦8,500,000",
-  //     size: "400 SQM",
-  //     deposit: "₦800,000",
-  //     duration: "8 Months",
-  //     image: propertyImg2,
-  //   },
-  //   {
-  //     id: 4,
-  //     title: "Luxury Villa with Pool",
-  //     location: "Asokoro, Abuja",
-  //     price: "₦45,000,000",
-  //     size: "1000 SQM",
-  //     deposit: "₦3,500,000",
-  //     duration: "18 Months",
-  //     image: propertyImg2,
-  //   },
-  //   {
-  //     id: 5,
-  //     title: "2 Bedroom Mini Flat",
-  //     location: "Lugbe, Abuja",
-  //     price: "₦5,500,000",
-  //     size: "300 SQM",
-  //     deposit: "₦600,000",
-  //     duration: "10 Months",
-  //     image: propertyImg2,
-  //   },
-  //   {
-  //     id: 6,
-  //     title: "5 Bedroom Fully Detached Duplex",
-  //     location: "Jabi, Abuja",
-  //     price: "₦60,000,000",
-  //     size: "1200 SQM",
-  //     deposit: "₦5,000,000",
-  //     duration: "24 Months",
-  //     image: propertyImg2,
-  //   },
-  //   {
-  //     id: 7,
-  //     title: "Penthouse Apartment",
-  //     location: "Wuse II, Abuja",
-  //     price: "₦35,000,000",
-  //     size: "850 SQM",
-  //     deposit: "₦2,800,000",
-  //     duration: "15 Months",
-  //     image: propertyImg2,
-  //   },
-  //   {
-  //     id: 8,
-  //     title: "Townhouse with Rooftop Terrace",
-  //     location: "Katampe Extension, Abuja",
-  //     price: "₦20,000,000",
-  //     size: "600 SQM",
-  //     deposit: "₦1,800,000",
-  //     duration: "9 Months",
-  //     image: propertyImg2,
-  //   },
-  // ];
 
   const stats = [
     { value: "98", label: "Projects" },
@@ -375,7 +214,7 @@ const HomePage = () => {
 
                   <Button
                     htmlType="submit"
-                    loading={loading}
+                    loading={emailSubmitLoading}
                     className="
                 !bg-blue-600 !text-white
                 !rounded-full
@@ -544,22 +383,41 @@ const HomePage = () => {
       <section className="w-11/12 max-w-7xl mx-auto py-16">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           {/* LEFT: Calculator */}
-          <div
-            className="
-        md:col-span-1 
-        flex flex-col justify-center 
-        bg-[url('/src/assets/phone.png')] 
-        bg-no-repeat bg-contain bg-center 
-        p-4 sm:p-6 md:p-10
-        h-[500px] sm:h-[600px] md:h-[650px] lg:h-full
-        transform scale-[0.8] sm:scale-90 md:scale-100 origin-top
-      "
-          >
-            <Calculator
-              amountFontSize="text-base sm:text-lg md:text-xl"
-              resultFontSize="!text-base sm:!text-lg md:!text-xl"
-            />
-          </div>
+         <div
+  className="
+    md:col-span-1
+    flex flex-col justify-center
+
+    bg-[url('/src/assets/phone.png')]
+    bg-no-repeat
+    bg-center
+
+    /* MOBILE & SMALL SCREENS — BIGGER */
+    bg-[length:auto_100%]
+    sm:bg-[length:auto_105%]
+
+    /* DESKTOP — KEEP PERFECT */
+    md:bg-[length:auto_100%]
+
+    p-4 sm:p-6 md:p-10
+
+    /* MOBILE HEIGHT INCREASED */
+    h-[520px]
+    sm:h-[600px]
+
+    /* DESKTOP HEIGHT — UNCHANGED */
+    md:h-[620px]
+    lg:h-[680px]
+
+    transform scale-100 origin-top
+  "
+>
+  <Calculator
+    amountFontSize="text-base sm:text-lg md:text-xl"
+    resultFontSize="!text-base sm:!text-lg md:!text-xl"
+  />
+</div>
+
 
           {/* RIGHT: Properties */}
           <div className="md:col-span-2 flex flex-col justify-center">
@@ -570,7 +428,7 @@ const HomePage = () => {
             {/* GRID WRAPPER */}
             <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3">
               {/* ⭐ SKELETON LOADER */}
-              {loading &&
+              {listingLoading &&
                 Array.from({ length: 8 }).map((_, i) => (
                   <Card key={i} className="!p-2 w-full">
                     <Skeleton.Image
@@ -586,47 +444,43 @@ const HomePage = () => {
                 ))}
 
               {/* ⭐ REAL LISTING */}
-              {!loading &&
+              {!listingLoading &&
                 property.map((property, index) => (
-                  
                   <Link key={property.id} to={`/property/${property.id}`}>
-                    
-                  
-                  <Card
-                    
-                    // onClick={moveToPage}
-                    hoverable
-                    className="w-full overflow-hidden !p-2"
-                    cover={
-                      <div className="relative">
-                        <img
-                          alt="property"
-                          src={property.banner}
-                          className="h-24 sm:h-28 md:h-32 w-full object-cover"
-                        />
+                    <Card
+                      // onClick={moveToPage}
+                      hoverable
+                      className="w-full overflow-hidden !p-2"
+                      cover={
+                        <div className="relative">
+                          <img
+                            alt="property"
+                            src={property.banner}
+                            className="h-24 sm:h-28 md:h-32 w-full object-cover"
+                          />
+                        </div>
+                      }
+                    >
+                      <span className="font-bold text-sm sm:text-base">
+                        {property.title?.slice(0, 13)}...
+                      </span>
+
+                      <div className="flex items-center mt-2 gap-2">
+                        <img src={pin} alt="pin" className="w-3 sm:w-4" />
+                        <p className="text-gray-400 text-xs sm:text-sm">
+                          {property.estate?.slice(0, 12)}...
+                        </p>
                       </div>
-                    }
-                  >
-                    <span className="font-bold text-sm sm:text-base">
-                      {property.title?.slice(0, 13)}...
-                    </span>
 
-                    <div className="flex items-center mt-2 gap-2">
-                      <img src={pin} alt="pin" className="w-3 sm:w-4" />
-                      <p className="text-gray-400 text-xs sm:text-sm">
-                        {property.estate?.slice(0, 12)}...
-                      </p>
-                    </div>
-
-                    <div className="flex gap-4 mt-1 items-center">
-                      <h1 className="font-bold text-sm sm:text-base">
-                        ₦{Number(property.price).toLocaleString("en-NG")}
-                      </h1>
-                      <h1 className="font-bold text-[0.5rem] sm:text-[0.6rem]">
-                        {property.sizeValue} sqm
-                      </h1>
-                    </div>
-                  </Card>
+                      <div className="flex gap-4 mt-1 items-center">
+                        <h1 className="font-bold text-sm sm:text-base">
+                          ₦{Number(property.price).toLocaleString("en-NG")}
+                        </h1>
+                        <h1 className="font-bold text-[0.5rem] sm:text-[0.6rem]">
+                          {property.sizeValue} sqm
+                        </h1>
+                      </div>
+                    </Card>
                   </Link>
                 ))}
             </div>
@@ -635,46 +489,46 @@ const HomePage = () => {
       </section>
 
       <section className="relative">
-      {/* HERO IMAGE */}
-      <div className="relative h-[400px] sm:h-[500px] md:h-[650px] lg:h-[750px] w-full bg-[url('/src/assets/home_img_2.png')] bg-cover bg-center bg-no-repeat">
-        {/* DARK OVERLAY */}
-        <div className="absolute inset-0 bg-[#00000085]"></div>
+        {/* HERO IMAGE */}
+        <div className="relative h-[400px] sm:h-[500px] md:h-[650px] lg:h-[750px] w-full bg-[url('/src/assets/home_img_2.png')] bg-cover bg-center bg-no-repeat">
+          {/* DARK OVERLAY */}
+          <div className="absolute inset-0 bg-[#00000085]"></div>
 
-        {/* VIDEO OR PLAY BUTTON */}
-        <div className="absolute inset-0 flex items-center justify-center z-10">
-          {!playVideo ? (
-            /* PLAY BUTTON */
-            <button
-              onClick={() => setPlayVideo(true)}
-              className="flex items-center justify-center w-20 h-20 sm:w-24 sm:h-24 lg:w-32 lg:h-32 bg-red-600 rounded-full hover:scale-110 transition-transform duration-300 shadow-lg"
-            >
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                className="w-10 h-10 sm:w-12 sm:h-12 text-white ml-1"
-                fill="currentColor"
-                viewBox="0 0 24 24"
+          {/* VIDEO OR PLAY BUTTON */}
+          <div className="absolute inset-0 flex items-center justify-center z-10">
+            {!playVideo ? (
+              /* PLAY BUTTON */
+              <button
+                onClick={() => setPlayVideo(true)}
+                className="flex items-center justify-center w-20 h-20 sm:w-24 sm:h-24 lg:w-32 lg:h-32 bg-red-600 rounded-full hover:scale-110 transition-transform duration-300 shadow-lg"
               >
-                <path d="M4 2.5a2.5 2.5 0 0 0-2.5 2.5v14a2.5 2.5 0 0 0 2.5 2.5h16a2.5 2.5 0 0 0 2.5-2.5v-14a2.5 2.5 0 0 0-2.5-2.5H4zm6.5 12.5v-7l6 3.5-6 3.5z" />
-              </svg>
-            </button>
-          ) : (
-            /* YOUTUBE IFRAME */
-            <div className="w-full h-full flex items-center justify-center px-4">
-              <div className="relative w-full max-w-5xl aspect-video">
-                <iframe
-                  className="absolute inset-0 w-full h-full rounded-xl"
-                  src="https://www.youtube.com/embed/YOUR_VIDEO_ID?autoplay=1"
-                  title="YouTube video player"
-                  frameBorder="0"
-                  allow="autoplay; encrypted-media; picture-in-picture"
-                  allowFullScreen
-                ></iframe>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  className="w-10 h-10 sm:w-12 sm:h-12 text-white ml-1"
+                  fill="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path d="M4 2.5a2.5 2.5 0 0 0-2.5 2.5v14a2.5 2.5 0 0 0 2.5 2.5h16a2.5 2.5 0 0 0 2.5-2.5v-14a2.5 2.5 0 0 0-2.5-2.5H4zm6.5 12.5v-7l6 3.5-6 3.5z" />
+                </svg>
+              </button>
+            ) : (
+              /* YOUTUBE IFRAME */
+              <div className="w-full h-full flex items-center justify-center px-4">
+                <div className="relative w-full max-w-5xl aspect-video">
+                  <iframe
+                    className="absolute inset-0 w-full h-full rounded-xl"
+                    src="https://www.youtube.com/embed/YOUR_VIDEO_ID?autoplay=1"
+                    title="YouTube video player"
+                    frameBorder="0"
+                    allow="autoplay; encrypted-media; picture-in-picture"
+                    allowFullScreen
+                  ></iframe>
+                </div>
               </div>
-            </div>
-          )}
+            )}
+          </div>
         </div>
-      </div>
-    </section>
+      </section>
 
       <section className="w-11/12 mx-auto mt-20">
         <div className="flex flex-col md:flex-row justify-between mb-10 gap-5 md:gap-0">
@@ -832,7 +686,7 @@ const HomePage = () => {
                   <Button
                     type="primary"
                     htmlType="submit"
-                    loading={loading}
+                    loading={downloadSubmitLoading}
                     size="large"
                     className="bg-white text-[#005DFF] font-semibold rounded-xl px-8 flex-shrink-0"
                   >
