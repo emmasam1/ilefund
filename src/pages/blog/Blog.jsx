@@ -3,6 +3,8 @@ const { Meta } = Card;
 import blogImg2 from "../../assets/blog_img_2.png";
 import blogImg3 from "../../assets/blog_img_3.png";
 import blogImg4 from "../../assets/blog_img_4.png";
+import star from "../../assets/star.png";
+import blueline from "../../assets/blueline.png";
 
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
@@ -156,16 +158,14 @@ const Blog = () => {
         </div>
       </div>
 
-      <section className="bg-[#12033a] py-10 mt-10">
+     <section className="bg-[#F2F3FA] py-10 mt-10">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 px-10">
           <div className="flex flex-col justify-center">
-            <h1 className="font-bold text-4xl mt-1 text-white">
-              1250+ customer say
-            </h1>
+            <h1 className="font-bold text-4xl mt-1">1250+ customer say</h1>
             <h1 className="font-bold text-3xl text-[#0047FF]">
               about our finance
             </h1>
-            <p className="text-sm text-white">
+            <p className="text-sm">
               With over 1,250 established clients, our finance and consulting
               services have earned praise for reliability, personalized
               guidance, and impactful results.
@@ -174,17 +174,17 @@ const Blog = () => {
             <Button
               type="primary"
               size="medium"
-              className="!rounded-full !px-6 flex items-center gap-2 w-fit mt-2"
+              className="!rounded-full !px-6 flex items-center gap-2 w-fit mt-2 !py-4 !h-10 !bg-[#0047FF]"
             >
               Contact Now <LiaLongArrowAltRightSolid size={20} />
             </Button>
           </div>
 
-          <div className="bg-[#2A1C4E] p-6 rounded-lg">
+          <div className="bg-[#DAE2FB] p-6 rounded-lg">
             <Slider {...settings}>
               <div>
-                <h2 className="text-2xl font-bold text-white">Logoipsum</h2>
-                <p className="mt-2 text-sm text-white">
+                <h2 className="text-2xl font-bold ">Logoipsum</h2>
+                <p className="mt-2 text-sm">
                   The guidance we received has transformed oyr financial
                   outlook. our consultant was patient, knowledgeable, and
                   crafted s plan that aligned with our goals. Thanks to their
@@ -192,36 +192,89 @@ const Blog = () => {
                 </p>
                 <div className="mt-3 flex items-center gap-5">
                   <div className="bg-indigo-600 h-14 w-14 rounded-md"></div>
-                  <h1 className="font-bold text-lg text-white">
+                  <h1 className="font-bold text-lg">
                     Rachael T./{" "}
                     <span className="!font-light">Entrepreneur</span>
                   </h1>
                 </div>
                 <Divider />
                 <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mb-2">
-                  <div class="border border-[#dddddd] rounded-lg flex justify-center flex-col items-center">
-                    <span className="text-xs mt-1 text-white">
-                      Goggle Rating
-                    </span>
-                    <h1 className="font-bold text-white">5.0</h1>
-                  </div>
-                  <div class="border border-[#dddddd] rounded-lg flex justify-center flex-col items-center">
-                    <h1 className="font-bold text-white">5.0</h1>
-                    <div className="flex justify-between items-center">
-                      <span className="text-xs text-white">Rated</span>
-                      <span className="text-xs text-white">Trustpilot</span>
+                  <div className="flex flex-col p-2 relative">
+                    <img
+                      src={blueline}
+                      alt=""
+                      className="w-30 absolute right-0"
+                    />
+                    <span className="text-xs mt-1">Google Rating</span>
+                    <div className="flex items-center mt-1">
+                      {/* Map star 5 times */}
+                      <h1 className="text-[17px] mr-2 mt-1">5.0</h1>
+                      {[...Array(5)].map((_, index) => (
+                        <img
+                          key={index}
+                          src={star}
+                          alt="star"
+                          className="w-4 h-4 "
+                        />
+                      ))}
                     </div>
                   </div>
-                  <div class="border border-[#dddddd] rounded-lg flex justify-center flex-col items-center">
-                    <span className="text-xs text-center text-white">
-                      Total rating <b>5.0</b> base on <b>1250+</b> Review
-                    </span>
+                  <div className="flex flex-col p-2 relative">
+                    <img
+                      src={blueline}
+                      alt=""
+                      className="w-30 absolute right-0"
+                    />
+                    <div className="flex mt-1 flex-col">
+                      {/* Map star 5 times */}
+                      <div className="flex items-center">
+                        <span className="text-[17px] mr-2 mt-1">5.0</span>
+                        {[...Array(5)].map((_, index) => (
+                          <img
+                            key={index}
+                            src={star}
+                            alt="star"
+                            className="w-4 h-4"
+                          />
+                        ))}
+                      </div>
+                      <div className="flex items-center">
+                        <h1 className="mr-2 mt-1 text-xs">Rated</h1>
+                        <h1 className="mr-2 mt-1 text-xs">Trustpilot</h1>
+                      </div>
+                    </div>
+                  </div>
+                  <div className="flex flex-col p-2 relative">
+                    <img
+                      src={blueline}
+                      alt=""
+                      className="w-30 absolute right-0"
+                    />
+                    <div className="flex mt-1 flex-col">
+                      {/* Map star 5 times */}
+                      <div className="flex items-center">
+                        <span className="text-[17px] mr-2 mt-1">5.0</span>
+                        {[...Array(5)].map((_, index) => (
+                          <img
+                            key={index}
+                            src={star}
+                            alt="star"
+                            className="w-4 h-4"
+                          />
+                        ))}
+                      </div>
+                      <div className="flex items-center">
+                        <h1 className="mr-2 mt-1 text-xs">Rated</h1>
+                        <h1 className="mr-2 mt-1 text-xs">Trustpilot</h1>
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>
+
               <div>
-                <h2 className="text-2xl font-bold text-white">Logoipsum</h2>
-                <p className="mt-2 text-sm text-white">
+                <h2 className="text-2xl font-bold">Logoipsum</h2>
+                <p className="mt-2 text-sm">
                   The guidance we received has transformed oyr financial
                   outlook. our consultant was patient, knowledgeable, and
                   crafted s plan that aligned with our goals. Thanks to their
@@ -229,67 +282,82 @@ const Blog = () => {
                 </p>
                 <div className="mt-3 flex items-center gap-5">
                   <div className="bg-indigo-600 h-14 w-14 rounded-md"></div>
-                  <h1 className="font-bold text-lg text-white">
+                  <h1 className="font-bold text-lg ">
                     Rachael T./{" "}
                     <span className="!font-light">Entrepreneur</span>
                   </h1>
                 </div>
                 <Divider />
                 <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mb-2">
-                  <div class="border border-[#dddddd] rounded-lg flex justify-center flex-col items-center">
-                    <span className="text-xs mt-1 text-white">
-                      Goggle Rating
-                    </span>
-                    <h1 className="font-bold text-white">5.0</h1>
-                  </div>
-                  <div class="border border-[#dddddd] rounded-lg flex justify-center flex-col items-center">
-                    <h1 className="font-bold text-white">5.0</h1>
-                    <div className="flex justify-between items-center">
-                      <span className="text-xs text-white">Rated</span>
-                      <span className="text-xs text-white">Trustpilot</span>
+                  <div className="flex flex-col p-2 relative">
+                    <img
+                      src={blueline}
+                      alt=""
+                      className="w-30 absolute right-0"
+                    />
+                    <span className="text-xs mt-1">Google Rating</span>
+                    <div className="flex items-center mt-1">
+                      {/* Map star 5 times */}
+                      <h1 className="text-[17px] mr-2 mt-1">5.0</h1>
+                      {[...Array(5)].map((_, index) => (
+                        <img
+                          key={index}
+                          src={star}
+                          alt="star"
+                          className="w-4 h-4 "
+                        />
+                      ))}
                     </div>
                   </div>
-                  <div class="border border-[#dddddd] rounded-lg flex justify-center flex-col items-center">
-                    <span className="text-xs text-center text-white">
-                      Total rating <b>5.0</b> base on <b>1250+</b> Review
-                    </span>
-                  </div>
-                </div>
-              </div>
-              <div>
-                <h2 className="text-2xl font-bold text-white">Logoipsum</h2>
-                <p className="mt-2 text-sm text-white">
-                  The guidance we received has transformed oyr financial
-                  outlook. our consultant was patient, knowledgeable, and
-                  crafted s plan that aligned with our goals. Thanks to their
-                  strategic advice, optimistic about our future.
-                </p>
-                <div className="mt-3 flex items-center gap-5">
-                  <div className="bg-indigo-600 h-14 w-14 rounded-md"></div>
-                  <h1 className="font-bold text-lg text-white">
-                    Rachael T./{" "}
-                    <span className="!font-light">Entrepreneur</span>
-                  </h1>
-                </div>
-                <Divider />
-                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mb-2">
-                  <div class="border border-[#dddddd] rounded-lg flex justify-center flex-col items-center">
-                    <span className="text-xs mt-1 text-white">
-                      Goggle Rating
-                    </span>
-                    <h1 className="font-bold text-white">5.0</h1>
-                  </div>
-                  <div class="border border-[#dddddd] rounded-lg flex justify-center flex-col items-center">
-                    <h1 className="font-bold text-white">5.0</h1>
-                    <div className="flex justify-between items-center">
-                      <span className="text-xs text-white">Rated</span>
-                      <span className="text-xs text-white">Trustpilot</span>
+                  <div className="flex flex-col p-2 relative">
+                    <img
+                      src={blueline}
+                      alt=""
+                      className="w-30 absolute right-0"
+                    />
+                    <div className="flex mt-1 flex-col">
+                      {/* Map star 5 times */}
+                      <div className="flex items-center">
+                        <span className="text-[17px] mr-2 mt-1">5.0</span>
+                        {[...Array(5)].map((_, index) => (
+                          <img
+                            key={index}
+                            src={star}
+                            alt="star"
+                            className="w-4 h-4"
+                          />
+                        ))}
+                      </div>
+                      <div className="flex items-center">
+                        <h1 className="mr-2 mt-1 text-xs">Rated</h1>
+                        <h1 className="mr-2 mt-1 text-xs">Trustpilot</h1>
+                      </div>
                     </div>
                   </div>
-                  <div class="border border-[#dddddd] rounded-lg flex justify-center flex-col items-center">
-                    <span className="text-xs text-center text-white">
-                      Total rating <b>5.0</b> base on <b>1250+</b> Review
-                    </span>
+                  <div className="flex flex-col p-2 relative">
+                    <img
+                      src={blueline}
+                      alt=""
+                      className="w-30 absolute right-0"
+                    />
+                    <div className="flex mt-1 flex-col">
+                      {/* Map star 5 times */}
+                      <div className="flex items-center">
+                        <span className="text-[17px] mr-2 mt-1">5.0</span>
+                        {[...Array(5)].map((_, index) => (
+                          <img
+                            key={index}
+                            src={star}
+                            alt="star"
+                            className="w-4 h-4"
+                          />
+                        ))}
+                      </div>
+                      <div className="flex items-center">
+                        <h1 className="mr-2 mt-1 text-xs">Rated</h1>
+                        <h1 className="mr-2 mt-1 text-xs">Trustpilot</h1>
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>

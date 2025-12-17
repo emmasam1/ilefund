@@ -3,7 +3,7 @@ import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 
-const SliderComponent = ({ images = [], settings = {}, height = "h-[300px]", customDots = false }) => {
+const SliderComponent = ({ images = [], settings = {}, height = "h-[300px]", customDots = false, property }) => {
   const defaultSettings = {
     dots: true,
     infinite: true,
@@ -38,10 +38,10 @@ const SliderComponent = ({ images = [], settings = {}, height = "h-[300px]", cus
         )
       }
     >
-      {images.map((img, index) => (
+      {property?.data?.files?.map((img, index) => (
         <div key={index} className={`w-full ${height}`}>
           <img
-            src={img}
+            src={img.url}
             alt={`slide-${index}`}
             className="w-full h-full object-cover rounded"
           />

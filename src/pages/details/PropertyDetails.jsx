@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import propertyImg1 from "../../assets/property_img_1.png";
 import propertyImg3 from "../../assets/property_img_3.png";
 import SliderComponent from "../../components/slider/SliderComponent";
@@ -7,6 +7,8 @@ import { motion, AnimatePresence } from "framer-motion"; // ✅ import AnimatePr
 import { Button, Divider } from "antd";
 import About from "../../components/About";
 import Details from "../../components/Details";
+import { useParams } from "react-router";
+import axios from "axios"
 
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
@@ -16,9 +18,27 @@ import { LiaLongArrowAltRightSolid } from "react-icons/lia";
 const PropertyDetails = () => {
   const images = [propertyImg1, propertyImg3];
   const [activeTab, setActiveTab] = useState(1);
+  const [property, setProperty] = useState([])
+
+  const { id } = useParams();
+  // console.log("Property ID:", id);
+
+  const getSingleProperty = async () => {
+    try {
+      const res = await axios.get(`https://wallet-v2-aeqw.onrender.com/api/estate/prototypes/${id}`);
+      console.log(res.data);
+      setProperty(res.data?.data || []);
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
+  useEffect(() => {
+    getSingleProperty();
+  }, [])
 
   const tabs = [
-    { key: 1, label: "About", content: <About /> },
+    { key: 1, label: "About", content: <About property={property} /> },
     { key: 2, label: "Details", content: <Details /> },
     { key: 3, label: "Documents", content: "Attached documents go here." },
     { key: 4, label: "Location", content: "Map and location details here." },
@@ -50,11 +70,11 @@ const PropertyDetails = () => {
   return (
     <div className="relative ">
       {/* Slider */}
-      <SliderComponent images={images} height="h-[500px]" settings={settings} />
+      <SliderComponent images={images} height="h-[500px]" settings={settings} property={property} />
 
       <div className="max-w-6xl mx-auto p-5">
         <h1 className="font-extrabold text-3xl mb-4">
-          4 Semi detached-duplex with 2 room BQ
+         {property?.data?.title}
         </h1>
 
         {/* Tabs */}

@@ -1,9 +1,56 @@
 import React, { useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import { LeftOutlined, RightOutlined } from "@ant-design/icons";
 import about_img_1 from "../../assets/about_img_1.png";
-import { Segmented } from "antd";
+import team_1 from "./../../../public/images/ilefund-land-nigeria-team-1.png";
+import team_2 from "./../../../public/images/ilefund-land-nigeria-team-2.png";
+import team_3 from "./../../../public/images/ilefund-land-nigeria-team-3.png";
+import { Segmented, Button, Divider } from "antd";
+import { LiaLongArrowAltRightSolid } from "react-icons/lia";
+import Slider from "react-slick";
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
+import blueline from "../../assets/blueline.png";
+import star from "../../assets/star.png";
 
 const About = () => {
   const [value, setValue] = useState("Mision");
+  const [index, setIndex] = useState(0);
+
+  const prevSlide = () => {
+    setIndex((prev) => (prev === 0 ? teamMembers.length - 1 : prev - 1));
+  };
+
+  const nextSlide = () => {
+    setIndex((prev) => (prev === teamMembers.length - 1 ? 0 : prev + 1));
+  };
+
+  const teamMembers = [
+    {
+      name: "Young Batimehin",
+      role: "Founder & Team Leader",
+      image: team_1,
+    },
+    {
+      name: "Victor",
+      role: "UI/UX Designer",
+      image: team_2,
+    },
+    {
+      name: "Rachael",
+      role: "UI/UX Designer",
+      image: team_3,
+    },
+  ];
+
+  var settings = {
+    dots: true,
+    infinite: true,
+    speed: 500,
+    slidesToShow: 1,
+    slidesToScroll: 1,
+    arrows: false,
+  };
 
   const content = {
     Mision:
@@ -124,10 +171,343 @@ const About = () => {
                 housing gap continues to widen. We’re introducing structure,
                 transparency, and accessibility to the real estate space by
                 letting users save with purpose, see what their money is working
-                toward, and deal directly with verified developers—no
-                middlemen, no guesswork.
+                toward, and deal directly with verified developers—no middlemen,
+                no guesswork.
               </p>
             </div>
+          </div>
+        </div>
+      </section>
+
+      <div className="w-[95%] mx-auto">
+        <h1 className="text-center font-bold text-xl sm:text-2xl md:text-3xl">
+          Pilot Launch → Expansion Plan
+        </h1>
+        <p className="text-center mt-5">
+          Our MVP pilot is launching in Abuja, with verified
+          <br /> developers onboarded and users already joining
+          <br /> the waitlist. From there, we’ll scale to:
+        </p>
+
+        <div className="py-10">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            <div className="">
+              <div className="bg-[url('/public/images/ilefund-land-nigeria-home-1.png')] bg-no-repeat bg-cover bg-center h-68 mb-4 rounded-4xl"></div>
+              <div className="h-13">
+                <p className="text-gray-600">Q3 & Q4 2025</p>
+              </div>
+              <h3 className="text-xl font-semibold mb-2">
+                Lagos, Port Harcourt, Ibadan
+              </h3>
+            </div>
+            <div className="">
+              <div className="bg-[url('/public/images/ilefund-land-nigeria-home-2.png')] bg-no-repeat bg-cover bg-center h-68 mb-4 rounded-4xl"></div>
+              <div className="h-13">
+                <p className="text-gray-600">2026 (Pan-African rollout)</p>
+              </div>
+              <h3 className="text-xl font-semibold mb-2">
+                Accra, Nairobi, Johannesburg
+              </h3>
+            </div>
+            <div className="">
+              <div className="bg-[url('/public/images/ilefund-land-nigeria-home-3.png')] bg-no-repeat bg-cover bg-center h-68 mb-4 rounded-4xl"></div>
+              <div className="h-13">
+                <p className="text-gray-600">
+                  2026–2027 (for Nigerian and African diaspora in the Middle
+                  East)
+                </p>
+              </div>
+              <h3 className="text-xl font-semibold mb-2">
+                Accra, Nairobi, Johannesburg
+              </h3>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <section className="bg-white py-16 overflow-hidden">
+        <div className="w-[95%] mx-auto px-4 grid grid-cols-1 lg:grid-cols-[1fr_1.4fr] gap-12 items-center">
+          {/* LEFT CONTENT (SMALLER) */}
+          <motion.div
+            initial={{ opacity: 0, x: -40 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.6 }}
+            viewport={{ once: true }}
+          >
+            <h2 className="text-3xl md:text-4xl font-bold mb-4">
+              Meet the Team
+            </h2>
+
+            <p className="text-gray-600 max-w-md mb-6">
+              LIEFUND is powered by a passionate, execution-driven team with a
+              deep understanding of design, development, finance, and the
+              African real estate landscape.
+            </p>
+
+            {/* SLIDER CONTROLS */}
+            <div className="flex gap-3">
+              <button
+                onClick={prevSlide}
+                className="w-11 h-11 flex items-center justify-center border rounded-full hover:bg-gray-100 transition"
+              >
+                <LeftOutlined />
+              </button>
+
+              <button
+                onClick={nextSlide}
+                className="w-11 h-11 flex items-center justify-center border rounded-full hover:bg-gray-100 transition"
+              >
+                <RightOutlined />
+              </button>
+            </div>
+          </motion.div>
+
+          {/* RIGHT SLIDER (BIGGER) */}
+          <div className="relative">
+            <AnimatePresence mode="wait">
+              <motion.div
+                key={index}
+                initial={{ opacity: 0, x: 100 }}
+                animate={{ opacity: 1, x: 0 }}
+                exit={{ opacity: 0, x: -100 }}
+                transition={{ duration: 0.5 }}
+                className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8"
+              >
+                {teamMembers
+                  .slice(index, index + 3)
+                  .concat(
+                    teamMembers.slice(
+                      0,
+                      Math.max(0, index + 3 - teamMembers.length)
+                    )
+                  )
+                  .map((member, i) => (
+                    <motion.div
+                      key={i}
+                      whileHover={{ y: -10 }}
+                      className="text-center"
+                    >
+                      <img
+                        src={member.image}
+                        alt={member.name}
+                        className="w-full h-52 object-cover rounded-xl mb-5"
+                      />
+
+                      <h4 className="font-semibold text-lg">{member.name}</h4>
+
+                      <p className="text-sm text-gray-500">{member.role}</p>
+                    </motion.div>
+                  ))}
+              </motion.div>
+            </AnimatePresence>
+          </div>
+        </div>
+      </section>
+
+      <section className="bg-[#F2F3FA] py-10 mt-10">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 px-10">
+          <div className="flex flex-col justify-center">
+            <h1 className="font-bold text-4xl mt-1">1250+ customer say</h1>
+            <h1 className="font-bold text-3xl text-[#0047FF]">
+              about our finance
+            </h1>
+            <p className="text-sm">
+              With over 1,250 established clients, our finance and consulting
+              services have earned praise for reliability, personalized
+              guidance, and impactful results.
+            </p>
+
+            <Button
+              type="primary"
+              size="medium"
+              className="!rounded-full !px-6 flex items-center gap-2 w-fit mt-2 !py-4 !h-10 !bg-[#0047FF]"
+            >
+              Contact Now <LiaLongArrowAltRightSolid size={20} />
+            </Button>
+          </div>
+
+          <div className="bg-[#DAE2FB] p-6 rounded-lg">
+            <Slider {...settings}>
+              <div>
+                <h2 className="text-2xl font-bold ">Logoipsum</h2>
+                <p className="mt-2 text-sm">
+                  The guidance we received has transformed oyr financial
+                  outlook. our consultant was patient, knowledgeable, and
+                  crafted s plan that aligned with our goals. Thanks to their
+                  strategic advice, optimistic about our future.
+                </p>
+                <div className="mt-3 flex items-center gap-5">
+                  <div className="bg-indigo-600 h-14 w-14 rounded-md"></div>
+                  <h1 className="font-bold text-lg">
+                    Rachael T./{" "}
+                    <span className="!font-light">Entrepreneur</span>
+                  </h1>
+                </div>
+                <Divider />
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mb-2">
+                  <div className="flex flex-col p-2 relative">
+                    <img
+                      src={blueline}
+                      alt=""
+                      className="w-30 absolute right-0"
+                    />
+                    <span className="text-xs mt-1">Google Rating</span>
+                    <div className="flex items-center mt-1">
+                      {/* Map star 5 times */}
+                      <h1 className="text-[17px] mr-2 mt-1">5.0</h1>
+                      {[...Array(5)].map((_, index) => (
+                        <img
+                          key={index}
+                          src={star}
+                          alt="star"
+                          className="w-4 h-4 "
+                        />
+                      ))}
+                    </div>
+                  </div>
+                  <div className="flex flex-col p-2 relative">
+                    <img
+                      src={blueline}
+                      alt=""
+                      className="w-30 absolute right-0"
+                    />
+                    <div className="flex mt-1 flex-col">
+                      {/* Map star 5 times */}
+                      <div className="flex items-center">
+                        <span className="text-[17px] mr-2 mt-1">5.0</span>
+                        {[...Array(5)].map((_, index) => (
+                          <img
+                            key={index}
+                            src={star}
+                            alt="star"
+                            className="w-4 h-4"
+                          />
+                        ))}
+                      </div>
+                      <div className="flex items-center">
+                        <h1 className="mr-2 mt-1 text-xs">Rated</h1>
+                        <h1 className="mr-2 mt-1 text-xs">Trustpilot</h1>
+                      </div>
+                    </div>
+                  </div>
+                  <div className="flex flex-col p-2 relative">
+                    <img
+                      src={blueline}
+                      alt=""
+                      className="w-30 absolute right-0"
+                    />
+                    <div className="flex mt-1 flex-col">
+                      {/* Map star 5 times */}
+                      <div className="flex items-center">
+                        <span className="text-[17px] mr-2 mt-1">5.0</span>
+                        {[...Array(5)].map((_, index) => (
+                          <img
+                            key={index}
+                            src={star}
+                            alt="star"
+                            className="w-4 h-4"
+                          />
+                        ))}
+                      </div>
+                      <div className="flex items-center">
+                        <h1 className="mr-2 mt-1 text-xs">Rated</h1>
+                        <h1 className="mr-2 mt-1 text-xs">Trustpilot</h1>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div>
+                <h2 className="text-2xl font-bold">Logoipsum</h2>
+                <p className="mt-2 text-sm">
+                  The guidance we received has transformed oyr financial
+                  outlook. our consultant was patient, knowledgeable, and
+                  crafted s plan that aligned with our goals. Thanks to their
+                  strategic advice, optimistic about our future.
+                </p>
+                <div className="mt-3 flex items-center gap-5">
+                  <div className="bg-indigo-600 h-14 w-14 rounded-md"></div>
+                  <h1 className="font-bold text-lg ">
+                    Rachael T./{" "}
+                    <span className="!font-light">Entrepreneur</span>
+                  </h1>
+                </div>
+                <Divider />
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mb-2">
+                  <div className="flex flex-col p-2 relative">
+                    <img
+                      src={blueline}
+                      alt=""
+                      className="w-30 absolute right-0"
+                    />
+                    <span className="text-xs mt-1">Google Rating</span>
+                    <div className="flex items-center mt-1">
+                      {/* Map star 5 times */}
+                      <h1 className="text-[17px] mr-2 mt-1">5.0</h1>
+                      {[...Array(5)].map((_, index) => (
+                        <img
+                          key={index}
+                          src={star}
+                          alt="star"
+                          className="w-4 h-4 "
+                        />
+                      ))}
+                    </div>
+                  </div>
+                  <div className="flex flex-col p-2 relative">
+                    <img
+                      src={blueline}
+                      alt=""
+                      className="w-30 absolute right-0"
+                    />
+                    <div className="flex mt-1 flex-col">
+                      {/* Map star 5 times */}
+                      <div className="flex items-center">
+                        <span className="text-[17px] mr-2 mt-1">5.0</span>
+                        {[...Array(5)].map((_, index) => (
+                          <img
+                            key={index}
+                            src={star}
+                            alt="star"
+                            className="w-4 h-4"
+                          />
+                        ))}
+                      </div>
+                      <div className="flex items-center">
+                        <h1 className="mr-2 mt-1 text-xs">Rated</h1>
+                        <h1 className="mr-2 mt-1 text-xs">Trustpilot</h1>
+                      </div>
+                    </div>
+                  </div>
+                  <div className="flex flex-col p-2 relative">
+                    <img
+                      src={blueline}
+                      alt=""
+                      className="w-30 absolute right-0"
+                    />
+                    <div className="flex mt-1 flex-col">
+                      {/* Map star 5 times */}
+                      <div className="flex items-center">
+                        <span className="text-[17px] mr-2 mt-1">5.0</span>
+                        {[...Array(5)].map((_, index) => (
+                          <img
+                            key={index}
+                            src={star}
+                            alt="star"
+                            className="w-4 h-4"
+                          />
+                        ))}
+                      </div>
+                      <div className="flex items-center">
+                        <h1 className="mr-2 mt-1 text-xs">Rated</h1>
+                        <h1 className="mr-2 mt-1 text-xs">Trustpilot</h1>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </Slider>
           </div>
         </div>
       </section>

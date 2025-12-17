@@ -28,6 +28,7 @@ function App() {
           <Route path="/properties" element={<Properties />} />
           <Route path="/property/:id" element={<PropertyDetails />} />
            <Route path="/contact" element={<Contact />} />
+           <Route path="/blog" element={<Blog />} />
           {/* Add more routes here */}
         </Routes>
         <Footer />

@@ -8,7 +8,7 @@ import grayBall from "../assets/gray_ball.png";
 import download from "../assets/download.png";
 import "leaflet/dist/leaflet.css";
 
-const About = () => {
+const About = ({property}) => {
   const [location, setLocation] = useState("");
   const [coords, setCoords] = useState({ lat: 9.082, lng: 8.6753 });
 
@@ -41,12 +41,12 @@ const About = () => {
     {
       id: 1,
       title: "price",
-      amount: "N1,300,000",
+      amount: `N${property?.data?.price?.toLocaleString()}` ,
     },
     {
       id: 2,
       title: "Square meter",
-      amount: "500",
+      amount: property?.data?.sizeValue,
     },
     {
       id: 3,
@@ -75,9 +75,7 @@ const About = () => {
       <h1 className="font-bold text-2xl">Six (6) Bedroom Flat</h1>
 
       <p className="my-2 text-sm text-gray-500">
-        Lorem Ipsum is simply dummy text of the print and typesetting industry.
-        Lorem Ipsum <br />
-        has industry's standard dummy text ever since 1500s, whenecimen book. 
+       {property?.data?.description}
       </p>
 
       <h1 className="font-bold text-2xl mt-6">Property Requirements</h1>

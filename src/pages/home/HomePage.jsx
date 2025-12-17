@@ -15,8 +15,6 @@ import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 
-import  { Link } from 'react-router';
-
 import home_progress from "../../assets/home_progress.png";
 import home_img_2 from "../../assets/ilefund-register.svg";
 import home_img_3 from "../../assets/ilefund-save.svg";
@@ -40,7 +38,7 @@ import phone2 from "../../assets/ilefund-land-nigeria-iphone-2.png";
 import bg from "../../assets/ilefund-land-nigeria-bg-1.png";
 import axios from "axios";
 
-import { useNavigate } from "react-router";
+import { useNavigate, Link } from "react-router";
 
 var settings = {
   dots: true,
@@ -54,8 +52,9 @@ var settings = {
 const HomePage = () => {
   const navigate = useNavigate();
   const [activeKey, setActiveKey] = useState(null);
-  const [listing, setListing] = useState([]);
+  const [property, setProperty] = useState([]);
   const [loading, setLoading] = useState(false);
+   const [playVideo, setPlayVideo] = useState(false);
 
   const [messageApi, contextHolder] = message.useMessage();
 
@@ -63,10 +62,11 @@ const HomePage = () => {
     try {
       setLoading(true);
       const res = await axios.get(
-        `https://wallet-v2-aeqw.onrender.com/api/estate/prototypes`
+        `https://wallet-v2-aeqw.onrender.com/api/estate/prototypes?limit=8`
       );
-      console.log(res);
+      // console.log(res);
       const cleanedData = (res.data.data || []).map((item) => ({
+        id: item._id,
         banner: item.banner?.url,
         estate: item.estate?.name,
         price: item.price,
@@ -74,7 +74,7 @@ const HomePage = () => {
         title: item.title,
       }));
 
-      setListing(cleanedData);
+      setProperty(cleanedData);
 
       // console.log("........", cleanedData)
     } catch (error) {
@@ -587,8 +587,10 @@ const HomePage = () => {
 
               {/* ⭐ REAL LISTING */}
               {!loading &&
-                listing.map((property, index) => (
-                  <Link key={index} to={`/property/${property._id}`}>
+                property.map((property, index) => (
+                  
+                  <Link key={property.id} to={`/property/${property.id}`}>
+                    
                   
                   <Card
                     
@@ -633,18 +635,18 @@ const HomePage = () => {
       </section>
 
       <section className="relative">
-        {/* HERO IMAGE */}
-        <div className="relative h-[400px] sm:h-[500px] md:h-[650px] lg:h-[750px] w-full bg-[url('/src/assets/home_img_2.png')] bg-cover bg-center bg-no-repeat">
-          {/* DARK OVERLAY */}
-          <div className="absolute inset-0 bg-[#00000085]"></div>
+      {/* HERO IMAGE */}
+      <div className="relative h-[400px] sm:h-[500px] md:h-[650px] lg:h-[750px] w-full bg-[url('/src/assets/home_img_2.png')] bg-cover bg-center bg-no-repeat">
+        {/* DARK OVERLAY */}
+        <div className="absolute inset-0 bg-[#00000085]"></div>
 
-          {/* YouTube Play Overlay */}
-          <div className="absolute inset-0 flex items-center justify-center">
-            <a
-              href="https://www.youtube.com/watch?v=YOUR_VIDEO_ID"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="flex items-center justify-center w-20 h-20 sm:w-24 sm:h-24 lg:w-32 lg:h-32 bg-red-600 rounded-full hover:scale-110 transition-transform duration-300 shadow-lg z-10"
+        {/* VIDEO OR PLAY BUTTON */}
+        <div className="absolute inset-0 flex items-center justify-center z-10">
+          {!playVideo ? (
+            /* PLAY BUTTON */
+            <button
+              onClick={() => setPlayVideo(true)}
+              className="flex items-center justify-center w-20 h-20 sm:w-24 sm:h-24 lg:w-32 lg:h-32 bg-red-600 rounded-full hover:scale-110 transition-transform duration-300 shadow-lg"
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -654,30 +656,25 @@ const HomePage = () => {
               >
                 <path d="M4 2.5a2.5 2.5 0 0 0-2.5 2.5v14a2.5 2.5 0 0 0 2.5 2.5h16a2.5 2.5 0 0 0 2.5-2.5v-14a2.5 2.5 0 0 0-2.5-2.5H4zm6.5 12.5v-7l6 3.5-6 3.5z" />
               </svg>
-            </a>
-          </div>
-        </div>
-
-        {/* BOTTOM SECTION */}
-        {/* <div className="bg-[#EAEAEA] py-10">
-         
-          <div className="max-w-7xl mx-auto grid grid-cols-2 sm:grid-cols-4 gap-6 text-center">
-            {stats?.map((stat, index) => (
-              <div
-                key={index}
-                className="flex flex-col items-center justify-center px-4"
-              >
-                <div className="text-4xl sm:text-5xl font-bold text-gray-700">
-                  {stat.value}
-                </div>
-                <div className="text-sm sm:text-lg font-semibold text-[#1E1245]">
-                  {stat.label}
-                </div>
+            </button>
+          ) : (
+            /* YOUTUBE IFRAME */
+            <div className="w-full h-full flex items-center justify-center px-4">
+              <div className="relative w-full max-w-5xl aspect-video">
+                <iframe
+                  className="absolute inset-0 w-full h-full rounded-xl"
+                  src="https://www.youtube.com/embed/YOUR_VIDEO_ID?autoplay=1"
+                  title="YouTube video player"
+                  frameBorder="0"
+                  allow="autoplay; encrypted-media; picture-in-picture"
+                  allowFullScreen
+                ></iframe>
               </div>
-            ))}
-          </div>
-        </div> */}
-      </section>
+            </div>
+          )}
+        </div>
+      </div>
+    </section>
 
       <section className="w-11/12 mx-auto mt-20">
         <div className="flex flex-col md:flex-row justify-between mb-10 gap-5 md:gap-0">
