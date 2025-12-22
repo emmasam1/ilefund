@@ -1,0 +1,20 @@
+User-agent: *
+Allow: /
+
+# Allow public pages
+Allow: /$
+Allow: /how-to-save
+Allow: /real-estate
+Allow: /faqs
+Allow: /resource
+Allow: /about-us
+Allow: /properties
+Allow: /property/
+Allow: /contact
+
+# Prevent indexing of internal React build files
+Disallow: /static/
+Disallow: /assets/
+
+# Sitemap location
+Sitemap: https://app.ilefund.com/sitemap.xml

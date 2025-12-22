@@ -15,12 +15,10 @@ import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 
-import home_progress from "../../assets/home_progress.png";
-import home_img_2 from "../../assets/ilefund-register.svg";
+ import home_img_2 from "../../assets/ilefund-register.svg";
 import home_img_3 from "../../assets/ilefund-save.svg";
 import home_img_4 from "../../assets/ilefund-homes.svg";
-import iphone from "../../assets/iPhone-ilefund.png";
-import google from "../../assets/google.svg";
+ import google from "../../assets/google.svg";
 import Rectangle43 from "../../assets/Rectangle43.png";
 import propertyImg2 from "../../assets/property_img_2.png";
 import home_img_1 from "../../assets/ilefund-home_img_1.png";
@@ -33,9 +31,8 @@ import { AntDesignOutlined, UserOutlined } from "@ant-design/icons";
 import { LiaLongArrowAltRightSolid } from "react-icons/lia";
 import star from "../../assets/star.png";
 import blueline from "../../assets/blueline.png";
-import phone1 from "../../assets/ilefund-land-nigeria-iphone-1.png";
-import phone2 from "../../assets/ilefund-land-nigeria-iphone-2.png";
-import bg from "../../assets/ilefund-land-nigeria-bg-1.png";
+import phone1 from "../../assets/ilefund-apps-group.png";
+ import bg from "../../assets/ilefund-land-nigeria-bg-1.png";
 import axios from "axios";
 
 import { useNavigate, Link } from "react-router";
@@ -649,18 +646,10 @@ const HomePage = () => {
               <img
                 src={phone1}
                 alt="mockup-1"
-                className="w-40 sm:w-52 md:w-72 drop-shadow-2xl rotate-[-5deg] z-20 -mt-10 sm:-mt-15"
+                className="w-40 sm:w-52 md:w-102 drop-shadow-2xl  z-20 -mt-10 sm:-mt-15"
               />
 
-              <img
-                src={phone2}
-                alt="mockup-2"
-                className="
-            w-40 sm:w-52 md:w-72 drop-shadow-xl rotate-[5deg]
-            absolute left-16 sm:left-28 md:left-48 -top-16 sm:-top-20
-            z-10
-          "
-              />
+               
             </div>
 
             {/* RIGHT: TEXT + FORM */}

@@ -18,10 +18,8 @@ import icon3 from "../../assets/icon3.png";
 import dollar_round from "../../assets/dollar_round.png";
 import google from "../../assets/google.png";
 
-import home_progress from "../../assets/home_progress.png";
-import home_img_2 from "../../assets/twemoji_house-with-garden.svg";
-import home_img_3 from "../../assets/game-icons_tower-bridge.svg";
-import home_img_4 from "../../assets/Group.svg";
+ 
+ 
 import img1 from "../../assets/ilefund-land-nigeria-wealth.png";
 import img2 from "../../assets/ilefund-land-nigeria-income.png";
 import img3 from "../../assets/ilefund-land-nigeria-future.png";
