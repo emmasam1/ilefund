@@ -182,49 +182,57 @@ const HomePage = () => {
                   alt=""
                   className="w-7 sm:w-8 md:w-auto"
                 />
-                <p className="text-sm sm:text-lg md:text-xl lg:text-2xl font-semibold">
+                <p className="text-sm sm:text-lg md:text-xl lg:text-2xl font-light">
                   From Savings to Home Ownership.
                 </p>
               </div>
 
               {/* FORM */}
               <Form onFinish={onFinish}>
-                <div className="flex flex-col sm:flex-row gap-3 max-w-[540px] w-full">
-                  <Form.Item
-                    name="email"
-                    rules={[
-                      { required: true, message: "Email is required" },
-                      { type: "email", message: "Enter a valid email" },
-                    ]}
-                    className="flex-1 mb-0"
-                  >
-                    <Input
-                      placeholder="Start Your Email address ....."
-                      className="
-                  !bg-[#f2f3fa]
-                  !border-none
-                  !h-11 sm:!h-12
-                  text-sm sm:text-base
-                "
-                    />
-                  </Form.Item>
+  <Form.Item
+    name="email"
+    rules={[
+      { required: true, message: "Email is required" },
+      { type: "email", message: "Enter a valid email" },
+    ]}
+    className="max-w-[460px] w-full mb-0"
+  >
+    <div className="flex items-center bg-white rounded-full p-1 shadow-lg">
+      <Input
+        placeholder="Start with your Email address ....."
+        className="
+          flex-1
+          !border-none
+          !shadow-none
+          !bg-transparent
+          !h-12
+          px-5
+          text-base
+          focus:!ring-0
+        "
+      />
 
-                  <Button
-                    htmlType="submit"
-                    loading={emailSubmitLoading}
-                    className="
-                !bg-blue-600 !text-white
-                !rounded-full
-                w-full sm:w-56
-                !h-11 sm:!h-12
-                flex items-center justify-center gap-2
-                text-sm sm:text-base
-              "
-                  >
-                    Let’s start <MdOutlineArrowRightAlt size={20} />
-                  </Button>
-                </div>
-              </Form>
+      <Button
+        htmlType="submit"
+        loading={emailSubmitLoading}
+        className="
+          !h-12
+          px-6
+          !rounded-full
+          !bg-blue-600
+          !text-white
+          flex items-center gap-2
+          text-base
+          font-medium
+        "
+      >
+        Get Started <MdOutlineArrowRightAlt size={20} />
+      </Button>
+    </div>
+  </Form.Item>
+</Form>
+
+             
 
               {/* AVATARS + TEXT */}
               <div className="flex items-center sm:flex-row gap-4 sm:gap-1 sm:items-center">
