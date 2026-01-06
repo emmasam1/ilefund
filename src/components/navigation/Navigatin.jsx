@@ -31,6 +31,12 @@ const resourcesMenu = (
           Blog
         </Menu.Item>
       </Link>
+      <Link to="/">
+        <Menu.Item key="4" icon={<EyeOutlined />} className="!bg-white">
+          {" "}
+          Home
+        </Menu.Item>
+      </Link>
       <Link to="/real-estate">
         <Menu.Item key="4" icon={<EyeOutlined />} className="!bg-white">
           {" "}
@@ -74,6 +80,9 @@ const Navigation = () => {
 
         {/* Desktop Nav */}
         <div className="hidden md:flex items-center space-x-8 text-black font-medium">
+           <Link to="/" className="cursor-pointer">
+            Home
+          </Link>
           <Link to="/about-us" className="cursor-pointer">
             About
           </Link>
@@ -112,7 +121,8 @@ const Navigation = () => {
         </div>
 
         {/* CTA */}
-
+        
+        
         <button
           onClick={moveToPage}
           className="hidden md:flex items-center space-x-2 bg-blue-600 text-white font-semibold px-5 py-2 rounded-full hover:bg-blue-700 transition cursor-pointer"
