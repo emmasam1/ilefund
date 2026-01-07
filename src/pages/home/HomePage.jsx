@@ -63,7 +63,7 @@ const HomePage = () => {
       setListingLoading(true)
 
       const res = await axios.get(
-        `https://wallet-v2-aeqw.onrender.com/api/estate/prototypes?limit=8`
+        `https://ilefund.onrender.com/api/estate/prototypes?limit=8`
       )
 
       const cleanedData = (res.data.data || []).map(item => ({
