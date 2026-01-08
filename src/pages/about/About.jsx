@@ -50,6 +50,10 @@ const About = () => {
     slidesToShow: 1,
     slidesToScroll: 1,
     arrows: false,
+    autoplay: true,     
+  autoplaySpeed: 3000,
+  pauseOnHover: true, 
+  pauseOnFocus: true,
   };
 
   const content = {
@@ -149,8 +153,8 @@ const About = () => {
               Why Now ?
             </h2>
           </div>
-
-          <div className="md:col-span-2 bg-[url('/src/assets/bg-plane.png')] bg-no-repeat bg-contain sm:bg-cover lg:bg-contain h-[400px] sm:h-[500px] md:h-[700px] flex items-center p-4 sm:p-6 md:p-10">
+{/* bg-[url('/src/assets/bg-plane.png')]  */}
+          <div className="md:col-span-2 bg-no-repeat bg-contain sm:bg-cover lg:bg-contain h-[400px] sm:h-[500px] md:h-[700px] flex items-center p-4 sm:p-6 md:p-10">
             <div className="max-w-full sm:max-w-2xl mx-auto">
               <p className="text-sm sm:text-base md:text-base">
                 For decades, owning a home in Nigeria has been a frustrating
@@ -179,7 +183,7 @@ const About = () => {
         </div>
       </section>
 
-      <div className="w-[95%] mx-auto">
+      {/* <div className="w-[95%] mx-auto">
         <h1 className="text-center font-bold text-xl sm:text-2xl md:text-3xl">
           Pilot Launch → Expansion Plan
         </h1>
@@ -223,7 +227,7 @@ const About = () => {
             </div>
           </div>
         </div>
-      </div>
+      </div> */}
 
       <section className="bg-white py-16 overflow-hidden">
         <div className="w-[95%] mx-auto px-4 grid grid-cols-1 lg:grid-cols-[1fr_1.4fr] gap-12 items-center">

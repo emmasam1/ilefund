@@ -7,7 +7,7 @@ import 'slick-carousel/slick/slick.css'
 import 'slick-carousel/slick/slick-theme.css'
 import { MdOutlineArrowRightAlt } from 'react-icons/md'
 
-import landImg1 from '../../assets/land_img_1.png'
+import landImg1 from '../../assets/realestatebanner.jpg'
 import landImg2 from '../../assets/land_img_2.png'
 import landImg3 from '../../assets/land_img_3.png'
 import landImg4 from '../../assets/land_img_4.png'

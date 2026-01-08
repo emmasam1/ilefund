@@ -43,7 +43,11 @@ var settings = {
   speed: 500,
   slidesToShow: 1,
   slidesToScroll: 1,
-  arrows: false
+  arrows: false,
+  autoplay: true,     
+  autoplaySpeed: 4000,
+  pauseOnHover: true, 
+  pauseOnFocus: true,
 }
 
 const HomePage = () => {

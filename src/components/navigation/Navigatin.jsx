@@ -1,5 +1,7 @@
 import { useState } from "react";
+import { useEffect } from "react";
 import { Link } from "react-router";
+import { NavLink } from "react-router-dom";
 import { Dropdown, Menu } from "antd";
 import Logo from "../../assets/ilefund-Logo-long.png";
 import right_arrow from "../../assets/arrow-long-right.png";
@@ -31,27 +33,27 @@ const resourcesMenu = (
           Blog
         </Menu.Item>
       </Link>
-      <Link to="/">
+      {/* <Link to="/">
         <Menu.Item key="4" icon={<EyeOutlined />} className="!bg-white">
           {" "}
           Home
         </Menu.Item>
-      </Link>
-      <Link to="/real-estate">
+      </Link> */}
+      <Link to="/privacy-policy">
         <Menu.Item key="4" icon={<EyeOutlined />} className="!bg-white">
           {" "}
-          Real Estate
+          Privacy Policy's
         </Menu.Item>
       </Link>
       <Menu.Item key="5" icon={<BulbOutlined />} className="!bg-white">
         <Link to="/how-to-save">How to Save</Link>
       </Menu.Item>
       <Menu.Item key="6" icon={<EyeOutlined />} className="!bg-white">
-        <Link to="/fmb">FMB</Link>
+        <Link to="/terms-of-use">Terms of Use</Link>
       </Menu.Item>
-      <Menu.Item key="7" icon={<EyeOutlined />} className="!bg-white">
+      {/* <Menu.Item key="7" icon={<EyeOutlined />} className="!bg-white">
         <Link to="/team">Team</Link>
-      </Menu.Item>
+      </Menu.Item> */}
       <Menu.Item key="7" icon={<ContactsOutlined />} className="!bg-white">
         <Link to="/contact">Contact</Link>
       </Menu.Item>
@@ -61,18 +63,39 @@ const resourcesMenu = (
 
 const Navigation = () => {
   const [isOpen, setOpen] = useState(false);
+
   const [showGoalsDropdownMobile, setShowGoalsDropdownMobile] = useState(false);
   const [showResourcesDropdownMobile, setShowResourcesDropdownMobile] =
     useState(false);
+    const [scrolled, setScrolled] = useState(false);
+
+
+useEffect(() => {
+  const onScroll = () => setScrolled(window.scrollY > 10);
+  window.addEventListener("scroll", onScroll);
+  return () => window.removeEventListener("scroll", onScroll);
+}, []);
 
   const handleMobileNavClick = () => {
     setOpen(false);
     setShowGoalsDropdownMobile(false);
     setShowResourcesDropdownMobile(false);
   };
+const navLinkClass = ({ isActive }) =>
+  `cursor-pointer transition ${
+    isActive
+      ? "text-blue-600 font-semibold"
+      : "text-black hover:text-blue-600"
+  }`;
 
   return (
-    <nav className="w-full border-b border-b-gray-200 py-4 bg-white relative bg-[url(src/assets/ilefund-land-nigeria-bg-2.png)] ">
+   <nav
+  className={`fixed top-0 left-0 w-full z-50 py-4 transition-shadow
+  ${scrolled ? "shadow-md bg-white" : "bg-transparent"}
+  bg-[url(src/assets/ilefund-land-nigeria-bg-2.png)]`}
+>
+
+
       <div className="flex justify-between items-center m-auto w-11/12">
         <Link to="/">
           <img src={Logo} alt="ilefund-logo" className="w-40" />
@@ -80,18 +103,18 @@ const Navigation = () => {
 
         {/* Desktop Nav */}
         <div className="hidden md:flex items-center space-x-8 text-black font-medium">
-           <Link to="/" className="cursor-pointer">
+           <NavLink to="/" className={navLinkClass}>
             Home
-          </Link>
-          <Link to="/about-us" className="cursor-pointer">
+          </NavLink>
+          <NavLink to="/about-us" className={navLinkClass}>
             About
-          </Link>
-          <Link to="/real-estate" className="cursor-pointer">
+          </NavLink>
+          <NavLink to="/real-estate" className={navLinkClass}>
             Real Estate
-          </Link>
-          <Link to="/faqs" className="cursor-pointer">
+          </NavLink>
+          <NavLink to="/faqs" className={navLinkClass}>
             FAQs
-          </Link>
+          </NavLink>
           {/* 
           <Dropdown
             overlay={goalsMenu}
@@ -113,10 +136,12 @@ const Navigation = () => {
             trigger={["click"]}
             placement="bottomLeft"
           >
+            <NavLink>
             <span className="cursor-pointer inline-flex items-center">
               Resources{" "}
               <img src={angle_down} alt="down" className="h-4 ml-1 mt-1" />
             </span>
+            </NavLink>
           </Dropdown>
         </div>
 

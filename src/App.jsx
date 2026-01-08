@@ -20,6 +20,7 @@ function App() {
   return (
     <>
       <BrowserRouter>
+      <div className="pt-20"></div>
         <Navigation />
         <Routes>
           <Route path="/" element={<HomePage />} />
