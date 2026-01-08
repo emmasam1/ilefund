@@ -8,10 +8,7 @@ import 'slick-carousel/slick/slick-theme.css'
 import { MdOutlineArrowRightAlt } from 'react-icons/md'
 
 import landImg1 from '../../assets/realestatebanner.jpg'
-import landImg2 from '../../assets/land_img_2.png'
-import landImg3 from '../../assets/land_img_3.png'
-import landImg4 from '../../assets/land_img_4.png'
-import landImg5 from '../../assets/land_img_5.png'
+ 
 import icon1 from '../../assets/icon1.png'
 import icon2 from '../../assets/icon2.png'
 import icon3 from '../../assets/icon3.png'
@@ -64,7 +61,7 @@ const RealEstate = () => {
     try {
       setLoading(true)
       const res = await axios.get(
-        `https://wallet-v2-aeqw.onrender.com/api/estate/prototypes?limit=8`
+        `https://ilefund.onrender.com/api/estate/prototypes?limit=8`
       )
       // console.log(res);
       const cleanedData = (res.data.data || []).map(item => ({

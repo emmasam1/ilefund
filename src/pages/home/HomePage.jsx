@@ -29,10 +29,11 @@ import Calculator from '../../components/calculator/Calculator'
 import { AiOutlinePlus } from 'react-icons/ai'
 import { AntDesignOutlined, UserOutlined } from '@ant-design/icons'
 import { LiaLongArrowAltRightSolid } from 'react-icons/lia'
-import star from '../../assets/star.png'
-import blueline from '../../assets/blueline.png'
+
 import phone1 from '../../assets/ilefund-apps-group.png'
 import bg from '../../assets/ilefund-land-nigeria-bg-1.png'
+import googlePlay from "../../assets/googleplaygetnow.svg";
+import appStore from "../../assets/comingsoonappstore.svg";
 import axios from 'axios'
 
 import { useNavigate, Link } from 'react-router'
@@ -205,7 +206,7 @@ Where required, you can also conduct independent verification through legal prof
             <div className='flex flex-col gap-4 sm:gap-6'>
               <h1
                 className='
-            font-extrabold
+            font-bold
             text-2xl
             sm:text-4xl
             md:text-[2.8rem]
@@ -685,257 +686,38 @@ Where required, you can also conduct independent verification through legal prof
       h-[500px] sm:h-[550px] md:h-[420px] w-full px-4 sm:pl-10
     "
         >
-          <div className='w-full max-w-7xl grid md:grid-cols-2 gap-10 items-center'>
+          <div className='w-full max-w-6xl grid md:grid-cols-2 gap-2 items-top'>
             {/* LEFT: PHONE MOCKUPS */}
             <div className='relative flex justify-center md:justify-start'>
               <img
                 src={phone1}
                 alt='mockup-1'
-                className='w-40 sm:w-52 md:w-102 drop-shadow-2xl  z-20 -mt-10 sm:-mt-15'
+                className='w-40 sm:w-52  md:w-102 drop-shadow-2xl  z-20 -mt-10 sm:-mt-15'
               />
             </div>
 
             {/* RIGHT: TEXT + FORM */}
-            <div className='text-white p-6 sm:p-10 md:p-16 mt-6 md:mt-0'>
-              <h1 className='text-2xl sm:text-3xl md:text-5xl font-extrabold leading-snug md:leading-tight'>
-                Already a Potential <br /> Stake Holder
+            <div className='text-white p-6 sm:p-10 md:p-16 mt-2 md:mt-0'>
+              <h1 className='text-2xl sm:text-3xl md:text-5xl font-bold leading-snug md:leading-tight'>
+                Download <br />ileFund Now
               </h1>
 
               <p className='text-xs sm:text-sm md:text-base mt-4 opacity-90'>
-                Download ILE FUND for free and get all the latest updates, find
-                your home, and contact support.
+                You don’t need millions to own property. You just need a plan — and ileFund gives you one. Download Ilefund now and start saving toward your property today.
               </p>
 
               <Form>
-                <div className='mt-6 flex flex-col sm:flex-row gap-3 sm:gap-4'>
-                  <Input
-                    placeholder='Email'
-                    name='email'
-                    size='large'
-                    className='rounded-xl flex-1'
-                  />
-
-                  <Button
-                    type='primary'
-                    htmlType='submit'
-                    loading={downloadSubmitLoading}
-                    size='large'
-                    className='bg-white text-[#005DFF] font-semibold rounded-xl px-8 flex-shrink-0'
-                  >
-                    Get Started
-                  </Button>
-                </div>
+                <div className="flex justify-start gap-4 mt-6 flex-wrap">
+                         <img src={googlePlay} alt="Google Play" className="h-12 cursor-pointer" />
+                         <img src={appStore} alt="App Store" className="h-12 cursor-pointer" />
+                       </div>
               </Form>
             </div>
           </div>
         </div>
       </div>
 
-      <section className='bg-[#F2F3FA] py-10 mt-10'>
-        <div className='grid grid-cols-1 md:grid-cols-2 gap-6 px-10'>
-          <div className='flex flex-col justify-center'>
-            <h1 className='font-bold text-4xl mt-1'>1,250+ Nigerians are saying</h1>
-            <h1 className='font-bold text-3xl text-[#0047FF]'>
-              about ilefund
-            </h1>
-            <p className='text-sm'>
-              With over 1,250 established clients, ilefund has earned praise for reliability, personalized guidance, and impactful results.
-            </p>
-
-            <Button
-              type='primary'
-              size='medium'
-              className='!rounded-full !px-6 flex items-center gap-2 w-fit mt-2 !py-4 !h-10 !bg-[#0047FF]'
-            >
-              Contact Now <LiaLongArrowAltRightSolid size={20} />
-            </Button>
-          </div>
-
-          <div className='bg-[#DAE2FB] p-6 rounded-lg'>
-            <Slider {...settings}>
-              <div>
-                <h2 className='text-2xl font-bold '>Logoipsum</h2>
-                <p className='mt-2 text-sm'>
-                  The guidance we received has transformed oyr financial
-                  outlook. our consultant was patient, knowledgeable, and
-                  crafted s plan that aligned with our goals. Thanks to their
-                  strategic advice, optimistic about our future.
-                </p>
-                <div className='mt-3 flex items-center gap-5'>
-                  <div className='bg-indigo-600 h-14 w-14 rounded-md'></div>
-                  <h1 className='font-bold text-lg'>
-                    Rachael T./{' '}
-                    <span className='!font-light'>Entrepreneur</span>
-                  </h1>
-                </div>
-                <Divider />
-                <div class='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mb-2'>
-                  <div className='flex flex-col p-2 relative'>
-                    <img
-                      src={blueline}
-                      alt=''
-                      className='w-30 absolute right-0'
-                    />
-                    <span className='text-xs mt-1'>Google Rating</span>
-                    <div className='flex items-center mt-1'>
-                      {/* Map star 5 times */}
-                      <h1 className='text-[17px] mr-2 mt-1'>5.0</h1>
-                      {[...Array(5)].map((_, index) => (
-                        <img
-                          key={index}
-                          src={star}
-                          alt='star'
-                          className='w-4 h-4 '
-                        />
-                      ))}
-                    </div>
-                  </div>
-                  <div className='flex flex-col p-2 relative'>
-                    <img
-                      src={blueline}
-                      alt=''
-                      className='w-30 absolute right-0'
-                    />
-                    <div className='flex mt-1 flex-col'>
-                      {/* Map star 5 times */}
-                      <div className='flex items-center'>
-                        <span className='text-[17px] mr-2 mt-1'>5.0</span>
-                        {[...Array(5)].map((_, index) => (
-                          <img
-                            key={index}
-                            src={star}
-                            alt='star'
-                            className='w-4 h-4'
-                          />
-                        ))}
-                      </div>
-                      <div className='flex items-center'>
-                        <h1 className='mr-2 mt-1 text-xs'>Rated</h1>
-                        <h1 className='mr-2 mt-1 text-xs'>Trustpilot</h1>
-                      </div>
-                    </div>
-                  </div>
-                  <div className='flex flex-col p-2 relative'>
-                    <img
-                      src={blueline}
-                      alt=''
-                      className='w-30 absolute right-0'
-                    />
-                    <div className='flex mt-1 flex-col'>
-                      {/* Map star 5 times */}
-                      <div className='flex items-center'>
-                        <span className='text-[17px] mr-2 mt-1'>5.0</span>
-                        {[...Array(5)].map((_, index) => (
-                          <img
-                            key={index}
-                            src={star}
-                            alt='star'
-                            className='w-4 h-4'
-                          />
-                        ))}
-                      </div>
-                      <div className='flex items-center'>
-                        <h1 className='mr-2 mt-1 text-xs'>Rated</h1>
-                        <h1 className='mr-2 mt-1 text-xs'>Trustpilot</h1>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              <div>
-                <h2 className='text-2xl font-bold'>Logoipsum</h2>
-                <p className='mt-2 text-sm'>
-                  The guidance we received has transformed oyr financial
-                  outlook. our consultant was patient, knowledgeable, and
-                  crafted s plan that aligned with our goals. Thanks to their
-                  strategic advice, optimistic about our future.
-                </p>
-                <div className='mt-3 flex items-center gap-5'>
-                  <div className='bg-indigo-600 h-14 w-14 rounded-md'></div>
-                  <h1 className='font-bold text-lg '>
-                    Rachael T./{' '}
-                    <span className='!font-light'>Entrepreneur</span>
-                  </h1>
-                </div>
-                <Divider />
-                <div class='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mb-2'>
-                  <div className='flex flex-col p-2 relative'>
-                    <img
-                      src={blueline}
-                      alt=''
-                      className='w-30 absolute right-0'
-                    />
-                    <span className='text-xs mt-1'>Google Rating</span>
-                    <div className='flex items-center mt-1'>
-                      {/* Map star 5 times */}
-                      <h1 className='text-[17px] mr-2 mt-1'>5.0</h1>
-                      {[...Array(5)].map((_, index) => (
-                        <img
-                          key={index}
-                          src={star}
-                          alt='star'
-                          className='w-4 h-4 '
-                        />
-                      ))}
-                    </div>
-                  </div>
-                  <div className='flex flex-col p-2 relative'>
-                    <img
-                      src={blueline}
-                      alt=''
-                      className='w-30 absolute right-0'
-                    />
-                    <div className='flex mt-1 flex-col'>
-                      {/* Map star 5 times */}
-                      <div className='flex items-center'>
-                        <span className='text-[17px] mr-2 mt-1'>5.0</span>
-                        {[...Array(5)].map((_, index) => (
-                          <img
-                            key={index}
-                            src={star}
-                            alt='star'
-                            className='w-4 h-4'
-                          />
-                        ))}
-                      </div>
-                      <div className='flex items-center'>
-                        <h1 className='mr-2 mt-1 text-xs'>Rated</h1>
-                        <h1 className='mr-2 mt-1 text-xs'>Trustpilot</h1>
-                      </div>
-                    </div>
-                  </div>
-                  <div className='flex flex-col p-2 relative'>
-                    <img
-                      src={blueline}
-                      alt=''
-                      className='w-30 absolute right-0'
-                    />
-                    <div className='flex mt-1 flex-col'>
-                      {/* Map star 5 times */}
-                      <div className='flex items-center'>
-                        <span className='text-[17px] mr-2 mt-1'>5.0</span>
-                        {[...Array(5)].map((_, index) => (
-                          <img
-                            key={index}
-                            src={star}
-                            alt='star'
-                            className='w-4 h-4'
-                          />
-                        ))}
-                      </div>
-                      <div className='flex items-center'>
-                        <h1 className='mr-2 mt-1 text-xs'>Rated</h1>
-                        <h1 className='mr-2 mt-1 text-xs'>Trustpilot</h1>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </Slider>
-          </div>
-        </div>
-      </section>
+    
 
       {/* ✅ You can continue the rest of your sections exactly as before */}
       {/* ...Steps Section, Calculator, Properties, FAQ, Testimonial, etc. */}
