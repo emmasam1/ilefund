@@ -11,6 +11,7 @@ import RealEstate from "./pages/land/HowItWorks";
 import PropertyDetails from "./pages/details/PropertyDetails";
 import HowToSave from "./pages/how to save/HowToSave";
 import Contact from "./pages/contact/Contact";
+import Contact2 from "./pages/contact/Contact2";
 import PrivacyPolicy from "./pages/privacy";
 import TermsOfUse from "./pages/terms";
 import DeleteAccount from "./pages/Delete-acount";
@@ -31,7 +32,9 @@ function App() {
           <Route path="/about-us" element={<About />} />
           <Route path="/properties" element={<Properties />} />
           <Route path="/property/:id" element={<PropertyDetails />} />
-           <Route path="/contact" element={<Contact />} />
+           {/* <Route path="/contact2" element={<Contact />} /> */}
+           <Route path="/contact" element={<Contact2 />} />
+
            <Route path="/blog" element={<Blog />} />
            <Route path="/privacy-policy" element={<PrivacyPolicy />} />
             <Route path="/terms-of-use" element={<TermsOfUse />} />
