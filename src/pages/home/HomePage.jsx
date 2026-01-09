@@ -18,10 +18,8 @@ import 'slick-carousel/slick/slick-theme.css'
 import home_img_2 from '../../assets/ilefund-register.svg'
 import home_img_3 from '../../assets/ilefund-save.svg'
 import home_img_4 from '../../assets/ilefund-homes.svg'
-import google from '../../assets/google.svg'
-import Rectangle43 from '../../assets/Rectangle43.png'
-import propertyImg2 from '../../assets/property_img_2.png'
-import home_img_1 from '../../assets/ilefund-home_img_1.png'
+ import Rectangle43 from '../../assets/Rectangle43.png'
+ 
 import { MdOutlineArrowRightAlt } from 'react-icons/md'
 import pin from '../../assets/pin.png'
 import btn from '../../assets/btn.png'
@@ -30,9 +28,7 @@ import { AiOutlinePlus } from 'react-icons/ai'
 import { AntDesignOutlined, UserOutlined } from '@ant-design/icons'
 import { LiaLongArrowAltRightSolid } from 'react-icons/lia'
 
-import phone1 from '../../assets/ilefund-apps-group.png'
-import bg from '../../assets/ilefund-land-nigeria-bg-1.png'
-import googlePlay from "../../assets/googleplaygetnow.svg";
+ import googlePlay from "../../assets/googleplaygetnow.svg";
 import appStore from "../../assets/comingsoonappstore.svg";
 import axios from 'axios'
 
@@ -190,7 +186,7 @@ Where required, you can also conduct independent verification through legal prof
       {/* ✅ Hero Section */}
       <div
         className='
-    bg-[url(src/assets/ilefund-land-nigeria-bg-2.png)]
+    bg-[url(https://res.cloudinary.com/da1mxvbx2/image/upload/v1767944328/ilefund/ilefund-land-nigeria-bg-2_fymozq.png)]
     bg-cover bg-center
     min-h-[480px]
     sm:min-h-[600px]
@@ -339,7 +335,7 @@ Where required, you can also conduct independent verification through legal prof
             {/* RIGHT IMAGE */}
             <div className='flex justify-center md:justify-end'>
               <img
-                src={home_img_1}
+                src="https://res.cloudinary.com/da1mxvbx2/image/upload/v1767943421/ilefund/ilefund-home_img_1_os6ziy.svg"
                 alt='Hero'
                 className='
             w-full
@@ -588,7 +584,7 @@ Where required, you can also conduct independent verification through legal prof
 
         <div className='grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-10'>
           {/* LEFT: Image with Stats */}
-          <div className="relative h-[400px] sm:h-[450px] md:h-[500px] lg:h-[550px] rounded-md bg-[url('/src/assets/land_img_5.png')] bg-no-repeat bg-cover bg-top">
+          <div className="relative h-[400px] sm:h-[450px] md:h-[500px] lg:h-[550px] rounded-md bg-[url('https://res.cloudinary.com/da1mxvbx2/image/upload/v1767943940/ilefund/ilefund-questions_wauhee.png')] bg-no-repeat bg-cover bg-top">
             <div className='rounded-md bg-[#F2F3FA] flex flex-col justify-center items-center p-6 sm:p-10 w-56 sm:w-60 absolute top-3/4 md:top-3/4 right-2 sm:right-5 lg:right-10 transform -translate-y-1/2'>
               <h1 className='font-bold text-center sm:text-lg'>100+ Client</h1>
               <h1 className='font-bold text-center sm:text-lg'>
@@ -690,7 +686,7 @@ Where required, you can also conduct independent verification through legal prof
             {/* LEFT: PHONE MOCKUPS */}
             <div className='relative flex justify-center md:justify-start'>
               <img
-                src={phone1}
+                src="https://res.cloudinary.com/da1mxvbx2/image/upload/v1767944009/ilefund/ilefund-apps-group_f5xxzx.svg"
                 alt='mockup-1'
                 className='w-40 sm:w-52  md:w-102 drop-shadow-2xl  z-20 -mt-10 sm:-mt-15'
               />

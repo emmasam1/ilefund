@@ -92,7 +92,7 @@ const navLinkClass = ({ isActive }) =>
    <nav
   className={`fixed top-0 left-0 w-full z-50 py-4 transition-shadow
   ${scrolled ? "shadow-md bg-white" : "bg-transparent"}
-  bg-[url(src/assets/ilefund-land-nigeria-bg-2.png)]`}
+  bg-[url(https://res.cloudinary.com/da1mxvbx2/image/upload/v1767944328/ilefund/ilefund-land-nigeria-bg-2_fymozq.png)]`}
 >
 
 
@@ -109,8 +109,8 @@ const navLinkClass = ({ isActive }) =>
           <NavLink to="/about-us" className={navLinkClass}>
             About
           </NavLink>
-          <NavLink to="/real-estate" className={navLinkClass}>
-            Real Estate
+          <NavLink to="/how-it-works" className={navLinkClass}>
+            How It Works
           </NavLink>
           <NavLink to="/faqs" className={navLinkClass}>
             FAQs

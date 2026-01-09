@@ -7,7 +7,7 @@ import Footer from "./components/footer/Footer";
 import Faq from "./pages/faq/Faq";
 import About from "./pages/about/About";
 import Properties from "./pages/properties/Properties";
-import RealEstate from "./pages/land/RealEstate";
+import RealEstate from "./pages/land/HowItWorks";
 import PropertyDetails from "./pages/details/PropertyDetails";
 import HowToSave from "./pages/how to save/HowToSave";
 import Contact from "./pages/contact/Contact";
@@ -25,7 +25,7 @@ function App() {
         <Routes>
           <Route path="/" element={<HomePage />} />
           <Route path="/how-to-save" element={<HowToSave />} />
-          <Route path="/real-estate" element={<RealEstate />} />
+          <Route path="/how-it-works" element={<RealEstate />} />
           <Route path="/faqs" element={<Faq />} />
           <Route path="/resource" element={<Blog />} />
           <Route path="/about-us" element={<About />} />

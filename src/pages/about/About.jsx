@@ -67,9 +67,9 @@ const About = () => {
   return (
     <div>
       {/* Header */}
-      <div className="bg-[url(src/assets/ilefund-land-nigeria-bg-2.png)] h-72 sm:h-80 md:h-96 flex flex-col justify-center items-center gap-3 px-4 text-center sm:px-6 md:px-20">
+      <div className="bg-[url(https://res.cloudinary.com/da1mxvbx2/image/upload/v1767944328/ilefund/ilefund-land-nigeria-bg-2_fymozq.png)] h-72 sm:h-80 md:h-96 flex flex-col justify-center items-center gap-3 px-4 text-center sm:px-6 md:px-20">
         <h1 className="text-[#0047FF] font-bold text-2xl sm:text-3xl md:text-3xl lg:text-4xl">
-          About the Company
+          About ileFund
         </h1>
         <p className="text-sm sm:text-base md:text-lg leading-relaxed max-w-3xl">
           At Ilefund, we are dedicated to creating innovative real estate
@@ -126,7 +126,7 @@ const About = () => {
       </style>
 
       {/* Section 2: Overlay with Background */}
-      <section className="relative bg-[url('/src/assets/house.jpg')] bg-no-repeat bg-cover bg-center mt-10 h-[400px] sm:h-[500px] md:h-[600px]">
+      <section className="relative bg-[url('https://res.cloudinary.com/da1mxvbx2/image/upload/v1767944811/ilefund/house_mrjder.jpg')] bg-no-repeat bg-cover bg-center mt-10 h-[400px] sm:h-[500px] md:h-[600px]">
         <div className="absolute inset-0 bg-black/50 flex flex-col justify-center items-center px-4 text-center">
           <h1 className="text-white font-extrabold text-xl sm:text-3xl md:text-4xl lg:text-6xl leading-tight max-w-4xl">
             ILEFUND And Its Purposes
