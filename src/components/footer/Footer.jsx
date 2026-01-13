@@ -255,7 +255,7 @@ const Footer = () => {
 You just need a plan.</i></p>
 
         <div className="flex justify-center gap-4 mt-6 flex-wrap">
-          <img src={googlePlay} alt="Google Play" className="h-12 cursor-pointer" />
+          <a href="https://play.google.com/store/apps/details?id=com.ilefund" target="_blank"> <img src={googlePlay} alt="Google Play" className="h-12 cursor-pointer" /></a>
           <img src={appStore} alt="App Store" className="h-12 cursor-pointer" />
         </div>
       </div>

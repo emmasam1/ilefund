@@ -460,12 +460,13 @@ Where required, you can also conduct independent verification through legal prof
 
           {/* RIGHT: Properties */}
           <div className='md:col-span-2 flex flex-col justify-center'>
-            <h1 className='text-center font-bold mb-5 text-lg sm:text-xl'>
-              Vetted Properties
-            </h1>
+            
+             <h1 className='font-bold text-3xl text-center mb-5'>
+         Feature Vetted Properties
+        </h1>
 
             {/* GRID WRAPPER */}
-            <div className='grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3'>
+            <div className='grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-3'>
               {/* ⭐ SKELETON LOADER */}
               {listingLoading &&
                 Array.from({ length: 8 }).map((_, i) => (
@@ -484,43 +485,47 @@ Where required, you can also conduct independent verification through legal prof
 
               {/* ⭐ REAL LISTING */}
               {!listingLoading &&
-                property.map((property, index) => (
-                  <Link key={property.id} to={`/property/${property.id}`}>
-                    <Card
-                      // onClick={moveToPage}
-                      hoverable
-                      className='w-full overflow-hidden !p-2'
-                      cover={
-                        <div className='relative'>
-                          <img
-                            alt='property'
-                            src={property.banner}
-                            className='h-24 sm:h-28 md:h-32 w-full object-cover'
-                          />
-                        </div>
-                      }
-                    >
-                      <span className='font-bold text-sm sm:text-base'>
-                        {property.title?.slice(0, 13)}...
-                      </span>
-
-                      <div className='flex items-center mt-2 gap-2'>
-                        <img src={pin} alt='pin' className='w-3 sm:w-4' />
-                        <p className='text-gray-400 text-xs sm:text-sm'>
-                          {property.estate?.slice(0, 12)}...
-                        </p>
-                      </div>
-
-                      <div className='flex gap-4 mt-1 items-center'>
-                        <h1 className='font-bold text-sm sm:text-base'>
-                          ₦{Number(property.price).toLocaleString('en-NG')}
-                        </h1>
-                        <h1 className='font-bold text-[0.5rem] sm:text-[0.6rem]'>
-                          {property.sizeValue} sqm
-                        </h1>
-                      </div>
-                    </Card>
-                  </Link>
+                property.map((item, index) => (
+                   <Link key={item.id} to={`/property/${item.id}`}>
+                          <Card
+                            hoverable
+                            className="w-full overflow-hidden rounded-xl !p-2 transition-all duration-300 hover:-translate-y-1 hover:shadow-lg"
+                            cover={
+                              <div className="relative">
+                                <img
+                                  alt="property"
+                                  src={item.banner}
+                                  className="h-28 sm:h-36 w-full object-cover rounded-lg"
+                                />
+                  
+                                {/* Price Badge */}
+                                <div className="absolute bottom-2 left-2 bg-black/80 text-white px-3 py-1 rounded-md text-xs sm:text-sm font-semibold">
+                                  ₦{Number(item.price).toLocaleString('en-NG')}
+                                </div>
+                  
+                                {/* Size Badge */}
+                                <div className="absolute top-2 right-2 bg-white/90 text-gray-900 px-2 py-1 rounded-md text-[0.6rem] sm:text-xs font-semibold">
+                                  {item.sizeValue} sqm
+                                </div>
+                              </div>
+                            }
+                          >
+                            {/* Title */}
+                            <h3 className="font-semibold text-sm sm:text-base leading-snug mt-1 truncate">
+                              {item.title}
+                            </h3>
+                  
+                            {/* Location */}
+                            <div className="flex items-center mt-1 gap-1">
+                              <img src={pin} alt="pin" className="w-3 sm:w-4" />
+                              <p className="text-gray-500 text-xs sm:text-sm truncate">
+                                {item.estate}
+                              </p>
+                            </div>
+                  
+                             
+                          </Card>
+                        </Link>
                 ))}
             </div>
           </div>
@@ -574,12 +579,13 @@ Where required, you can also conduct independent verification through legal prof
           <h1 className='font-bold text-3xl sm:text-4xl md:text-4xl lg:text-5xl leading-tight'>
             Your most frequently asked <br /> question answered
           </h1>
-          <Button
+          <Link
+            to='/faqs'
             className='!bg-blue-600 !h-10 !text-white py-3 !rounded-full w-full sm:w-60 hover:bg-blue-700 transition !border-0 mt-3 md:mt-0 flex items-center justify-center gap-2'
             htmlType='submit'
           >
             View All FAQS <MdOutlineArrowRightAlt />
-          </Button>
+          </Link>
         </div>
 
         <div className='grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-10'>
@@ -704,7 +710,8 @@ Where required, you can also conduct independent verification through legal prof
 
               <Form>
                 <div className="flex justify-start gap-4 mt-6 flex-wrap">
-                         <img src={googlePlay} alt="Google Play" className="h-12 cursor-pointer" />
+                 
+                        <a href=" https://play.google.com/store/apps/details?id=com.ilefund" target="_blank"> <img src={googlePlay} alt="Google Play" className="h-12 cursor-pointer" /></a>
                          <img src={appStore} alt="App Store" className="h-12 cursor-pointer" />
                        </div>
               </Form>

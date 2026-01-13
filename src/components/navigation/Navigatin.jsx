@@ -103,13 +103,14 @@ const navLinkClass = ({ isActive }) =>
 
         {/* Desktop Nav */}
         <div className="hidden md:flex items-center space-x-8 text-black font-medium">
-           <NavLink to="/" className={navLinkClass}>
-            Home
-          </NavLink>
+           
           <NavLink to="/about-us" className={navLinkClass}>
             About
           </NavLink>
-          <NavLink to="/how-it-works" className={navLinkClass}>
+          <NavLink to="/properties" className={navLinkClass}>
+            Properties
+          </NavLink>
+           <NavLink to="/how-it-works" className={navLinkClass}>
             How It Works
           </NavLink>
           <NavLink to="/faqs" className={navLinkClass}>
@@ -187,6 +188,14 @@ const navLinkClass = ({ isActive }) =>
               >
                 About
               </Link>
+               <Link
+                to="/properties"
+                onClick={handleMobileNavClick}
+                className="block"
+              >
+                Properties
+              </Link>
+              
 
               {/* Mobile Dropdown for Goals */}
               {/* <div>

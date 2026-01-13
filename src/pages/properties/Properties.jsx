@@ -1,345 +1,253 @@
-import { Card, Button, Divider } from "antd";
-import { useNavigate } from "react-router"
-import Slider from "react-slick";
-import "slick-carousel/slick/slick.css";
-import "slick-carousel/slick/slick-theme.css";
+import { Card, Button, Divider, Form, Collapse, Input, Skeleton  } from 'antd'
+import React, { useState, useEffect } from 'react'
+import { useNavigate, Link } from 'react-router'
 
-import house from "../../assets/house.jpg";
-import pin from "../../assets/pin.png";
-import btn from "../../assets/btn.png";
-import propertyImg1 from "../../assets/property_img_1.png";
-import propertyImg2 from "../../assets/property_img_2.png";
-import { LiaLongArrowAltRightSolid } from "react-icons/lia";
-import Calculator from "../../components/calculator/Calculator";
+import axios from 'axios'
+import Slider from 'react-slick'
+import 'slick-carousel/slick/slick.css'
+import 'slick-carousel/slick/slick-theme.css'
+import { MdOutlineArrowRightAlt } from 'react-icons/md'
+import house from '../../assets/house.jpg'
+import pin from '../../assets/pin.png'
+import btn from '../../assets/btn.png'
+import propertyImg1 from '../../assets/property_img_1.png'
+import propertyImg2 from '../../assets/property_img_2.png'
+import { LiaLongArrowAltRightSolid } from 'react-icons/lia'
+import Calculator from '../../components/calculator/Calculator'
 
-var settings = {
-  dots: true,
-  infinite: true,
-  speed: 500,
-  slidesToShow: 1,
-  slidesToScroll: 1,
-  arrows: false,
-};
-
-const properties = [
-  {
-    id: 1,
-    title: "4 Semi detached-duplex with 2 room BQ",
-    location: "Big land city Apo hilltop",
-    price: "₦13,000,000",
-    size: "500 SQM",
-    deposit: "₦1,500,000",
-    duration: "6 Months",
-    image: propertyImg2,
-  },
-  {
-    id: 2,
-    title: "Luxury 3 Bedroom Flat",
-    location: "Maitama District, Abuja",
-    price: "₦25,000,000",
-    size: "750 SQM",
-    deposit: "₦2,000,000",
-    duration: "12 Months",
-    image: propertyImg2,
-  },
-  {
-    id: 3,
-    title: "Modern Bungalow with Garden",
-    location: "Gwarinpa, Abuja",
-    price: "₦8,500,000",
-    size: "400 SQM",
-    deposit: "₦800,000",
-    duration: "8 Months",
-    image: propertyImg2,
-  },
-  {
-    id: 4,
-    title: "Luxury Villa with Pool",
-    location: "Asokoro, Abuja",
-    price: "₦45,000,000",
-    size: "1000 SQM",
-    deposit: "₦3,500,000",
-    duration: "18 Months",
-    image: propertyImg2,
-  },
-  {
-    id: 5,
-    title: "2 Bedroom Mini Flat",
-    location: "Lugbe, Abuja",
-    price: "₦5,500,000",
-    size: "300 SQM",
-    deposit: "₦600,000",
-    duration: "10 Months",
-    image: propertyImg2,
-  },
-  {
-    id: 6,
-    title: "5 Bedroom Fully Detached Duplex",
-    location: "Jabi, Abuja",
-    price: "₦60,000,000",
-    size: "1200 SQM",
-    deposit: "₦5,000,000",
-    duration: "24 Months",
-    image: propertyImg2,
-  },
-  {
-    id: 7,
-    title: "Penthouse Apartment",
-    location: "Wuse II, Abuja",
-    price: "₦35,000,000",
-    size: "850 SQM",
-    deposit: "₦2,800,000",
-    duration: "15 Months",
-    image: propertyImg2,
-  },
-  {
-    id: 8,
-    title: "Townhouse with Rooftop Terrace",
-    location: "Katampe Extension, Abuja",
-    price: "₦20,000,000",
-    size: "600 SQM",
-    deposit: "₦1,800,000",
-    duration: "9 Months",
-    image: propertyImg2,
-  },
-];
+ 
 
 const Properties = () => {
+  const [property, setProperty] = useState([])
+  const [loading, setLoading] = useState(false)
+  const [emailSubmitLoading, setEmailSubmitLoading] = useState(false)
 
-  const navigate = useNavigate();
+  const navigate = useNavigate()
 
-  const handleClick = (id) => {
-    navigate(`/property/${id}`);
-  };
+  const handleClick = id => {
+    navigate(`/property/${id}`)
+  }
+
+  const onFinish = async values => {
+    const userEmail = values.email
+
+    setEmailSubmitLoading(true)
+
+    await new Promise(resolve => setTimeout(resolve, 3000))
+
+    window.location.href = `https://app.ilefund.com/register?email=${userEmail}`
+  }
+
+    const getListing = async () => {
+    try {
+      setLoading(true)
+      const res = await axios.get(
+        `https://ilefund.onrender.com/api/estate/prototypes?limit=8`
+      )
+      // console.log(res);
+      const cleanedData = (res.data.data || []).map(item => ({
+        id: item._id,
+        banner: item.banner?.url,
+        estate: item.estate?.name,
+        price: item.price,
+        sizeValue: item.sizeValue,
+        title: item.title
+      }))
+      setProperty(cleanedData)
+    } catch (error) {
+      console.log(error)
+    } finally {
+      setLoading(false)
+    }
+  }
+
+  useEffect(() => {
+    getListing()
+  }, [])
 
   return (
     <>
-      <div
-        className="relative min-h-[500px] bg-cover bg-center bg-no-repeat"
-        style={{ backgroundImage: `url(${propertyImg1})` }}
+          <div
+        className='
+    bg-[url(https://res.cloudinary.com/da1mxvbx2/image/upload/v1767944328/ilefund/ilefund-land-nigeria-bg-2_fymozq.png)]
+    bg-cover bg-center
+    min-h-[480px]
+    sm:min-h-[600px]
+    md:min-h-[680px]
+    lg:min-h-[750px]
+    xl:min-h-[820px]
+    overflow-hidden
+  '
       >
-        <div className="overlay h-full w-full absolute bg-[#00000063] flex items-center">
-          <div className="pl-10">
-            <h1 className="text-white font-extrabold text-5xl">
-              Start With A <br /> Plan, Save & Own.
-            </h1>
-            <p className="text-white mt-4">From Savings to Home Ownership.</p>
-            <Button
-              type="primary"
-              size="mideum"
-              className="!rounded-full !px-6 flex items-center gap-2 w-fit mt-4"
-            >
-              Let’s start <LiaLongArrowAltRightSolid size={20} />
-            </Button>
+      <section className='grid grid-cols-1 sm:grid-cols-2 gap-8 items-center px-15 py-16 bg-cover bg-center '>
+        <div className='space-y-6'>
+          <div className='bg-[#DFE8FF] px-3 sm:px-4 py-1 rounded-lg text-[#0047FF] w-max'>
+           Vetted Properties
           </div>
-        </div>
-      </div>
+          <h1 className='font-extrabold text-4xl sm:text-4xl lg:text-4xl leading-tight'>
+            A diversified property portfolio,
+            <br />
+             built for steady growth
+            
+          </h1>
+          <p className='text-gray-600 max-w-md'>
+           Explore ILEFUND’s real estate strategies designed to capture long-term demand drivers such as urban housing growth, rental demand, and logistics expansion across Nigeria and Africa.
+          </p>
 
-      <section>
-        <div className="max-w-6xl mx-auto py-15">
-          <h1 className="text-center font-extrabold">
+          {/* FORM */}
+          <Form onFinish={onFinish}>
+            <Form.Item
+              name='email'
+              rules={[
+                { required: true, message: 'Email is required' },
+                { type: 'email', message: 'Enter a valid email' }
+              ]}
+              className='max-w-[460px] w-full mb-0'
+            >
+              <div className='flex items-center bg-white rounded-full p-1 shadow-lg'>
+                <Input
+                  placeholder='Start with your Email address .....'
+                  className='
+          flex-1
+          !border-none
+          !shadow-none
+          !bg-transparent
+          !h-12
+          px-5
+          text-base
+          focus:!ring-0
+        '
+                />
+
+                <Button
+                  htmlType='submit'
+                  loading={emailSubmitLoading}
+                  className='
+          !h-12
+          px-6
+          !rounded-full
+          !bg-blue-600
+          !text-white
+          flex items-center gap-2
+          text-base
+          font-medium
+        '
+                >
+                  Get Started <MdOutlineArrowRightAlt size={20} />
+                </Button>
+              </div>
+            </Form.Item>
+          </Form>
+        </div>
+
+        <div className='flex justify-center'>
+          <img
+            src='https://res.cloudinary.com/da1mxvbx2/image/upload/v1767943399/ilefund/realestatebanner_u9h1tf.svg'
+            alt='Illustration of land planning'
+            className='w-full max-w-md object-contain'
+          />
+        </div>
+      </section>
+
+      {/* <section>
+        <div className='max-w-6xl mx-auto py-15'>
+          <h1 className='text-center font-extrabold'>
             Stay the course, reap the rewards
           </h1>
-          <p className="!text-center text-bold mt-7 text-gray-300">
+          <p className='!text-center text-bold mt-7 text-gray-300'>
             If you Invested
           </p>
         </div>
 
         <Calculator />
-      </section>
+      </section> */}
 
-      <section className="px-5 mt-9">
-        <h1 className="font-extrabold text-2xl mb-4">Vetted Properties</h1>
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-          {properties.map((property) => (
-            <div key={property.id} onClick={() => handleClick(property.id)}>
-              <Card
-              hoverable
-                className="w-full overflow-hidden !p-2"
-                cover={
-                  <div className="relative">
-                    <img
-                      alt="property"
-                      src={property.image}
-                      className="h-40 w-full object-cover"
-                    />
-                  </div>
-                }
-              >
-                <span className="font-bold text-lg">{property.title}</span>
+       <div className='p-10 mt-10'>
+        <h1 className='text-2xl font-bold text-center'>
+          Vetted Properties
+        </h1>
+        <p className='text-center'>
+          Here are the real estate properties that are powering currently available for purchase.
+        </p>
 
-                <div className="flex items-center mt-3 gap-2">
-                  <img src={pin} alt="pin" />
-                  <p className="text-gray-400 text-lg">{property.location}</p>
-                </div>
+       <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 mt-5">
+  {/* ⭐ SKELETON LOADER */}
+  {loading &&
+    Array.from({ length: 8 }).map((_, i) => (
+      <Card
+        key={i}
+        className="w-full overflow-hidden rounded-xl !p-2"
+      >
+        <Skeleton.Image
+          active
+          style={{
+            width: '100%',
+            height: '8rem',
+            borderRadius: '10px'
+          }}
+        />
 
-                <div className="flex gap-4 mt-3 items-center">
-                  <h1 className="font-bold text-2xl">{property.price}</h1>
-                  <h1 className="font-bold text-sm mt-2">{property.size}</h1>
-                </div>
+        <div className="mt-2">
+          <Skeleton active title={false} paragraph={{ rows: 2 }} />
+        </div>
+      </Card>
+    ))}
 
-                <div className="flex justify-between mt-5">
-                  <div>
-                    <h1 className="font-bold text-1xl">{property.deposit}</h1>
-                    <p className="text-gray-400 text-sm">Weekly deposit</p>
-                  </div>
-                  <div>
-                    <h1 className="font-bold text-1xl">{property.duration}</h1>
-                    <p className="text-gray-400 text-sm">Duration</p>
-                  </div>
-                  <div>
-                    <img src={btn} alt="button" className="w-22" />
-                  </div>
-                </div>
-              </Card>
+  {/* ⭐ REAL LISTINGS */}
+  {!loading &&
+    property.map((item) => (
+      <Link key={item.id} to={`/property/${item.id}`}>
+        <Card
+          hoverable
+          className="w-full overflow-hidden rounded-xl !p-2 transition-all duration-300 hover:-translate-y-1 hover:shadow-lg"
+          cover={
+            <div className="relative">
+              <img
+                alt="property"
+                src={item.banner}
+                className="h-28 sm:h-36 w-full object-cover rounded-lg"
+              />
+
+              {/* Price Badge */}
+              <div className="absolute bottom-2 left-2 bg-black/80 text-white px-3 py-1 rounded-md text-xs sm:text-sm font-semibold">
+                ₦{Number(item.price).toLocaleString('en-NG')}
+              </div>
+
+              {/* Size Badge */}
+              <div className="absolute top-2 right-2 bg-white/90 text-gray-900 px-2 py-1 rounded-md text-[0.6rem] sm:text-xs font-semibold">
+                {item.sizeValue} sqm
+              </div>
             </div>
-          ))}
-        </div>
-      </section>
+          }
+        >
+          {/* Title */}
+          <h3 className="font-semibold text-sm sm:text-base leading-snug mt-1 truncate">
+            {item.title}
+          </h3>
 
-      <section className="bg-[#12033a] py-10 mt-10">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 px-10">
-          <div className="flex flex-col justify-center">
-            <h1 className="font-bold text-4xl mt-1 text-white">
-              1250+ customer say
-            </h1>
-            <h1 className="font-bold text-3xl text-[#0047FF]">
-              about our finance
-            </h1>
-            <p className="text-sm text-white">
-              With over 1,250 established clients, our finance and consulting
-              services have earned praise for reliability, personalized
-              guidance, and impactful results.
+          {/* Location */}
+          <div className="flex items-center mt-1 gap-1">
+            <img src={pin} alt="pin" className="w-3 sm:w-4" />
+            <p className="text-gray-500 text-xs sm:text-sm truncate">
+              {item.estate}
             </p>
-
-            <Button
-              type="primary"
-              size="medium"
-              className="!rounded-full !px-6 flex items-center gap-2 w-fit mt-2"
-            >
-              Contact Now <LiaLongArrowAltRightSolid size={20} />
-            </Button>
           </div>
 
-          <div className="bg-[#2A1C4E] p-6 rounded-lg">
-            <Slider {...settings}>
-              <div>
-                <h2 className="text-2xl font-bold text-white">Logoipsum</h2>
-                <p className="mt-2 text-sm text-white">
-                  The guidance we received has transformed oyr financial
-                  outlook. our consultant was patient, knowledgeable, and
-                  crafted s plan that aligned with our goals. Thanks to their
-                  strategic advice, optimistic about our future.
-                </p>
-                <div className="mt-3 flex items-center gap-5">
-                  <div className="bg-indigo-600 h-14 w-14 rounded-md"></div>
-                  <h1 className="font-bold text-lg text-white">
-                    Rachael T./{" "}
-                    <span className="!font-light">Entrepreneur</span>
-                  </h1>
-                </div>
-                <Divider />
-                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mb-2">
-                  <div class="border border-[#dddddd] rounded-lg flex justify-center flex-col items-center">
-                    <span className="text-xs mt-1 text-white">
-                      Goggle Rating
-                    </span>
-                    <h1 className="font-bold text-white">5.0</h1>
-                  </div>
-                  <div class="border border-[#dddddd] rounded-lg flex justify-center flex-col items-center">
-                    <h1 className="font-bold text-white">5.0</h1>
-                    <div className="flex justify-between items-center">
-                      <span className="text-xs text-white">Rated</span>
-                      <span className="text-xs text-white">Trustpilot</span>
-                    </div>
-                  </div>
-                  <div class="border border-[#dddddd] rounded-lg flex justify-center flex-col items-center">
-                    <span className="text-xs text-center text-white">
-                      Total rating <b>5.0</b> base on <b>1250+</b> Review
-                    </span>
-                  </div>
-                </div>
-              </div>
-              <div>
-                <h2 className="text-2xl font-bold text-white">Logoipsum</h2>
-                <p className="mt-2 text-sm text-white">
-                  The guidance we received has transformed oyr financial
-                  outlook. our consultant was patient, knowledgeable, and
-                  crafted s plan that aligned with our goals. Thanks to their
-                  strategic advice, optimistic about our future.
-                </p>
-                <div className="mt-3 flex items-center gap-5">
-                  <div className="bg-indigo-600 h-14 w-14 rounded-md"></div>
-                  <h1 className="font-bold text-lg text-white">
-                    Rachael T./{" "}
-                    <span className="!font-light">Entrepreneur</span>
-                  </h1>
-                </div>
-                <Divider />
-                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mb-2">
-                  <div class="border border-[#dddddd] rounded-lg flex justify-center flex-col items-center">
-                    <span className="text-xs mt-1 text-white">
-                      Goggle Rating
-                    </span>
-                    <h1 className="font-bold text-white">5.0</h1>
-                  </div>
-                  <div class="border border-[#dddddd] rounded-lg flex justify-center flex-col items-center">
-                    <h1 className="font-bold text-white">5.0</h1>
-                    <div className="flex justify-between items-center">
-                      <span className="text-xs text-white">Rated</span>
-                      <span className="text-xs text-white">Trustpilot</span>
-                    </div>
-                  </div>
-                  <div class="border border-[#dddddd] rounded-lg flex justify-center flex-col items-center">
-                    <span className="text-xs text-center text-white">
-                      Total rating <b>5.0</b> base on <b>1250+</b> Review
-                    </span>
-                  </div>
-                </div>
-              </div>
-              <div>
-                <h2 className="text-2xl font-bold text-white">Logoipsum</h2>
-                <p className="mt-2 text-sm text-white">
-                  The guidance we received has transformed oyr financial
-                  outlook. our consultant was patient, knowledgeable, and
-                  crafted s plan that aligned with our goals. Thanks to their
-                  strategic advice, optimistic about our future.
-                </p>
-                <div className="mt-3 flex items-center gap-5">
-                  <div className="bg-indigo-600 h-14 w-14 rounded-md"></div>
-                  <h1 className="font-bold text-lg text-white">
-                    Rachael T./{" "}
-                    <span className="!font-light">Entrepreneur</span>
-                  </h1>
-                </div>
-                <Divider />
-                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mb-2">
-                  <div class="border border-[#dddddd] rounded-lg flex justify-center flex-col items-center">
-                    <span className="text-xs mt-1 text-white">
-                      Goggle Rating
-                    </span>
-                    <h1 className="font-bold text-white">5.0</h1>
-                  </div>
-                  <div class="border border-[#dddddd] rounded-lg flex justify-center flex-col items-center">
-                    <h1 className="font-bold text-white">5.0</h1>
-                    <div className="flex justify-between items-center">
-                      <span className="text-xs text-white">Rated</span>
-                      <span className="text-xs text-white">Trustpilot</span>
-                    </div>
-                  </div>
-                  <div class="border border-[#dddddd] rounded-lg flex justify-center flex-col items-center">
-                    <span className="text-xs text-center text-white">
-                      Total rating <b>5.0</b> base on <b>1250+</b> Review
-                    </span>
-                  </div>
-                </div>
-              </div>
-            </Slider>
-          </div>
-        </div>
-      </section>
+           
+        </Card>
+      </Link>
+    ))}
+</div>
+
+      </div>
+
+      </div>
+
+      
+
+      
     </>
-  );
-};
+  )
+}
 
-export default Properties;
+export default Properties
