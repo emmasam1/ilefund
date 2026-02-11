@@ -93,61 +93,132 @@ const About = () => {
   return (
     <div>
       {/* Header */}
-      <div
-        className='
-    bg-[url(https://res.cloudinary.com/da1mxvbx2/image/upload/v1767944328/ilefund/ilefund-land-nigeria-bg-2_fymozq.png)]
+     <div
+  className="
     bg-cover bg-center
-    min-h-[480px]
-    sm:min-h-[600px]
-    md:min-h-[680px]
-    lg:min-h-[750px]
-    xl:min-h-[820px]
+    min-h-[30rem]
+    sm:min-h-[37.5rem]
+    md:min-h-[42.5rem]
+    lg:min-h-[46.875rem]
     overflow-hidden
-  '
+    w-full
+  "
+>
+  {/* TOP CONTENT */}
+  <div
+    className="
+      flex flex-col justify-center items-center
+      gap-[0.75rem]
+      px-[5%]
+      text-center
+      h-[18rem]
+      sm:h-[20rem]
+      md:h-[24rem]
+      max-w-[75rem]
+      mx-auto
+    "
+  >
+    <h1
+      className="
+        text-[#0047FF]
+        font-bold
+        text-[1.5rem]
+        sm:text-[1.875rem]
+        md:text-[2rem]
+        lg:text-[2.25rem]
+      "
+    >
+      About ileFund
+    </h1>
+
+    <p
+      className="
+        text-[0.875rem]
+        sm:text-[1rem]
+        md:text-[1.125rem]
+        leading-relaxed
+        max-w-[48rem]
+      "
+    >
+      Owning a home shouldn’t feel impossible. ileFund helps you save,
+      plan, and buy property the smart way. With trusted developers and
+      clear processes, we remove fear from real estate.
+      <br />
+      One goal, One step, One home at a time.
+    </p>
+  </div>
+
+  {/* VALUES SECTION */}
+  <div
+    className="
+      grid
+      grid-cols-1
+      sm:grid-cols-2
+      gap-[1.5rem]
+      mt-[3rem]
+      sm:mt-[5rem]
+      px-[5%]
+      max-w-[75rem]
+      mx-auto
+      items-start
+    "
+  >
+    {/* LEFT IMAGE */}
+    <div className="flex justify-center sm:justify-start">
+      <img
+        src="https://res.cloudinary.com/da1mxvbx2/image/upload/v1768217011/ilefund/values_xqowse.svg"
+        alt="ileFund values"
+        className="
+          w-[100%]
+          h-auto
+          aspect-auto
+        "
+      />
+    </div>
+
+    {/* RIGHT CONTENT */}
+    <div className="w-full">
+      <div
+        className="
+          bg-[#DFE8FF]
+          px-[0.75rem]
+          py-[0.25rem]
+          rounded-[0.5rem]
+          text-[#0047FF]
+          w-max
+          text-[0.875rem]
+          font-medium
+        "
       >
-        <div className=' h-72 sm:h-80 md:h-96 flex flex-col justify-center items-center gap-3 px-4 text-center sm:px-6 md:px-20'>
-          <h1 className='text-[#0047FF] font-bold text-2xl sm:text-3xl md:text-3xl lg:text-4xl'>
-            About ileFund
-          </h1>
-          <p className='text-sm sm:text-base md:text-lg leading-relaxed max-w-3xl'>
-            Owning a home shouldn’t feel impossible. ileFund helps you save,
-            plan, and buy property the smart way. With trusted developers and
-            clear processes, we remove fear from real estate. <br />
-            One goal, One step, One home at a time.
-          </p>
-        </div>
-
-        {/* FIXED GRID SECTION */}
-        <div className='grid grid-cols-1 sm:grid-cols-2 gap-6 mt-10 sm:mt-20 px-4 sm:px-6 md:px-20'>
-          {/* LEFT SIDE */}
-          <div className='mb-6 sm:mb-0'>
-            <img
-              src='https://res.cloudinary.com/da1mxvbx2/image/upload/v1768217011/ilefund/values_xqowse.svg'
-              alt=''
-              className='w-7 sm:w-8 md:w-auto'
-            />
-          </div>
-
-          {/* RIGHT SIDE - Segmented + Content */}
-          <div>
-            <div className='bg-[#DFE8FF] px-3 sm:px-4 py-1 rounded-lg text-[#0047FF] w-max'>
-              Our Values
-            </div>
-            <br />
-            <Segmented
-              options={['Mision', 'Vision', 'Goal']}
-              value={value}
-              onChange={setValue}
-              className='custom-segment h-12'
-            />
-
-            {/* Content Renders Under the Selected Tab */}
-            <div className='mt-4 p-4 text-sm sm:text-base md:text-base leading-relaxed'>
-              {content[value]}
-            </div>
-          </div>
-        </div>
+        Our Values
       </div>
+
+      <div className="mt-[1rem]">
+        <Segmented
+          options={['Mision', 'Vision', 'Goal']}
+          value={value}
+          onChange={setValue}
+          className="custom-segment h-[3rem]"
+        />
+      </div>
+
+      {/* DYNAMIC CONTENT */}
+      <div
+        className="
+          mt-[1rem]
+          p-[1rem]
+          text-[0.875rem]
+          sm:text-[1rem]
+          leading-relaxed
+          max-w-[40rem]
+        "
+      >
+        {content[value]}
+      </div>
+    </div>
+  </div>
+</div>
+
 
       {/* Segmented styles */}
       <style>
@@ -316,163 +387,284 @@ const About = () => {
         </div>
       </div> */}
 
-      <section className='bg-white py-16 overflow-hidden'>
-        <div className='w-[95%] mx-auto px-4 grid grid-cols-1 lg:grid-cols-[1fr_1.4fr] gap-12 items-center'>
-          {/* LEFT CONTENT (SMALLER) */}
-          <motion.div
-            initial={{ opacity: 0, x: -40 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.6 }}
-            viewport={{ once: true }}
-          >
-            <h2 className='text-3xl md:text-4xl font-bold mb-4'>
-              Meet the Team
-            </h2>
+    {/* ================= TEAM SECTION ================= */}
+<section className="bg-white py-[4rem] overflow-hidden">
+  <div
+    className="
+      w-full
+      max-w-[75rem]
+      mx-auto
+      px-[5%]
+      grid
+      grid-cols-1
+      lg:grid-cols-[1fr_1.4fr]
+      gap-[3rem]
+      items-center
+    "
+  >
+    {/* LEFT CONTENT */}
+    <motion.div
+      initial={{ opacity: 0, x: -40 }}
+      whileInView={{ opacity: 1, x: 0 }}
+      transition={{ duration: 0.6 }}
+      viewport={{ once: true }}
+    >
+      <h2
+        className="
+          text-[1.875rem]
+          md:text-[2.25rem]
+          font-bold
+          mb-[1rem]
+        "
+      >
+        Meet the Team
+      </h2>
 
-            <p className='text-gray-600 max-w-md mb-6'>
-              LIEFUND is powered by a passionate, execution-driven team with a
-              deep understanding of design, development, finance, and the
-              African real estate landscape.
-            </p>
+      <p
+        className="
+          text-gray-600
+          max-w-[28rem]
+          mb-[1.5rem]
+          text-[1rem]
+          leading-relaxed
+        "
+      >
+        LIEFUND is powered by a passionate, execution-driven team with a
+        deep understanding of design, development, finance, and the
+        African real estate landscape.
+      </p>
 
-            {/* SLIDER CONTROLS */}
-            <div className='flex gap-3'>
-              <button
-                onClick={prevSlide}
-                className='w-11 h-11 flex items-center justify-center border rounded-full hover:bg-gray-100 transition'
-              >
-                <LeftOutlined />
-              </button>
+      {/* SLIDER CONTROLS */}
+      <div className="flex gap-[0.75rem]">
+        <button
+          onClick={prevSlide}
+          className="
+            w-[2.75rem]
+            h-[2.75rem]
+            flex
+            items-center
+            justify-center
+            border
+            rounded-full
+            hover:bg-gray-100
+            transition
+          "
+        >
+          <LeftOutlined />
+        </button>
 
-              <button
-                onClick={nextSlide}
-                className='w-11 h-11 flex items-center justify-center border rounded-full hover:bg-gray-100 transition'
-              >
-                <RightOutlined />
-              </button>
-            </div>
-          </motion.div>
+        <button
+          onClick={nextSlide}
+          className="
+            w-[2.75rem]
+            h-[2.75rem]
+            flex
+            items-center
+            justify-center
+            border
+            rounded-full
+            hover:bg-gray-100
+            transition
+          "
+        >
+          <RightOutlined />
+        </button>
+      </div>
+    </motion.div>
 
-          {/* RIGHT SLIDER (BIGGER) */}
-          <div className='relative'>
-            <AnimatePresence mode='wait'>
+    {/* RIGHT SLIDER */}
+    <div className="relative w-full">
+      <AnimatePresence mode="wait">
+        <motion.div
+          key={index}
+          initial={{ opacity: 0, x: 100 }}
+          animate={{ opacity: 1, x: 0 }}
+          exit={{ opacity: 0, x: -100 }}
+          transition={{ duration: 0.5 }}
+          className="
+            grid
+            grid-cols-1
+            sm:grid-cols-2
+            lg:grid-cols-3
+            gap-[2rem]
+          "
+        >
+          {teamMembers
+            .slice(index, index + 3)
+            .concat(
+              teamMembers.slice(
+                0,
+                Math.max(0, index + 3 - teamMembers.length)
+              )
+            )
+            .map((member, i) => (
               <motion.div
-                key={index}
-                initial={{ opacity: 0, x: 100 }}
-                animate={{ opacity: 1, x: 0 }}
-                exit={{ opacity: 0, x: -100 }}
-                transition={{ duration: 0.5 }}
-                className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8'
+                key={i}
+                whileHover={{ y: -10 }}
+                className="text-center"
               >
-                {teamMembers
-                  .slice(index, index + 3)
-                  .concat(
-                    teamMembers.slice(
-                      0,
-                      Math.max(0, index + 3 - teamMembers.length)
-                    )
-                  )
-                  .map((member, i) => (
-                    <motion.div
-                      key={i}
-                      whileHover={{ y: -10 }}
-                      className='text-center'
-                    >
-                      <img
-                        src={member.image}
-                        alt={member.name}
-                        className='w-full h-52 object-cover rounded-xl mb-5'
-                      />
+                <div className="w-full aspect-[4/3] overflow-hidden rounded-[0.75rem] mb-[1.25rem]">
+                  <img
+                    src={member.image}
+                    alt={member.name}
+                    className="w-full h-full object-cover"
+                  />
+                </div>
 
-                      <h4 className='font-semibold text-lg'>{member.name}</h4>
+                <h4 className="font-semibold text-[1.125rem]">
+                  {member.name}
+                </h4>
 
-                      <p className='text-sm text-gray-500'>{member.role}</p>
-                    </motion.div>
-                  ))}
+                <p className="text-[0.875rem] text-gray-500">
+                  {member.role}
+                </p>
               </motion.div>
-            </AnimatePresence>
-          </div>
-        </div>
-      </section>
+            ))}
+        </motion.div>
+      </AnimatePresence>
+    </div>
+  </div>
+</section>
 
-      <section className='bg-white py-16 overflow-hidden'>
-        <div className='w-[95%] mx-auto px-4 grid grid-cols-1 lg:grid-cols-[1fr_1.4fr] gap-12 items-center'>
-          {/* LEFT CONTENT (SMALLER) */}
-          <motion.div
-            initial={{ opacity: 0, x: -40 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.6 }}
-            viewport={{ once: true }}
-          >
-            <h2 className='text-3xl md:text-4xl font-bold mb-4'>
-              Meet the Board Of Trustees
-            </h2>
+{/* ================= BOARD SECTION ================= */}
+<section className="bg-white py-[4rem] overflow-hidden">
+  <div
+    className="
+      w-full
+      max-w-[75rem]
+      mx-auto
+      px-[5%]
+      grid
+      grid-cols-1
+      lg:grid-cols-[1fr_1.4fr]
+      gap-[3rem]
+      items-center
+    "
+  >
+    {/* LEFT CONTENT */}
+    <motion.div
+      initial={{ opacity: 0, x: -40 }}
+      whileInView={{ opacity: 1, x: 0 }}
+      transition={{ duration: 0.6 }}
+      viewport={{ once: true }}
+    >
+      <h2
+        className="
+          text-[1.875rem]
+          md:text-[2.25rem]
+          font-bold
+          mb-[1rem]
+        "
+      >
+        Meet the Board Of Trustees
+      </h2>
 
-            <p className='text-gray-600 max-w-md mb-6'>
-              LIEFUND is powered by a passionate, execution-driven team with a
-              deep understanding of design, development, finance, and the
-              African real estate landscape.
-            </p>
+      <p
+        className="
+          text-gray-600
+          max-w-[28rem]
+          mb-[1.5rem]
+          text-[1rem]
+          leading-relaxed
+        "
+      >
+        LIEFUND is powered by a passionate, execution-driven team with a
+        deep understanding of design, development, finance, and the
+        African real estate landscape.
+      </p>
 
-            {/* SLIDER CONTROLS */}
-            <div className='flex gap-3'>
-              <button
-                onClick={boardprevSlide}
-                className='w-11 h-11 flex items-center justify-center border rounded-full hover:bg-gray-100 transition'
-              >
-                <LeftOutlined />
-              </button>
+      {/* SLIDER CONTROLS */}
+      <div className="flex gap-[0.75rem]">
+        <button
+          onClick={boardprevSlide}
+          className="
+            w-[2.75rem]
+            h-[2.75rem]
+            flex
+            items-center
+            justify-center
+            border
+            rounded-full
+            hover:bg-gray-100
+            transition
+          "
+        >
+          <LeftOutlined />
+        </button>
 
-              <button
-                onClick={boardnextSlide}
-                className='w-11 h-11 flex items-center justify-center border rounded-full hover:bg-gray-100 transition'
-              >
-                <RightOutlined />
-              </button>
-            </div>
-          </motion.div>
+        <button
+          onClick={boardnextSlide}
+          className="
+            w-[2.75rem]
+            h-[2.75rem]
+            flex
+            items-center
+            justify-center
+            border
+            rounded-full
+            hover:bg-gray-100
+            transition
+          "
+        >
+          <RightOutlined />
+        </button>
+      </div>
+    </motion.div>
 
-          {/* RIGHT SLIDER (BIGGER) */}
-          <div className='relative'>
-            <AnimatePresence mode='wait'>
+    {/* RIGHT SLIDER */}
+    <div className="relative w-full">
+      <AnimatePresence mode="wait">
+        <motion.div
+          key={index}
+          initial={{ opacity: 0, x: 100 }}
+          animate={{ opacity: 1, x: 0 }}
+          exit={{ opacity: 0, x: -100 }}
+          transition={{ duration: 0.5 }}
+          className="
+            grid
+            grid-cols-1
+            sm:grid-cols-2
+            lg:grid-cols-3
+            gap-[2rem]
+          "
+        >
+          {boardMembers
+            .slice(index, index + 3)
+            .concat(
+              boardMembers.slice(
+                0,
+                Math.max(0, index + 3 - boardMembers.length)
+              )
+            )
+            .map((member, i) => (
               <motion.div
-                key={index}
-                initial={{ opacity: 0, x: 100 }}
-                animate={{ opacity: 1, x: 0 }}
-                exit={{ opacity: 0, x: -100 }}
-                transition={{ duration: 0.5 }}
-                className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8'
+                key={i}
+                whileHover={{ y: -10 }}
+                className="text-center"
               >
-                {boardMembers
-                  .slice(index, index + 3)
-                  .concat(
-                    boardMembers.slice(
-                      0,
-                      Math.max(0, index + 3 - boardMembers.length)
-                    )
-                  )
-                  .map((member, i) => (
-                    <motion.div
-                      key={i}
-                      whileHover={{ y: -10 }}
-                      className='text-center'
-                    >
-                      <img
-                        src={member.image}
-                        alt={member.name}
-                        className='w-full h-52 object-cover rounded-xl mb-5'
-                      />
+                <div className="w-full aspect-[4/3] overflow-hidden rounded-[0.75rem] mb-[1.25rem]">
+                  <img
+                    src={member.image}
+                    alt={member.name}
+                    className="w-full h-full object-cover"
+                  />
+                </div>
 
-                      <h4 className='font-semibold text-lg'>{member.name}</h4>
+                <h4 className="font-semibold text-[1.125rem]">
+                  {member.name}
+                </h4>
 
-                      <p className='text-sm text-gray-500'>{member.role}</p>
-                    </motion.div>
-                  ))}
+                <p className="text-[0.875rem] text-gray-500">
+                  {member.role}
+                </p>
               </motion.div>
-            </AnimatePresence>
-          </div>
-        </div>
-      </section>
+            ))}
+        </motion.div>
+      </AnimatePresence>
+    </div>
+  </div>
+</section>
+
     </div>
   )
 }

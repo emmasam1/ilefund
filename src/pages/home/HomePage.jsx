@@ -18,8 +18,8 @@ import 'slick-carousel/slick/slick-theme.css'
 import home_img_2 from '../../assets/ilefund-register.svg'
 import home_img_3 from '../../assets/ilefund-save.svg'
 import home_img_4 from '../../assets/ilefund-homes.svg'
- import Rectangle43 from '../../assets/Rectangle43.png'
- 
+import Rectangle43 from '../../assets/Rectangle43.png'
+
 import { MdOutlineArrowRightAlt } from 'react-icons/md'
 import pin from '../../assets/pin.png'
 import btn from '../../assets/btn.png'
@@ -28,8 +28,8 @@ import { AiOutlinePlus } from 'react-icons/ai'
 import { AntDesignOutlined, UserOutlined } from '@ant-design/icons'
 import { LiaLongArrowAltRightSolid } from 'react-icons/lia'
 
- import googlePlay from "../../assets/googleplaygetnow.svg";
-import appStore from "../../assets/comingsoonappstore.svg";
+import googlePlay from '../../assets/googleplaygetnow.svg'
+import appStore from '../../assets/comingsoonappstore.svg'
 import axios from 'axios'
 
 import { useNavigate, Link } from 'react-router'
@@ -41,10 +41,10 @@ var settings = {
   slidesToShow: 1,
   slidesToScroll: 1,
   arrows: false,
-  autoplay: true,     
+  autoplay: true,
   autoplaySpeed: 4000,
-  pauseOnHover: true, 
-  pauseOnFocus: true,
+  pauseOnHover: true,
+  pauseOnFocus: true
 }
 
 const HomePage = () => {
@@ -59,12 +59,26 @@ const HomePage = () => {
 
   const [messageApi, contextHolder] = message.useMessage()
 
-  const getListing = async () => {
+  const loadAPIBaseURL = () => {
+    axios
+      .get(import.meta.env.VITE_BASE_URL)
+      .then(response => {
+        const { web_api_url, estate_api } = response.data.data
+
+        axios.get(estate_api)
+        getListing(web_api_url)
+      })
+      .catch(error => {
+        console.error('Axios error:', error)
+      })
+  }
+
+  const getListing = async web_api_url => {
     try {
       setListingLoading(true)
 
       const res = await axios.get(
-        `https://ilefund.onrender.com/api/estate/prototypes?limit=8`
+        `${web_api_url}/api/estate/prototypes?limit=8`
       )
 
       const cleanedData = (res.data.data || []).map(item => ({
@@ -99,7 +113,7 @@ const HomePage = () => {
   }
 
   useEffect(() => {
-    getListing()
+    loadAPIBaseURL()
   }, [])
 
   const stats = [
@@ -115,9 +129,9 @@ const HomePage = () => {
       label: 'How much do I need to start?',
       children: (
         <p>
-          You can start with as little as <b> ₦50,000</b>, depending on the property or
-          savings plan you choose. Ilefund is designed to allow gradual saving,
-          so you don’t need a large lump sum to begin.
+          You can start with as little as <b> ₦50,000</b>, depending on the
+          property or savings plan you choose. Ilefund is designed to allow
+          gradual saving, so you don’t need a large lump sum to begin.
         </p>
       )
     },
@@ -132,23 +146,25 @@ const HomePage = () => {
         </p>
       )
     },
-        {
+    {
       key: '3',
       label: 'Can I pay outright instead of saving gradually?',
       children: (
         <p>
-         Yes. If you prefer to pay outright, you can do so.
-Ilefund supports both full payment and structured payment plans.
+          Yes. If you prefer to pay outright, you can do so. Ilefund supports
+          both full payment and structured payment plans.
         </p>
       )
     },
-            {
+    {
       key: '4',
       label: 'What happens if I miss a payment?',
       children: (
         <p>
-        Missing a payment does not automatically cancel your plan.
-Your progress remains visible, and you can continue saving when you’re ready. Specific payment timelines depend on the property or plan you selected. Contact our support team for personalized assistance.
+          Missing a payment does not automatically cancel your plan. Your
+          progress remains visible, and you can continue saving when you’re
+          ready. Specific payment timelines depend on the property or plan you
+          selected. Contact our support team for personalized assistance.
         </p>
       )
     },
@@ -167,14 +183,15 @@ Your progress remains visible, and you can continue saving when you’re ready. 
         </p>
       )
     },
-        {
+    {
       key: '6',
       label: 'How do I verify the property myself?',
       children: (
         <p>
-         We encourage transparency.
-You will receive access to property <b>details</b>, <b>approvals</b>, and <b>documentation</b> summaries.
-Where required, you can also conduct independent verification through legal professionals or relevant government agencies.
+          We encourage transparency. You will receive access to property{' '}
+          <b>details</b>, <b>approvals</b>, and <b>documentation</b> summaries.
+          Where required, you can also conduct independent verification through
+          legal professionals or relevant government agencies.
         </p>
       )
     }
@@ -185,41 +202,86 @@ Where required, you can also conduct independent verification through legal prof
       {contextHolder}
       {/* ✅ Hero Section */}
       <div
-        className='
-    bg-[url(https://res.cloudinary.com/da1mxvbx2/image/upload/v1767944328/ilefund/ilefund-land-nigeria-bg-2_fymozq.png)]
-    bg-cover bg-center
-    min-h-[480px]
-    sm:min-h-[600px]
-    md:min-h-[680px]
-    lg:min-h-[750px]
-    xl:min-h-[820px]
-    overflow-hidden
-  '
-      >
-        <section className='w-11/12 max-w-7xl mx-auto flex items-center py-8 sm:py-14 lg:py-20'>
-          <div className='grid grid-cols-1 md:grid-cols-2 gap-10 lg:gap-16 items-center w-full'>
+   className="
+     overflow-hidden
+     min-h-[520px]
+     3xl:min-h-[1100px]
+     sm:min-h-[650px]
+     md:min-h-[720px]
+     lg:min-h-[780px]
+     xl:min-h-[860px]
+     2xl:min-h-[950px]
+   "
+ >
+        <section
+          className="
+            flex
+            w-11/12 max-w-[75rem]
+            mx-auto py-10
+            3xl:max-w-[130rem] items-center
+            sm:py-16
+            lg:py-24
+            2xl:max-w-[110rem] 2xl:py-32
+          "
+        >
+          <div
+            className="
+              grid grid-cols-1
+              w-full
+              gap-12 items-center
+              md:grid-cols-2
+              lg:gap-20
+              2xl:gap-28
+            "
+          >
             {/* LEFT CONTENT */}
-            <div className='flex flex-col gap-4 sm:gap-6'>
+            <div
+              className="
+                flex flex-col
+                gap-5
+                sm:gap-6
+                lg:gap-8
+              "
+            >
               <h1
-                className='
-            font-bold
-            text-2xl
-            sm:text-4xl
-            md:text-[2.8rem]
-            lg:text-5xl
-            leading-tight
-          '
+                className="
+                  max-w-[20ch]
+                  font-bold text-2xl leading-tight
+                  3xl:text-[5.5rem]
+                  sm:text-3xl
+                  md:text-[2.8rem]
+                  lg:text-3xl
+                  xl:text-6xl
+                  2xl:text-[4.5rem]
+                "
               >
                 Start With A <br /> Plan, Save & Own.
               </h1>
 
-              <div className='flex items-center gap-3 flex-wrap'>
+              <div
+                className="
+                  flex flex-wrap
+                  items-center gap-3
+                "
+              >
                 <img
                   src={Rectangle43}
                   alt=''
-                  className='w-7 sm:w-8 md:w-auto'
+                  className="
+                    w-7
+                    sm:w-8
+                    md:w-auto
+                  "
                 />
-                <p className='text-sm sm:text-lg md:text-xl lg:text-2xl font-light'>
+                <p
+                  className="
+                    text-sm font-light
+                    sm:text-lg
+                    md:text-xl
+                    lg:text-2xl
+                    2xl:text-3xl
+                  "
+                >
                   From Savings to Home Ownership.
                 </p>
               </div>
@@ -232,152 +294,301 @@ Where required, you can also conduct independent verification through legal prof
                     { required: true, message: 'Email is required' },
                     { type: 'email', message: 'Enter a valid email' }
                   ]}
-                  className='max-w-[460px] w-full mb-0'
+                  className="
+                    max-w-[520px] w-full
+                    mb-0
+                    2xl:max-w-[620px]
+                  "
                 >
-                  <div className='flex items-center bg-white rounded-full p-1 shadow-lg'>
+                  <div
+                    className="
+                      flex
+                      p-1
+                      bg-white
+                      rounded-full border-4px[#E0E0E0]
+                      shadow-xl
+                      items-center
+                    "
+                  >
                     <Input
                       placeholder='Start with your Email address .....'
-                      className='
-          flex-1
-          !border-none
-          !shadow-none
-          !bg-transparent
-          !h-12
-          px-5
-          text-base
-          focus:!ring-0
-        '
+                      className="
+                        flex-1
+                        px-6
+                        text-base
+                        !border-none !shadow-none !bg-transparent !h-14 focus:!ring-0
+                        2xl:text-xl 2xl:!h-16
+                      "
                     />
 
                     <Button
                       htmlType='submit'
                       loading={emailSubmitLoading}
-                      className='
-          !h-12
-          px-6
-          !rounded-full
-          !bg-blue-600
-          !text-white
-          flex items-center gap-2
-          text-base
-          font-medium
-        '
+                      className="
+                        flex
+                        px-6
+                        text-base font-medium
+                        !h-14 !rounded-full !bg-blue-600 !text-white items-center gap-2
+                        2xl:px-10 2xl:text-xl 2xl:!h-16
+                      "
                     >
-                      Get Started <MdOutlineArrowRightAlt size={20} />
+                      Get Started <MdOutlineArrowRightAlt size={24} />
                     </Button>
                   </div>
                 </Form.Item>
               </Form>
 
               {/* AVATARS + TEXT */}
-              <div className='flex items-center sm:flex-row gap-4 sm:gap-1 sm:items-center'>
-                <p className='text-xs sm:text-sm md:text-base leading-snug'>
+              <div
+                className="
+                  flex flex-wrap
+                  items-center gap-4
+                "
+              >
+                <p
+                  className="
+                    text-xs leading-snug
+                    sm:text-sm
+                    md:text-base
+                    lg:text-lg
+                    2xl:text-xl
+                  "
+                >
                   Building a Dream, One{' '}
-                  <span className='font-bold'>Home Owner</span> at a Time.
+                  <span
+                    className="
+                      font-bold
+                    "
+                  >Home Owner</span> at a Time.
                 </p>
 
-                <div className='flex -space-x-2'>
+                <div
+                  className="
+                    flex
+                    -space-x-3
+                  "
+                >
                   <img
                     src='https://images.unsplash.com/photo-1594564190328-0bed16a89837?w=200&auto=format&fit=crop&q=60'
                     alt='ilefund-user-1'
-                    className='
-      w-8 h-8
-      sm:w-9 sm:h-9
-      md:w-10 md:h-10
-      rounded-full
-      object-cover
-      border-2 border-white
-    '
+                    className="
+                      object-cover
+                      w-9 h-9
+                      rounded-full border-2 border-white
+                      sm:w-10 sm:h-10
+                      lg:w-11 lg:h-11
+                      2xl:w-14 2xl:h-14
+                    "
                   />
 
                   <img
                     src='https://images.unsplash.com/photo-1643008504049-1f4957523024?w=200&auto=format&fit=crop&q=60'
                     alt='ilefund-user-2'
-                    className='
-      w-8 h-8
-      sm:w-9 sm:h-9
-      md:w-10 md:h-10
-      rounded-full
-      object-cover
-      border-2 border-white
-    '
+                    className="
+                      object-cover
+                      w-9 h-9
+                      rounded-full border-2 border-white
+                      sm:w-10 sm:h-10
+                      lg:w-11 lg:h-11
+                      2xl:w-14 2xl:h-14
+                    "
                   />
 
                   <img
                     src='https://images.unsplash.com/photo-1533108344127-a586d2b02479?w=200&auto=format&fit=crop&q=60'
                     alt='ilefund-user-3'
-                    className='
-      w-8 h-8
-      sm:w-9 sm:h-9
-      md:w-10 md:h-10
-      rounded-full
-      object-cover
-      border-2 border-white
-    '
+                    className="
+                      object-cover
+                      w-9 h-9
+                      rounded-full border-2 border-white
+                      sm:w-10 sm:h-10
+                      lg:w-11 lg:h-11
+                      2xl:w-14 2xl:h-14
+                    "
                   />
 
                   <img
                     src='https://images.unsplash.com/photo-1602342323893-b11f757957c9?w=200&auto=format&fit=crop&q=60'
                     alt='ilefund-user-4'
-                    className='
-      w-8 h-8
-      sm:w-9 sm:h-9
-      md:w-10 md:h-10
-      rounded-full
-      object-cover
-      border-2 border-white
-    '
+                    className="
+                      object-cover
+                      w-9 h-9
+                      rounded-full border-2 border-white
+                      sm:w-10 sm:h-10
+                      lg:w-11 lg:h-11
+                      2xl:w-14 2xl:h-14
+                    "
                   />
                 </div>
               </div>
             </div>
 
             {/* RIGHT IMAGE */}
-            <div className='flex justify-center md:justify-end'>
+            <div
+              className="
+                flex
+                justify-center
+                md:justify-end
+              "
+            >
               <img
-                src="https://res.cloudinary.com/da1mxvbx2/image/upload/v1767943421/ilefund/ilefund-home_img_1_os6ziy.svg"
+                src='https://res.cloudinary.com/da1mxvbx2/image/upload/v1767943421/ilefund/ilefund-home_img_1_os6ziy.svg'
                 alt='Hero'
-                className='
-            w-full
-            max-w-[320px]
-            sm:max-w-[420px]
-            md:max-w-[500px]
-            lg:max-w-[560px]
-            xl:max-w-[620px]
-            h-auto
-          '
+                className="
+                  w-full max-w-[320px] h-auto
+                  3xl:max-w-[900px]
+                  sm:max-w-[420px]
+                  md:max-w-[520px]
+                  lg:max-w-[600px]
+                  xl:max-w-[680px]
+                  2xl:max-w-[780px]
+                "
               />
             </div>
           </div>
         </section>
       </div>
 
-      <div className='flex justify-center flex-col items-center pt-10 gap-4 w-11/12 mx-auto'>
-        <div className='bg-[#DFE8FF] px-2 rounded-lg py-1 text-[#0047FF]'>
+      <div
+        className='
+    flex
+    flex-col
+    items-center
+    pt-1
+    sm:pt-1
+    lg:pt-1
+    2xl:pt-1
+    gap-4
+    sm:gap-6
+    w-11/12
+    max-w-[75rem]
+    2xl:max-w-[110rem]
+    3xl:max-w-[130rem]
+    mx-auto
+  '
+      >
+        <div
+          className='
+      bg-[#DFE8FF]
+      px-3
+      py-1
+      rounded-lg
+      text-[#0047FF]
+      text-xs
+      sm:text-sm
+      lg:text-base
+      2xl:text-lg
+      font-medium
+    '
+        >
           How it Works
         </div>
 
-        <h1 className='font-bold text-3xl text-center'>
+        <h1
+          className='
+      font-bold
+      text-2xl
+      sm:text-3xl
+      md:text-4xl
+      lg:text-5xl
+      2xl:text-[3.5rem]
+      3xl:text-[4rem]
+      text-center
+      max-w-[24ch]
+      leading-tight
+    '
+        >
           Three Steps to Own Your First Property
         </h1>
 
-        <p className='text-center'>
+        <p
+          className='
+      text-center
+      text-sm
+      sm:text-base
+      md:text-lg
+      lg:text-xl
+      2xl:text-2xl
+      text-gray-600
+      max-w-[40ch]
+    '
+        >
           Find out how you can become a property owner <br /> in just few days.
         </p>
 
         {/* ✅ FULLY RESPONSIVE GRID */}
-        <div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10 mt-10 w-full'>
+        <div
+          className='
+      grid
+      grid-cols-1
+      sm:grid-cols-2
+      lg:grid-cols-3
+      gap-8
+      sm:gap-10
+      lg:gap-14
+      2xl:gap-20
+      mt-10
+      lg:mt-16
+      2xl:mt-20
+      w-full
+    '
+        >
           {/* Item 1 */}
-          <div className='p-6 flex flex-col items-center text-center'>
+          <div
+            className='
+        p-6
+        sm:p-8
+        lg:p-10
+        2xl:p-12
+        flex
+        flex-col
+        items-center
+        text-center
+        bg-white
+        
+      '
+          >
             <img
               src={home_img_2}
               alt='ilefund-Register'
-              className='w-34 h-34 mb-4'
+              className='
+          w-24
+          h-24
+          sm:w-28
+          sm:h-28
+          lg:w-32
+          lg:h-32
+          2xl:w-36
+          2xl:h-36
+          mb-4
+          lg:mb-6
+        '
             />
-            <h3 className='text-xl font-semibold mb-2'>
-              Sign Up and Verify Your Account
+            <h3
+              className='
+          text-lg
+          sm:text-xl
+          lg:text-2xl
+          2xl:text-3xl
+          font-semibold
+          mb-2
+          lg:mb-4
+        '
+            >
+              SignUp & Verify Your Account
             </h3>
-            <p className='text-gray-600 text-sm leading-6 text-justify'>
+            <p
+              className='
+          text-gray-600
+          text-sm
+          sm:text-base
+          lg:text-lg
+          2xl:text-xl
+          leading-6
+          lg:leading-7
+          text-justify
+        '
+            >
               Create a secure account and complete your KYC (NIN, BVN, Address)
               to access all features. The more verified you are, the more
               benefits you unlock.
@@ -385,16 +596,61 @@ Where required, you can also conduct independent verification through legal prof
           </div>
 
           {/* Item 2 */}
-          <div className='p-6 flex flex-col items-center text-center'>
+          <div
+            className='
+        p-6
+        sm:p-8
+        lg:p-10
+        2xl:p-12
+        flex
+        flex-col
+        items-center
+        text-center
+        bg-white
+        
+      '
+          >
             <img
               src={home_img_3}
               alt='ilefund-Save'
-              className='w-34 h-34 mb-4'
+              className='
+          w-24
+          h-24
+          sm:w-28
+          sm:h-28
+          lg:w-32
+          lg:h-32
+          2xl:w-36
+          2xl:h-36
+          mb-4
+          lg:mb-6
+        '
             />
-            <h3 className='text-xl font-semibold mb-2'>
+            <h3
+              className='
+          text-lg
+          sm:text-xl
+          lg:text-2xl
+          2xl:text-3xl
+          font-semibold
+          mb-2
+          lg:mb-4
+        '
+            >
               Start Saving with a Plan
             </h3>
-            <p className='text-gray-600 text-sm leading-6 text-justify'>
+            <p
+              className='
+          text-gray-600
+          text-sm
+          sm:text-base
+          lg:text-lg
+          2xl:text-xl
+          leading-6
+          lg:leading-7
+          text-justify
+        '
+            >
               Set your saving frequency (daily, weekly, monthly), and we’ll
               guide you with reminders and progress tracking. You can save
               manually or automate with card/bank.
@@ -402,14 +658,51 @@ Where required, you can also conduct independent verification through legal prof
           </div>
 
           {/* Item 3 */}
-          <div className='p-6 flex flex-col items-center text-center'>
+          <div
+            className='
+        p-6
+        sm:p-8
+        lg:p-10
+        2xl:p-12
+        flex
+        flex-col
+        items-center
+        text-center
+        bg-white
+        
+      '
+          >
             <img
               src={home_img_4}
               alt='ilefund-Get-Home'
-              className='w-34 h-34 mb-4'
+              className='
+          w-24
+          h-24
+          sm:w-28
+          sm:h-28
+          lg:w-32
+          lg:h-32
+          2xl:w-36
+          2xl:h-36
+          mb-4
+          lg:mb-6
+        '
             />
-            <h3 className='text-xl font-semibold mb-2'>Own Your Property</h3>
-            <p className='text-gray-600 text-sm leading-6 text-justify'>
+            <h3 className=' text-lg sm:text-xl  lg:text-2xl  2xl:text-3xl font-semibold mb-2 lg:mb-4 '>
+              Own Your Property
+            </h3>
+            <p
+              className='
+          text-gray-600
+          text-sm
+          sm:text-base
+          lg:text-lg
+          2xl:text-xl
+          leading-6
+          lg:leading-7
+          text-justify
+        '
+            >
               Choose to pay outright or continue your payment plan over a
               pre-defined period. We’ll keep track of everything with the
               savings tracker, and the developer shares documentation with you
@@ -420,123 +713,123 @@ Where required, you can also conduct independent verification through legal prof
       </div>
 
       {/* ✅ Calculator + Properties Section */}
-      <section className='w-11/12 max-w-7xl mx-auto py-16'>
-        <div className='grid grid-cols-1 md:grid-cols-3 gap-6'>
-          {/* LEFT: Calculator */}
-          <div
-            className="
-    md:col-span-1
-    flex flex-col justify-center
+<section className="w-11/12  2xl:max-w-[110rem]
+    3xl:max-w-[130rem] max-w-[75rem]
+       mx-auto py-16 sm:py-20 lg:py-24">
+  <div className="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8">
 
-    bg-[url('/src/assets/phone.png')]
-    bg-no-repeat
-    bg-center
+    {/* LEFT: Calculator */}
+    <div
+      className="
+        md:col-span-1
+        flex flex-col justify-center
 
-    /* MOBILE & SMALL SCREENS — BIGGER */
-    bg-[length:auto_100%]
-    sm:bg-[length:auto_105%]
+        bg-[url('/src/assets/phone.png')]
+        bg-no-repeat
+        bg-center
+        bg-[length:auto_100%]
+        sm:bg-[length:auto_105%]
+        md:bg-[length:auto_100%]
 
-    /* DESKTOP — KEEP PERFECT */
-    md:bg-[length:auto_100%]
+        p-4 sm:p-6 md:p-8 lg:p-10
 
-    p-4 sm:p-6 md:p-10
+        h-[520px] sm:h-[580px] md:h-[620px] lg:h-[680px] 2xl:h-[720px]
 
-    /* MOBILE HEIGHT INCREASED */
-    h-[520px]
-    sm:h-[600px]
+        transform scale-100 origin-top
+      "
+    >
+      <Calculator
+        amountFontSize="text-base sm:text-lg md:text-xl lg:text-2xl"
+        resultFontSize="!text-base sm:!text-lg md:!text-xl lg:!text-2xl"
+      />
+    </div>
 
-    /* DESKTOP HEIGHT — UNCHANGED */
-    md:h-[620px]
-    lg:h-[680px]
+    {/* RIGHT: Properties */}
+    <div className="md:col-span-2 flex flex-col justify-center mt-10 md:mt-0">
+      <h1 className="font-bold text-2xl sm:text-3xl md:text-4xl lg:text-5xl text-center mb-6 sm:mb-8 lg:mb-10">
+        Feature Vetted Properties
+      </h1>
 
-    transform scale-100 origin-top
-  "
-          >
-            <Calculator
-              amountFontSize='text-base sm:text-lg md:text-xl'
-              resultFontSize='!text-base sm:!text-lg md:!text-xl'
-            />
-          </div>
+      {/* GRID WRAPPER */}
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-4 sm:gap-6 lg:gap-8">
+        {/* ⭐ SKELETON LOADER */}
+        {listingLoading &&
+          Array.from({ length: 8 }).map((_, i) => (
+            <Card key={i} className="!p-2 w-full">
+              <Skeleton.Image
+                style={{
+                  width: "100%",
+                  height: "5rem",
+                  borderRadius: "6px",
+                }}
+                active
+              />
+              <Skeleton active title={false} paragraph={{ rows: 3 }} />
+            </Card>
+          ))}
 
-          {/* RIGHT: Properties */}
-          <div className='md:col-span-2 flex flex-col justify-center'>
-            
-             <h1 className='font-bold text-3xl text-center mb-5'>
-         Feature Vetted Properties
-        </h1>
-
-            {/* GRID WRAPPER */}
-            <div className='grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-3'>
-              {/* ⭐ SKELETON LOADER */}
-              {listingLoading &&
-                Array.from({ length: 8 }).map((_, i) => (
-                  <Card key={i} className='!p-2 w-full'>
-                    <Skeleton.Image
-                      style={{
-                        width: '100%',
-                        height: '5rem',
-                        borderRadius: '6px'
-                      }}
-                      active
+        {/* ⭐ REAL LISTING */}
+        {!listingLoading &&
+          property.map((item) => (
+            <Link key={item.id} onClick={moveToPage}>
+              <Card
+                hoverable
+                className="
+                  w-full
+                  overflow-hidden
+                  rounded-xl
+                  !p-2
+                  transition-all duration-300
+                  hover:-translate-y-1 hover:shadow-lg
+                "
+                cover={
+                  <div className="relative">
+                    <img
+                      alt="property"
+                      src={item.banner}
+                      className="h-28 sm:h-32 md:h-36 lg:h-40 w-full object-cover rounded-lg"
                     />
-                    <Skeleton active title={false} paragraph={{ rows: 3 }} />
-                  </Card>
-                ))}
 
-              {/* ⭐ REAL LISTING */}
-              {!listingLoading &&
-                property.map((item, index) => (
-                   <Link key={item.id} to={`/property/${item.id}`}>
-                          <Card
-                            hoverable
-                            className="w-full overflow-hidden rounded-xl !p-2 transition-all duration-300 hover:-translate-y-1 hover:shadow-lg"
-                            cover={
-                              <div className="relative">
-                                <img
-                                  alt="property"
-                                  src={item.banner}
-                                  className="h-28 sm:h-36 w-full object-cover rounded-lg"
-                                />
-                  
-                                {/* Price Badge */}
-                                <div className="absolute bottom-2 left-2 bg-black/80 text-white px-3 py-1 rounded-md text-xs sm:text-sm font-semibold">
-                                  ₦{Number(item.price).toLocaleString('en-NG')}
-                                </div>
-                  
-                                {/* Size Badge */}
-                                <div className="absolute top-2 right-2 bg-white/90 text-gray-900 px-2 py-1 rounded-md text-[0.6rem] sm:text-xs font-semibold">
-                                  {item.sizeValue} sqm
-                                </div>
-                              </div>
-                            }
-                          >
-                            {/* Title */}
-                            <h3 className="font-semibold text-sm sm:text-base leading-snug mt-1 truncate">
-                              {item.title}
-                            </h3>
-                  
-                            {/* Location */}
-                            <div className="flex items-center mt-1 gap-1">
-                              <img src={pin} alt="pin" className="w-3 sm:w-4" />
-                              <p className="text-gray-500 text-xs sm:text-sm truncate">
-                                {item.estate}
-                              </p>
-                            </div>
-                  
-                             
-                          </Card>
-                        </Link>
-                ))}
-            </div>
-          </div>
-        </div>
-      </section>
+                    {/* Price Badge */}
+                    <div className="absolute bottom-2 left-2 bg-black/80 text-white px-3 py-1 rounded-md text-xs sm:text-sm md:text-base font-semibold">
+                      ₦{Number(item.price).toLocaleString("en-NG")}
+                    </div>
 
-      <section className='relative'>
+                    {/* Size Badge */}
+                    <div className="absolute top-2 right-2 bg-white/90 text-gray-900 px-2 py-1 rounded-md text-[0.6rem] sm:text-xs md:text-sm lg:text-sm font-semibold">
+                      {item.sizeValue} sqm
+                    </div>
+                  </div>
+                }
+              >
+                {/* Title */}
+                <h3 className="font-semibold text-sm sm:text-base md:text-lg lg:text-lg leading-snug mt-1 truncate">
+                  {item.title}
+                </h3>
+
+                {/* Location */}
+                <div className="flex items-center mt-1 gap-1">
+                  <img src={pin} alt="pin" className="w-3 sm:w-4 md:w-4" />
+                  <p className="text-gray-500 text-xs sm:text-sm md:text-base truncate">
+                    {item.estate}
+                  </p>
+                </div>
+              </Card>
+            </Link>
+          ))}
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<section className='relative'>
         {/* HERO IMAGE */}
-        <div className="relative h-[400px] sm:h-[500px] md:h-[650px] lg:h-[750px] w-full bg-[url('/src/assets/home_img_2.png')] bg-cover bg-center bg-no-repeat">
+        <div className="relative h-[400px] sm:h-[500px] md:h-[650px] lg:h-[750px]  2xl:max-w-[110rem]
+    3xl:max-w-[130rem] max-w-[75rem] mx-auto rounded-4xl
+         bg-[url('/src/assets/home_img_2.png')] bg-cover bg-center bg-no-repeat">
           {/* DARK OVERLAY */}
-          <div className='absolute inset-0 bg-[#00000085]'></div>
+          <div className='absolute inset-0 bg-[#00000085] rounded-4xl'></div>
 
           {/* VIDEO OR PLAY BUTTON */}
           <div className='absolute inset-0 flex items-center justify-center z-10'>
@@ -572,155 +865,147 @@ Where required, you can also conduct independent verification through legal prof
             )}
           </div>
         </div>
-      </section>
+</section>
 
-      <section className='w-11/12 mx-auto mt-20'>
-        <div className='flex flex-col md:flex-row justify-between mb-10 gap-5 md:gap-0'>
-          <h1 className='font-bold text-3xl sm:text-4xl md:text-4xl lg:text-5xl leading-tight'>
-            Your most frequently asked <br /> question answered
-          </h1>
-          <Link
-            to='/faqs'
-            className='!bg-blue-600 !h-10 !text-white py-3 !rounded-full w-full sm:w-60 hover:bg-blue-700 transition !border-0 mt-3 md:mt-0 flex items-center justify-center gap-2'
-            htmlType='submit'
-          >
-            View All FAQS <MdOutlineArrowRightAlt />
-          </Link>
-        </div>
+<section className="w-11/12 2xl:max-w-[110rem]
+    3xl:max-w-[130rem] max-w-[75rem] mx-auto mt-20 sm:mt-24 lg:mt-28">
+  {/* FAQ Header */}
+  <div className="flex flex-col md:flex-row justify-between mb-10 gap-5 md:gap-0">
+    <h1 className="font-bold text-2xl sm:text-3xl md:text-4xl lg:text-5xl leading-tight">
+      Your most frequently asked <br /> question answered
+    </h1>
 
-        <div className='grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-10'>
-          {/* LEFT: Image with Stats */}
-          <div className="relative h-[400px] sm:h-[450px] md:h-[500px] lg:h-[550px] rounded-md bg-[url('https://res.cloudinary.com/da1mxvbx2/image/upload/v1767943940/ilefund/ilefund-questions_wauhee.png')] bg-no-repeat bg-cover bg-top">
-            <div className='rounded-md bg-[#F2F3FA] flex flex-col justify-center items-center p-6 sm:p-10 w-56 sm:w-60 absolute top-3/4 md:top-3/4 right-2 sm:right-5 lg:right-10 transform -translate-y-1/2'>
-              <h1 className='font-bold text-center sm:text-lg'>100+ Client</h1>
-              <h1 className='font-bold text-center sm:text-lg'>
-                5.0 (250 Reviews)
-              </h1>
-              <Avatar.Group className='mt-2 sm:mt-4'>
-                <Avatar src='https://api.dicebear.com/7.x/miniavs/svg?seed=1' />
-                <a href='https://ant.design'>
-                  <Avatar style={{ backgroundColor: '#f56a00' }}>K</Avatar>
-                </a>
-                <Tooltip title='Ant User' placement='top'>
-                  <Avatar
-                    style={{ backgroundColor: '#87d068' }}
-                    icon={<UserOutlined />}
+    <Link
+      to="/faqs"
+      className="!bg-blue-600 !h-10 !text-white py-3 !rounded-full w-full sm:w-60 hover:bg-blue-700 transition !border-0 mt-3 md:mt-0 flex items-center justify-center gap-2"
+    >
+      View All FAQS <MdOutlineArrowRightAlt />
+    </Link>
+  </div>
+
+  <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-10">
+    {/* LEFT: Image with Stats */}
+    <div
+      className="relative h-[400px] sm:h-[450px] md:h-[500px] lg:h-[550px] rounded-md 
+        bg-[url('https://res.cloudinary.com/da1mxvbx2/image/upload/v1767943940/ilefund/ilefund-questions_wauhee.png')] 
+        bg-no-repeat bg-cover bg-top"
+    >
+      <div
+        className="rounded-md bg-[#F2F3FA] flex flex-col justify-center items-center
+          p-6 sm:p-10 w-56 sm:w-60 absolute top-3/4 md:top-3/4 right-2 sm:right-5 lg:right-10 transform -translate-y-1/2"
+      >
+        <h1 className="font-bold text-center sm:text-lg">100+ Clients</h1>
+        <h1 className="font-bold text-center sm:text-lg">5.0 (250 Reviews)</h1>
+        <Avatar.Group className="mt-2 sm:mt-4">
+          <Avatar src="https://api.dicebear.com/7.x/miniavs/svg?seed=1" />
+          <a href="https://ant.design">
+            <Avatar style={{ backgroundColor: "#f56a00" }}>K</Avatar>
+          </a>
+          <Tooltip title="Ant User" placement="top">
+            <Avatar style={{ backgroundColor: "#87d068" }} icon={<UserOutlined />} />
+          </Tooltip>
+          <Avatar style={{ backgroundColor: "#1677ff" }} icon={<AntDesignOutlined />} />
+        </Avatar.Group>
+      </div>
+    </div>
+
+    {/* RIGHT: Accordion */}
+    <div className="w-full">
+      <div className="space-y-4">
+        {items.map((item) => {
+          const isActive = activeKey === item.key;
+
+          return (
+            <div key={item.key} className="border border-gray-300 rounded-lg overflow-hidden">
+              {/* Header */}
+              <button
+                type="button"
+                onClick={() => setActiveKey(isActive ? null : item.key)}
+                aria-expanded={isActive}
+                aria-controls={`panel-${item.key}`}
+                className={`w-full flex items-center justify-between px-4 sm:px-6 py-4 sm:py-5 focus:outline-none transition-colors duration-300 ${
+                  isActive ? "bg-[#F2F3FA]" : "bg-white text-gray-900"
+                }`}
+              >
+                <span className="text-base sm:text-lg font-semibold">{item.label}</span>
+                <span
+                  className={`ml-4 transition-transform duration-300 ${
+                    isActive ? "rotate-45" : "rotate-0"
+                  }`}
+                >
+                  <AiOutlinePlus
+                    size={20}
+                    className={`${isActive ? "text-black" : "text-gray-500"}`}
                   />
-                </Tooltip>
-                <Avatar
-                  style={{ backgroundColor: '#1677ff' }}
-                  icon={<AntDesignOutlined />}
-                />
-              </Avatar.Group>
+                </span>
+              </button>
+
+              {/* Content */}
+              <div
+                id={`panel-${item.key}`}
+                className={`overflow-hidden transition-[max-height] duration-300 ease-in-out ${
+                  isActive ? "max-h-60 sm:max-h-64" : "max-h-0"
+                }`}
+              >
+                <div
+                  className={`p-4 sm:p-6 border-t border-gray-200 ${
+                    isActive ? "bg-[#F2F3FA]" : "bg-white text-gray-700"
+                  }`}
+                >
+                  {item.children}
+                </div>
+              </div>
             </div>
-          </div>
+          );
+        })}
+      </div>
+    </div>
+  </div>
+</section>
 
-          {/* RIGHT: Accordion */}
-          <div className='w-full'>
-            <div className='space-y-4'>
-              {items.map(item => {
-                const isActive = activeKey === item.key
-
-                return (
-                  <div
-                    key={item.key}
-                    className='border border-gray-300 rounded-lg overflow-hidden'
-                  >
-                    {/* Header */}
-                    <button
-                      type='button'
-                      onClick={() => setActiveKey(isActive ? null : item.key)}
-                      aria-expanded={isActive}
-                      aria-controls={`panel-${item.key}`}
-                      className={`w-full flex items-center justify-between px-4 sm:px-6 py-4 sm:py-5 focus:outline-none transition-colors duration-300 ${
-                        isActive ? 'bg-[#F2F3FA]' : 'bg-white text-gray-900'
-                      }`}
-                    >
-                      <span className='text-base sm:text-lg font-semibold'>
-                        {item.label}
-                      </span>
-
-                      {/* Icon */}
-                      <span
-                        className={`ml-4 transition-transform duration-300 ${
-                          isActive ? 'rotate-45' : 'rotate-0'
-                        }`}
-                      >
-                        <AiOutlinePlus
-                          size={20}
-                          className={`${
-                            isActive ? 'text-black' : 'text-gray-500'
-                          }`}
-                        />
-                      </span>
-                    </button>
-
-                    {/* Content */}
-                    <div
-                      id={`panel-${item.key}`}
-                      className={`overflow-hidden transition-[max-height] duration-300 ease-in-out ${
-                        isActive ? 'max-h-40' : 'max-h-0'
-                      }`}
-                    >
-                      <div
-                        className={`p-4 sm:p-6 border-t border-gray-200 ${
-                          isActive ? 'bg-[#F2F3FA]' : 'bg-white text-gray-700'
-                        }`}
-                      >
-                        {item.children}
-                      </div>
-                    </div>
-                  </div>
-                )
-              })}
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* // bg-[url('/src/assets/ilefund-land-nigeria-bg-1.png')]  */}
-      <div className='w-full py-16 flex justify-center mt-28'>
-        <div
-          className="
-      bg-[url('/src/assets/ilefund-land-nigeria-bg-1.png')]
-      bg-no-repeat bg-center 
-      bg-[length:100%_100%]
-      h-[500px] sm:h-[550px] md:h-[420px] w-full px-4 sm:pl-10
-    "
-        >
-          <div className='w-full max-w-6xl grid md:grid-cols-2 gap-2 items-top'>
-            {/* LEFT: PHONE MOCKUPS */}
-            <div className='relative flex justify-center md:justify-start'>
-              <img
-                src="https://res.cloudinary.com/da1mxvbx2/image/upload/v1767944009/ilefund/ilefund-apps-group_f5xxzx.svg"
-                alt='mockup-1'
-                className='w-40 sm:w-52  md:w-102 drop-shadow-2xl  z-20 -mt-10 sm:-mt-15'
-              />
-            </div>
-
-            {/* RIGHT: TEXT + FORM */}
-            <div className='text-white p-6 sm:p-10 md:p-16 mt-2 md:mt-0'>
-              <h1 className='text-2xl sm:text-3xl md:text-5xl font-bold leading-snug md:leading-tight'>
-                Download <br />ileFund Now
-              </h1>
-
-              <p className='text-xs sm:text-sm md:text-base mt-4 opacity-90'>
-                You don’t need millions to own property. You just need a plan — and ileFund gives you one. Download Ilefund now and start saving toward your property today.
-              </p>
-
-              <Form>
-                <div className="flex justify-start gap-4 mt-6 flex-wrap">
-                 
-                        <a href=" https://play.google.com/store/apps/details?id=com.ilefund" target="_blank"> <img src={googlePlay} alt="Google Play" className="h-12 cursor-pointer" /></a>
-                         <img src={appStore} alt="App Store" className="h-12 cursor-pointer" />
-                       </div>
-              </Form>
-            </div>
-          </div>
-        </div>
+{/* App Download Section */}
+<div className="w-full py-16 flex justify-center mt-28">
+  <div
+    className="bg-[#0047ff] bg-no-repeat bg-center bg-[length:100%_100%]
+      h-[300px] sm:h-[350px] md:h-[400px] lg:h-[450px] w-full px-4 sm:pl-10 flex justify-center"
+  >
+    <div className="mx-auto max-w-7xl grid md:grid-cols-2 gap-4 items-center">
+      {/* LEFT: PHONE MOCKUPS */}
+      <div className="relative flex justify-center md:justify-center">
+        <img
+          src="https://res.cloudinary.com/da1mxvbx2/image/upload/v1767944009/ilefund/ilefund-apps-group_f5xxzx.svg"
+          alt="mockup-1"
+          className="w-40 sm:w-52 md:w-80 lg:w-96 drop-shadow-2xl z-20 -mt-10 sm:-mt-15"
+        />
       </div>
 
-    
+      {/* RIGHT: TEXT + FORM */}
+      <div className="text-white p-6 sm:p-10 md:p-16 mt-4 md:mt-0">
+        <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold leading-snug md:leading-tight">
+          Download <br />
+          ileFund Now
+        </h1>
+
+        <p className="text-xs sm:text-sm md:text-base mt-4 opacity-90">
+          You don’t need millions to own property. You just need a plan — and ileFund gives you one. Download ileFund now and start saving toward your property today.
+        </p>
+
+        <Form>
+          <div className="flex justify-start gap-4 mt-6 flex-wrap">
+            <a
+              href="https://play.google.com/store/apps/details?id=com.ilefund"
+              target="_blank"
+              rel="noreferrer"
+            >
+              <img src={googlePlay} alt="Google Play" className="h-12 cursor-pointer" />
+            </a>
+            <img src={appStore} alt="App Store" className="h-12 cursor-pointer" />
+          </div>
+        </Form>
+      </div>
+    </div>
+  </div>
+</div>
 
       {/* ✅ You can continue the rest of your sections exactly as before */}
       {/* ...Steps Section, Calculator, Properties, FAQ, Testimonial, etc. */}

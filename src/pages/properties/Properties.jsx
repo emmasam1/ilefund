@@ -1,4 +1,4 @@
-import { Card, Button, Divider, Form, Collapse, Input, Skeleton  } from 'antd'
+import { Card, Button, Divider, Form, Collapse, Input, Skeleton } from 'antd'
 import React, { useState, useEffect } from 'react'
 import { useNavigate, Link } from 'react-router'
 
@@ -15,8 +15,6 @@ import propertyImg2 from '../../assets/property_img_2.png'
 import { LiaLongArrowAltRightSolid } from 'react-icons/lia'
 import Calculator from '../../components/calculator/Calculator'
 
- 
-
 const Properties = () => {
   const [property, setProperty] = useState([])
   const [loading, setLoading] = useState(false)
@@ -26,6 +24,10 @@ const Properties = () => {
 
   const handleClick = id => {
     navigate(`/property/${id}`)
+  }
+
+  const moveToPage = () => {
+    window.location.href = 'https://app.ilefund.com'
   }
 
   const onFinish = async values => {
@@ -38,11 +40,27 @@ const Properties = () => {
     window.location.href = `https://app.ilefund.com/register?email=${userEmail}`
   }
 
-    const getListing = async () => {
+  const loadAPIBaseURL = () => {
+    axios
+      .get(import.meta.env.VITE_BASE_URL)
+      .then(response => {
+        const { web_api_url, estate_api } = response.data.data
+
+        getListing(web_api_url)
+        axios.get(estate_api)
+      })
+      .catch(error => {
+        console.error('Axios error:', error)
+      })
+  }
+
+  const getListing = async web_api_url => {
     try {
+      console.log(`${web_api_url}/api/estate/prototypes?limit=8`)
+
       setLoading(true)
       const res = await axios.get(
-        `https://ilefund.onrender.com/api/estate/prototypes?limit=8`
+        `${web_api_url}/api/estate/prototypes?limit=8`
       )
       // console.log(res);
       const cleanedData = (res.data.data || []).map(item => ({
@@ -62,190 +80,299 @@ const Properties = () => {
   }
 
   useEffect(() => {
-    getListing()
+    loadAPIBaseURL()
   }, [])
 
   return (
     <>
-          <div
-        className='
-    bg-[url(https://res.cloudinary.com/da1mxvbx2/image/upload/v1767944328/ilefund/ilefund-land-nigeria-bg-2_fymozq.png)]
-    bg-cover bg-center
-    min-h-[480px]
-    sm:min-h-[600px]
-    md:min-h-[680px]
-    lg:min-h-[750px]
-    xl:min-h-[820px]
+     <div
+  className="
+    w-full
     overflow-hidden
-  '
+    min-h-[30rem]
+  "
+>
+  {/* ================= HERO SECTION ================= */}
+  <section
+    className="
+      w-full
+      max-w-[75rem]
+      mx-auto
+      px-[5%]
+      py-[4rem]
+      grid
+      grid-cols-1
+      sm:grid-cols-2
+      gap-[3rem]
+      items-center
+      bg-cover
+      bg-center
+    "
+  >
+    {/* LEFT CONTENT */}
+    <div className="space-y-[1.5rem]">
+      <div
+        className="
+          bg-[#DFE8FF]
+          px-[0.75rem]
+          py-[0.25rem]
+          rounded-[0.5rem]
+          text-[#0047FF]
+          text-[0.875rem]
+          w-max
+        "
       >
-      <section className='grid grid-cols-1 sm:grid-cols-2 gap-8 items-center px-15 py-16 bg-cover bg-center '>
-        <div className='space-y-6'>
-          <div className='bg-[#DFE8FF] px-3 sm:px-4 py-1 rounded-lg text-[#0047FF] w-max'>
-           Vetted Properties
-          </div>
-          <h1 className='font-extrabold text-4xl sm:text-4xl lg:text-4xl leading-tight'>
-            A diversified property portfolio,
-            <br />
-             built for steady growth
-            
-          </h1>
-          <p className='text-gray-600 max-w-md'>
-           Explore ILEFUND’s real estate strategies designed to capture long-term demand drivers such as urban housing growth, rental demand, and logistics expansion across Nigeria and Africa.
-          </p>
+        Vetted Properties
+      </div>
 
-          {/* FORM */}
-          <Form onFinish={onFinish}>
-            <Form.Item
-              name='email'
-              rules={[
-                { required: true, message: 'Email is required' },
-                { type: 'email', message: 'Enter a valid email' }
-              ]}
-              className='max-w-[460px] w-full mb-0'
-            >
-              <div className='flex items-center bg-white rounded-full p-1 shadow-lg'>
-                <Input
-                  placeholder='Start with your Email address .....'
-                  className='
-          flex-1
-          !border-none
-          !shadow-none
-          !bg-transparent
-          !h-12
-          px-5
-          text-base
-          focus:!ring-0
-        '
-                />
-
-                <Button
-                  htmlType='submit'
-                  loading={emailSubmitLoading}
-                  className='
-          !h-12
-          px-6
-          !rounded-full
-          !bg-blue-600
-          !text-white
-          flex items-center gap-2
-          text-base
-          font-medium
-        '
-                >
-                  Get Started <MdOutlineArrowRightAlt size={20} />
-                </Button>
-              </div>
-            </Form.Item>
-          </Form>
-        </div>
-
-        <div className='flex justify-center'>
-          <img
-            src='https://res.cloudinary.com/da1mxvbx2/image/upload/v1767943399/ilefund/realestatebanner_u9h1tf.svg'
-            alt='Illustration of land planning'
-            className='w-full max-w-md object-contain'
-          />
-        </div>
-      </section>
-
-      {/* <section>
-        <div className='max-w-6xl mx-auto py-15'>
-          <h1 className='text-center font-extrabold'>
-            Stay the course, reap the rewards
-          </h1>
-          <p className='!text-center text-bold mt-7 text-gray-300'>
-            If you Invested
-          </p>
-        </div>
-
-        <Calculator />
-      </section> */}
-
-       <div className='p-10 mt-10'>
-        <h1 className='text-2xl font-bold text-center'>
-          Vetted Properties
-        </h1>
-        <p className='text-center'>
-          Here are the real estate properties that are powering currently available for purchase.
-        </p>
-
-       <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 mt-5">
-  {/* ⭐ SKELETON LOADER */}
-  {loading &&
-    Array.from({ length: 8 }).map((_, i) => (
-      <Card
-        key={i}
-        className="w-full overflow-hidden rounded-xl !p-2"
+      <h1
+        className="
+          font-extrabold
+          text-[2rem]
+          md:text-[2.25rem]
+          leading-tight
+        "
       >
-        <Skeleton.Image
-          active
-          style={{
-            width: '100%',
-            height: '8rem',
-            borderRadius: '10px'
-          }}
-        />
+        A diversified property portfolio,
+        <br />
+        built for steady growth
+      </h1>
 
-        <div className="mt-2">
-          <Skeleton active title={false} paragraph={{ rows: 2 }} />
-        </div>
-      </Card>
-    ))}
+      <p
+        className="
+          text-gray-600
+          max-w-[28rem]
+          text-[1rem]
+          leading-relaxed
+        "
+      >
+        Explore ILEFUND’s real estate strategies designed to capture
+        long-term demand drivers such as urban housing growth, rental
+        demand, and logistics expansion across Nigeria and Africa.
+      </p>
 
-  {/* ⭐ REAL LISTINGS */}
-  {!loading &&
-    property.map((item) => (
-      <Link key={item.id} to={`/property/${item.id}`}>
-        <Card
-          hoverable
-          className="w-full overflow-hidden rounded-xl !p-2 transition-all duration-300 hover:-translate-y-1 hover:shadow-lg"
-          cover={
-            <div className="relative">
-              <img
-                alt="property"
-                src={item.banner}
-                className="h-28 sm:h-36 w-full object-cover rounded-lg"
-              />
-
-              {/* Price Badge */}
-              <div className="absolute bottom-2 left-2 bg-black/80 text-white px-3 py-1 rounded-md text-xs sm:text-sm font-semibold">
-                ₦{Number(item.price).toLocaleString('en-NG')}
-              </div>
-
-              {/* Size Badge */}
-              <div className="absolute top-2 right-2 bg-white/90 text-gray-900 px-2 py-1 rounded-md text-[0.6rem] sm:text-xs font-semibold">
-                {item.sizeValue} sqm
-              </div>
-            </div>
-          }
+      {/* FORM */}
+      <Form onFinish={onFinish}>
+        <Form.Item
+          name="email"
+          rules={[
+            { required: true, message: 'Email is required' },
+            { type: 'email', message: 'Enter a valid email' }
+          ]}
+          className="w-full max-w-[28.75rem] mb-0"
         >
-          {/* Title */}
-          <h3 className="font-semibold text-sm sm:text-base leading-snug mt-1 truncate">
-            {item.title}
-          </h3>
+          <div
+            className="
+              flex
+              items-center
+              bg-white
+              rounded-full
+              p-[0.25rem]
+              shadow-lg
+            "
+          >
+            <Input
+              placeholder="Start with your Email address ....."
+              className="
+                flex-1
+                !border-none
+                !shadow-none
+                !bg-transparent
+                h-[3rem]
+                px-[1.25rem]
+                text-[1rem]
+                focus:!ring-0
+              "
+            />
 
-          {/* Location */}
-          <div className="flex items-center mt-1 gap-1">
-            <img src={pin} alt="pin" className="w-3 sm:w-4" />
-            <p className="text-gray-500 text-xs sm:text-sm truncate">
-              {item.estate}
-            </p>
+            <Button
+              htmlType="submit"
+              loading={emailSubmitLoading}
+              className="
+                h-[3rem]
+                px-[1.5rem]
+                !rounded-full
+                !bg-blue-600
+                !text-white
+                flex
+                items-center
+                gap-[0.5rem]
+                text-[1rem]
+                font-medium
+              "
+            >
+              Get Started <MdOutlineArrowRightAlt size={20} />
+            </Button>
           </div>
+        </Form.Item>
+      </Form>
+    </div>
 
-           
-        </Card>
-      </Link>
-    ))}
+    {/* RIGHT IMAGE */}
+    <div className="flex justify-center">
+      <div className="w-full max-w-[24rem] aspect-[4/3]">
+        <img
+          src="https://res.cloudinary.com/da1mxvbx2/image/upload/v1767943399/ilefund/realestatebanner_u9h1tf.svg"
+          alt="Illustration of land planning"
+          className="w-full h-full object-contain"
+        />
+      </div>
+    </div>
+  </section>
+
+  {/* ================= PROPERTY GRID ================= */}
+  <section
+    className="
+      w-full
+      max-w-[75rem]
+      mx-auto
+      px-[5%]
+      py-[3rem]
+    "
+  >
+    <h1
+      className="
+        text-[1.5rem]
+        font-bold
+        text-center
+        mb-[0.5rem]
+      "
+    >
+      Vetted Properties
+    </h1>
+
+    <p
+      className="
+        text-center
+        text-[1rem]
+        text-gray-600
+        max-w-[36rem]
+        mx-auto
+      "
+    >
+      Here are the real estate properties that are currently available for
+      purchase.
+    </p>
+
+    <div
+      className="
+        grid
+        grid-cols-2
+        md:grid-cols-3
+        lg:grid-cols-4
+        gap-[1rem]
+        mt-[2rem]
+      "
+    >
+      {/* ⭐ SKELETON LOADER */}
+      {loading &&
+        Array.from({ length: 8 }).map((_, i) => (
+          <Card
+            key={i}
+            className="w-full overflow-hidden rounded-[0.75rem] !p-[0.5rem]"
+          >
+            <Skeleton.Image
+              active
+              style={{
+                width: '100%',
+                height: '8rem',
+                borderRadius: '0.625rem'
+              }}
+            />
+
+            <div className="mt-[0.5rem]">
+              <Skeleton active title={false} paragraph={{ rows: 2 }} />
+            </div>
+          </Card>
+        ))}
+
+      {/* ⭐ REAL LISTINGS */}
+      {!loading &&
+        property.map(item => (
+          <Link key={item.id} onClick={moveToPage}>
+            <Card
+              hoverable
+              className="
+                w-full
+                overflow-hidden
+                rounded-[0.75rem]
+                !p-[0.5rem]
+                transition-all
+                duration-300
+                hover:-translate-y-[0.25rem]
+                hover:shadow-lg
+              "
+              cover={
+                <div className="relative w-full aspect-[4/3] overflow-hidden rounded-[0.5rem]">
+                  <img
+                    alt="property"
+                    src={item.banner}
+                    className="w-full h-full object-cover"
+                  />
+
+                  {/* Price Badge */}
+                  <div
+                    className="
+                      absolute
+                      bottom-[0.5rem]
+                      left-[0.5rem]
+                      bg-black/80
+                      text-white
+                      px-[0.75rem]
+                      py-[0.25rem]
+                      rounded-[0.375rem]
+                      text-[0.75rem]
+                      font-semibold
+                    "
+                  >
+                    ₦{Number(item.price).toLocaleString('en-NG')}
+                  </div>
+
+                  {/* Size Badge */}
+                  <div
+                    className="
+                      absolute
+                      top-[0.5rem]
+                      right-[0.5rem]
+                      bg-white/90
+                      text-gray-900
+                      px-[0.5rem]
+                      py-[0.25rem]
+                      rounded-[0.375rem]
+                      text-[0.625rem]
+                      font-semibold
+                    "
+                  >
+                    {item.sizeValue} sqm
+                  </div>
+                </div>
+              }
+            >
+              <h3
+                className="
+                  font-semibold
+                  text-[0.875rem]
+                  leading-snug
+                  mt-[0.5rem]
+                  truncate
+                "
+              >
+                {item.title}
+              </h3>
+
+              <div className="flex items-center gap-[0.25rem] mt-[0.25rem]">
+                <img src={pin} alt="pin" className="w-[0.875rem]" />
+                <p className="text-gray-500 text-[0.75rem] truncate">
+                  {item.estate}
+                </p>
+              </div>
+            </Card>
+          </Link>
+        ))}
+    </div>
+  </section>
 </div>
 
-      </div>
-
-      </div>
-
-      
-
-      
     </>
   )
 }

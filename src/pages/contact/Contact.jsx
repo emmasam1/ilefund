@@ -19,7 +19,8 @@ const Contact = () => {
       <div className="absolute inset-0 bg-black/60"></div>
 
       {/* Content Wrapper */}
-      <div className="relative z-10 max-w-5xl w-full mx-auto px-6 text-center">
+      <div className="relative z-10 max-w-[75rem]
+       mx-auto px-6 text-center">
         <h1 className="font-extrabold text-white text-4xl sm:text-5xl mb-10">
           Let’s Get In Touch
         </h1>
