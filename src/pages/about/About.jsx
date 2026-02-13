@@ -166,13 +166,15 @@ const About = () => {
     {/* LEFT IMAGE */}
     <div className="flex justify-center sm:justify-start">
       <img
-        src="https://res.cloudinary.com/da1mxvbx2/image/upload/v1768217011/ilefund/values_xqowse.svg"
+        src="https://res.cloudinary.com/da1mxvbx2/image/upload/f_auto,q_auto/v1768217011/ilefund/values_xqowse.svg"
         alt="ileFund values"
         className="
           w-[100%]
           h-auto
           aspect-auto
         "
+         loading="lazy"
+  decoding="async"
       />
     </div>
 

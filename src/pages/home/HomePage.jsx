@@ -266,7 +266,7 @@ const HomePage = () => {
               >
                 <img
                   src={Rectangle43}
-                  alt=''
+                  alt='ilefund-rectangle43'
                   className="
                     w-7
                     sm:w-8
@@ -379,6 +379,8 @@ const HomePage = () => {
                       lg:w-11 lg:h-11
                       2xl:w-14 2xl:h-14
                     "
+                    loading="lazy"
+          decoding='async'
                   />
 
                   <img
@@ -392,6 +394,8 @@ const HomePage = () => {
                       lg:w-11 lg:h-11
                       2xl:w-14 2xl:h-14
                     "
+                    loading="lazy"
+          decoding='async'
                   />
 
                   <img
@@ -405,6 +409,8 @@ const HomePage = () => {
                       lg:w-11 lg:h-11
                       2xl:w-14 2xl:h-14
                     "
+                    loading="lazy"
+          decoding='async'
                   />
 
                   <img
@@ -418,6 +424,8 @@ const HomePage = () => {
                       lg:w-11 lg:h-11
                       2xl:w-14 2xl:h-14
                     "
+                    loading="lazy"
+          decoding='async'
                   />
                 </div>
               </div>
@@ -432,8 +440,8 @@ const HomePage = () => {
               "
             >
               <img
-                src='https://res.cloudinary.com/da1mxvbx2/image/upload/v1767943421/ilefund/ilefund-home_img_1_os6ziy.svg'
-                alt='Hero'
+                src='https://res.cloudinary.com/da1mxvbx2/image/upload/f_auto,q_auto/v1767943421/ilefund/ilefund-home_img_1_os6ziy.svg'
+                alt='ilefund-home-banner'
                 className="
                   w-full max-w-[320px] h-auto
                   3xl:max-w-[900px]
@@ -443,6 +451,8 @@ const HomePage = () => {
                   xl:max-w-[680px]
                   2xl:max-w-[780px]
                 "
+                loading="lazy"
+                decoding='async'
               />
             </div>
           </div>
@@ -563,6 +573,8 @@ const HomePage = () => {
           mb-4
           lg:mb-6
         '
+         loading="lazy"
+          decoding='async'
             />
             <h3
               className='
@@ -625,6 +637,8 @@ const HomePage = () => {
           mb-4
           lg:mb-6
         '
+         loading="lazy"
+          decoding='async'
             />
             <h3
               className='
@@ -669,7 +683,6 @@ const HomePage = () => {
         items-center
         text-center
         bg-white
-        
       '
           >
             <img
@@ -687,6 +700,8 @@ const HomePage = () => {
           mb-4
           lg:mb-6
         '
+         loading="lazy"
+          decoding='async'
             />
             <h3 className=' text-lg sm:text-xl  lg:text-2xl  2xl:text-3xl font-semibold mb-2 lg:mb-4 '>
               Own Your Property
@@ -785,7 +800,7 @@ const HomePage = () => {
                 cover={
                   <div className="relative">
                     <img
-                      alt="property"
+                      alt="ilefund-property"
                       src={item.banner}
                       className="h-28 sm:h-32 md:h-36 lg:h-40 w-full object-cover rounded-lg"
                     />
@@ -809,7 +824,9 @@ const HomePage = () => {
 
                 {/* Location */}
                 <div className="flex items-center mt-1 gap-1">
-                  <img src={pin} alt="pin" className="w-3 sm:w-4 md:w-4" />
+                  <img src={pin} alt="ilefund-pins" className="w-3 sm:w-4 md:w-4"
+                    loading="lazy"
+          decoding='async'/>
                   <p className="text-gray-500 text-xs sm:text-sm md:text-base truncate">
                     {item.estate}
                   </p>
@@ -974,8 +991,10 @@ const HomePage = () => {
       <div className="relative flex justify-center md:justify-center">
         <img
           src="https://res.cloudinary.com/da1mxvbx2/image/upload/v1767944009/ilefund/ilefund-apps-group_f5xxzx.svg"
-          alt="mockup-1"
+          alt="ilefund-mockup-1"
           className="w-40 sm:w-52 md:w-80 lg:w-96 drop-shadow-2xl z-20 -mt-10 sm:-mt-15"
+          loading="lazy"
+          decoding='async'
         />
       </div>
 

@@ -65,7 +65,7 @@ const HowToSave = () => {
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-8 items-center p-5">
           {/* ✅ Image Section */}
           <div className="flex justify-center">
-            <img src={safe} alt="Safe" className="object-contain w-80" />
+            <img src={safe} alt="ilefund-Safe" className="object-contain w-80" />
           </div>
 
           {/* ✅ Text Section */}
@@ -163,7 +163,7 @@ const HowToSave = () => {
 
           {/* ✅ Image Section */}
           <div className="flex justify-center">
-            <img src={step} alt="Safe" className="object-contain" />
+            <img src={step} alt="ilefund-Safe" className="object-contain" />
           </div>
         </div>
 

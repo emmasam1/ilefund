@@ -212,9 +212,11 @@ const Properties = () => {
     <div className="flex justify-center">
       <div className="w-full max-w-[24rem] aspect-[4/3]">
         <img
-          src="https://res.cloudinary.com/da1mxvbx2/image/upload/v1767943399/ilefund/realestatebanner_u9h1tf.svg"
-          alt="Illustration of land planning"
+          src="https://res.cloudinary.com/da1mxvbx2/image/upload/f_auto,q_auto/v1767943399/ilefund/realestatebanner_u9h1tf.svg"
+          alt="ilefund-Illustration of land planning"
           className="w-full h-full object-contain"
+          loading='lazy'
+          decoding='async'
         />
       </div>
     </div>
