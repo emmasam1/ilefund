@@ -15,6 +15,7 @@ import Contact2 from "./pages/contact/Contact2";
 import PrivacyPolicy from "./pages/privacy";
 import TermsOfUse from "./pages/terms";
 import DeleteAccount from "./pages/Delete-acount";
+import ScroolToTop from "./components/ui/ScroolToTop";
 
 
 function App() {
@@ -23,6 +24,7 @@ function App() {
       <BrowserRouter>
       <div className="pt-20"></div>
         <Navigation />
+        <ScroolToTop />
         <Routes>
           <Route path="/" element={<HomePage />} />
           <Route path="/how-to-save" element={<HowToSave />} />
